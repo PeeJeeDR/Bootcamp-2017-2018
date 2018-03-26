@@ -1,4 +1,4 @@
-var game    = new Phaser.Game( 480, 360, Phaser.AUTO, 'gameDiv' );
+var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 
