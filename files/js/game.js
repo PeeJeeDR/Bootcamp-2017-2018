@@ -6,7 +6,15 @@ var enemies;
 var enemy;
 var detectionPoints;
 var points;
-var random_direction
+
+var corner;
+var corners;
+var cornersArray    = [];
+
+var random_direction;
+var generated   = true;
+
+var counter     = 0;
 
 
 /* === FUNCTIONS === */

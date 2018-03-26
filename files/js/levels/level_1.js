@@ -2,6 +2,7 @@ var Level_1   = {
     create: function ()
     {
         this.addMap();
+        random_direction = Math.random() >= 0.5;
 
         enemies     = game.add.group();
         enemies.enableBody  = true;
@@ -12,10 +13,14 @@ var Level_1   = {
         points  = game.add.group();
         points.enableBody   = true;
 
-        if (map.objects.detection) {
-            detectionPoints = map.objects.detection;
-            detectionPoints.forEach(function (point) {
-                points.create(point.x, point.y);
+        corners     = game.add.group();
+        corners.enableBody  = true;
+
+        if (map.objects.corners) {
+            map.objects.corners.forEach(function (corner) {
+                cornersArray.push(corner);
+                corners.create(corner.x, corner.y);
+                console.log(corner);
             }, this);
         }
     }, 
@@ -23,46 +28,89 @@ var Level_1   = {
     update: function ()
     {
         this.controls();
-
-        game.physics.arcade.collide(enemy, borderLayer, this.collide, null, this);
-        game.physics.arcade.overlap(enemy, points, this.onTurningPoint, null, this);
-        game.physics.arcade.overlap(enemy, groundLayer, this.onGround, null, this);
-        
+        console.log(random_direction);
+        game.physics.arcade.collide(enemy, borderLayer);
+        game.physics.arcade.overlap(enemy, corners, this.inCorner, null, this);
     },
 
-    render: function ()
+    inCorner: function (enemy, corner)
     {
-
-    },
-
-    collide: function ()
-    {
-        if (enemy.body.blocked.down)
+        for (var i = 0, ilen = cornersArray.length; i < ilen; i++)
         {
-            random_direction = Math.random() >= 0.5;
-
-            console.log(random_direction);
-
-            if (random_direction)
+            if (cornersArray[i].x == corner.position.x && cornersArray[i].y == corner.position.y)
             {
-                enemy.body.velocity.x   = 200;
-            }
-            else 
-            {
-                enemy.body.velocity.x   = -200;
-            }
+                switch (cornersArray[i].name) 
+                {
+                    case "tl":
+                        if (enemy.body.blocked.up || enemy.body.blocked.left)
+                        {
+                            cameFromCorner  = true;
+                            if (random_direction) 
+                            {
+                                enemy.body.velocity.x   = 200;
+                            }
+                            else 
+                            {
+                                enemy.body.velocity.y   = 200;
+                            }
+                            random_direction = Math.random() >= 0.3;
+                        }
+                    break;
 
-            if (enemy.body.blocked.left)
-            {
-                enemy.body.velocity.x   = 200;
-                enemy.body.velocity.y   = 0;
+                    case "tr":
+                        if (enemy.body.blocked.up || enemy.body.blocked.right)
+                        {
+                            cameFromCorner  = true;
+                            if (random_direction) 
+                            {
+                                enemy.body.velocity.x   = -200;
+                            }
+                            else 
+                            {
+                                enemy.body.velocity.y   = 200;
+                            }
+                            random_direction = Math.random() >= 0.5;
+                        }
+                    break;
+
+                    case "bl":
+                        if (enemy.body.blocked.down || enemy.body.blocked.left)
+                        {
+                            cameFromCorner  = true;
+                            if (random_direction) 
+                            {
+                                enemy.body.velocity.x   = 200;
+                            }
+                            else 
+                            {
+                                enemy.body.velocity.y   = -200;
+                            }
+                            random_direction = Math.random() >= 0.3;
+                        }
+                    break;
+
+                    case "br":
+                        if (enemy.body.blocked.down || enemy.body.blocked.right)
+                        {
+                            cameFromCorner  = true;
+                            if (random_direction) 
+                            {
+                                enemy.body.velocity.x   = -200;
+                            }
+                            else 
+                            {
+                                enemy.body.velocity.y   = -200;
+                            }
+                            random_direction = Math.random() >= 0.3;
+                        }
+                    break;
+
+                    default:
+                        
+                    break;
+                }
             }
         }
-    },
-
-    onGround: function ()
-    {
-
     },
 
     addMap: function ()
@@ -72,11 +120,6 @@ var Level_1   = {
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
-    },
-
-    onTurningPoint: function ()
-    {
-        console.log('hoi');
     },
 
     controls: function ()
