@@ -16,102 +16,57 @@ var Level_1   = {
         points     = game.add.group();
         points.enableBody  = true;
 
-        console.log(map.objects);
-
-        if (map.objects.detection_points) {
-            map.objects.detection_points.forEach(function (point) {
+        if (map.objects.Detection_Points) {
+            map.objects.Detection_Points.forEach(function (point) {
                 pointArray.push(point);
                 points.create(point.x, point.y);
-                console.log(point);
             }, this);
         }
     }, 
 
     update: function ()
     {
-        this.controls();
-        // console.log(random_direction);
         game.physics.arcade.collide(enemy, borderLayer);
-        game.physics.arcade.overlap(enemy, points, this.inCorner, null, this);
+        game.physics.arcade.overlap(enemy, points, this.onPoint, null, this);
+
+        this.controls();
+        // this.moveEnemy();
     },
 
-    inCorner: function (enemy, corner)
+    moveEnemy: function ()
     {
-        for (var i = 0, ilen = pointArray.length; i < ilen; i++)
+        if (enemy.body.blocked.up || enemy.body.blocked.down)
         {
-            if (pointArray[i].x == corner.position.x && pointArray[i].y == corner.position.y)
+            if (Math.random() >= 0.5)
             {
-                switch (pointArray[i].name) 
-                {
-                    case "tl":
-                        if (enemy.body.blocked.up || enemy.body.blocked.left)
-                        {
-                            cameFromCorner  = true;
-                            if (random_direction) 
-                            {
-                                enemy.body.velocity.x   = 200;
-                            }
-                            else 
-                            {
-                                enemy.body.velocity.y   = 200;
-                            }
-                            random_direction = Math.random() >= 0.3;
-                        }
-                    break;
-
-                    case "tr":
-                        if (enemy.body.blocked.up || enemy.body.blocked.right)
-                        {
-                            cameFromCorner  = true;
-                            if (random_direction) 
-                            {
-                                enemy.body.velocity.x   = -200;
-                            }
-                            else 
-                            {
-                                enemy.body.velocity.y   = 200;
-                            }
-                            random_direction = Math.random() >= 0.5;
-                        }
-                    break;
-
-                    case "bl":
-                        if (enemy.body.blocked.down || enemy.body.blocked.left)
-                        {
-                            cameFromCorner  = true;
-                            if (random_direction) 
-                            {
-                                enemy.body.velocity.x   = 200;
-                            }
-                            else 
-                            {
-                                enemy.body.velocity.y   = -200;
-                            }
-                            random_direction = Math.random() >= 0.3;
-                        }
-                    break;
-
-                    case "br":
-                        if (enemy.body.blocked.down || enemy.body.blocked.right)
-                        {
-                            cameFromCorner  = true;
-                            if (random_direction) 
-                            {
-                                enemy.body.velocity.x   = -200;
-                            }
-                            else 
-                            {
-                                enemy.body.velocity.y   = -200;
-                            }
-                            random_direction = Math.random() >= 0.3;
-                        }
-                    break;
-
-                    default:
-                        
-                    break;
-                }
+                enemy.body.velocity.x  = -200;
+            } 
+            else 
+            {
+                enemy.body.velocity.x  = 200;
             }
+        }
+
+        else if (enemy.body.blocked.left || enemy.body.blocked.right)
+        {
+            if (Math.random() >= 0.5)
+            {
+                enemy.body.velocity.y  = 200;
+            } 
+            else 
+            {
+                enemy.body.velocity.y  = -200;
+            }
+        }
+    },
+
+    onPoint: function (enemy, point)
+    {
+        // console.log(point.x);
+        // console.log(Math.floor(enemy.body.x));
+        if (Math.round(enemy.x) === point.x || Math.round(enemy.y) === point.y)
+        {
+            console.log('test');
         }
     },
 
@@ -126,6 +81,9 @@ var Level_1   = {
 
     controls: function ()
     {
+        enemy.body.velocity.x   = 0;
+        enemy.body.velocity.y   = 0;
+
         if (cursors.down.isDown)
         {
             enemy.body.velocity.y   = 200;

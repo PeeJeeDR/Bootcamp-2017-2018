@@ -4,20 +4,20 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 var map;
 var enemies;
 var enemy;
-var detectionPoints;
-var points;
 
 var point;
 var points;
 var pointArray  = [];
 
-var random_direction;
-var generated   = true;
-
 var counter     = 0;
 
+/* ===== SETTINGS ===== */
+var enemySettings = {
+    moveSpeed: 200,
+}
 
-/* === FUNCTIONS === */
+
+/* ===== FUNCTIONS ===== */
 
 
 /* ===== STATES ===== */
