@@ -1,7 +1,12 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-
+var map;
+var enemies;
+var enemy;
+var detectionPoints;
+var points;
+var random_direction
 
 
 /* === FUNCTIONS === */

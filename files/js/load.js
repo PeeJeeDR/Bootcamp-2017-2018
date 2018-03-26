@@ -2,6 +2,9 @@ var LoadState   = {
     preload: function ()
     {
         this.loadTileMaps();
+
+        cursors = game.input.keyboard.createCursorKeys();
+        game.load.spritesheet('enemy', 'assets/sprites/pacman_prototype.png');
     },
 
     create: function ()
