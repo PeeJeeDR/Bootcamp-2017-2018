@@ -7,7 +7,6 @@ var Level_1   = {
         enemies     = game.add.group();
         enemies.enableBody  = true;
         enemy       = enemies.create(48, 48, 'enemy');
-        enemy.scale.setTo(1);
         enemy.anchor.setTo(0.5);
 
         points  = game.add.group();
@@ -30,7 +29,7 @@ var Level_1   = {
         game.physics.arcade.overlap(enemy, points, this.onPoint, null, this);
 
         this.controls();
-        // this.moveEnemy();
+        this.moveEnemy();
     },
 
     moveEnemy: function ()
@@ -62,11 +61,32 @@ var Level_1   = {
 
     onPoint: function (enemy, point)
     {
-        // console.log(point.x);
-        // console.log(Math.floor(enemy.body.x));
-        if (Math.round(enemy.x) === point.x || Math.round(enemy.y) === point.y)
+        margeXTop       = point.x + 1;
+        margeXBottom    = point.x - 1;
+
+        margeYTop       = point.y + 1;
+        margeYBottom    = point.y - 1;
+
+        if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
         {
-            console.log('test');
+            switch (Math.floor(Math.random() * (5 - 1) + 1))
+            {
+                case 1:
+                    enemy.body.velocity.x   = 200;
+                break;
+
+                case 2:
+                    enemy.body.velocity.x   = -200;
+                break;
+
+                case 3:
+                    enemy.body.velocity.y   = 200;
+                break;
+
+                case 4:
+                    enemy.body.velocity.y   = -200;
+                break;
+            }
         }
     },
 
@@ -81,8 +101,10 @@ var Level_1   = {
 
     controls: function ()
     {
-        enemy.body.velocity.x   = 0;
+        /*
         enemy.body.velocity.y   = 0;
+        enemy.body.velocity.x   = 0;
+        */
 
         if (cursors.down.isDown)
         {
