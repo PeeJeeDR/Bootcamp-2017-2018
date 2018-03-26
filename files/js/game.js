@@ -7,9 +7,9 @@ var enemy;
 var detectionPoints;
 var points;
 
-var corner;
-var corners;
-var cornersArray    = [];
+var point;
+var points;
+var pointArray  = [];
 
 var random_direction;
 var generated   = true;

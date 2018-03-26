@@ -13,14 +13,16 @@ var Level_1   = {
         points  = game.add.group();
         points.enableBody   = true;
 
-        corners     = game.add.group();
-        corners.enableBody  = true;
+        points     = game.add.group();
+        points.enableBody  = true;
 
-        if (map.objects.corners) {
-            map.objects.corners.forEach(function (corner) {
-                cornersArray.push(corner);
-                corners.create(corner.x, corner.y);
-                console.log(corner);
+        console.log(map.objects);
+
+        if (map.objects.detection_points) {
+            map.objects.detection_points.forEach(function (point) {
+                pointArray.push(point);
+                points.create(point.x, point.y);
+                console.log(point);
             }, this);
         }
     }, 
@@ -28,18 +30,18 @@ var Level_1   = {
     update: function ()
     {
         this.controls();
-        console.log(random_direction);
+        // console.log(random_direction);
         game.physics.arcade.collide(enemy, borderLayer);
-        game.physics.arcade.overlap(enemy, corners, this.inCorner, null, this);
+        game.physics.arcade.overlap(enemy, points, this.inCorner, null, this);
     },
 
     inCorner: function (enemy, corner)
     {
-        for (var i = 0, ilen = cornersArray.length; i < ilen; i++)
+        for (var i = 0, ilen = pointArray.length; i < ilen; i++)
         {
-            if (cornersArray[i].x == corner.position.x && cornersArray[i].y == corner.position.y)
+            if (pointArray[i].x == corner.position.x && pointArray[i].y == corner.position.y)
             {
-                switch (cornersArray[i].name) 
+                switch (pointArray[i].name) 
                 {
                     case "tl":
                         if (enemy.body.blocked.up || enemy.body.blocked.left)
