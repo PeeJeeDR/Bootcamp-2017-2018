@@ -6,6 +6,7 @@ var Level_1   = {
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         detectionLayer  = map.createLayer('detection');
+        coinsLayer      = map.createLayer('coins');
         map.setCollisionBetween(0, 10000, true, groundLayer);
     }, 
 
