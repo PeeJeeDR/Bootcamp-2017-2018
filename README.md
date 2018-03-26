@@ -10,3 +10,10 @@
 ## Packman variatie
 - als speler is het de bedoeling dat je packman gaat ontwijken.
 - accelerometer? Projectiel spawnen die de pacman kan raken.
+
+## To Do 
+- Tileset maken
+- Graphics
+- Player movement
+- Enemy movement
+- Mystery Boxes
