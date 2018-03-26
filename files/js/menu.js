@@ -6,6 +6,6 @@ var MenuState   = {
 
     update: function () 
     {
-        game.state.start( 'play' );
+        game.state.start( 'level_1' );
     }
 }

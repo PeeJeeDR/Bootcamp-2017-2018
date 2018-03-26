@@ -17,3 +17,4 @@
 - Player movement
 - Enemy movement
 - Mystery Boxes
+- Menu

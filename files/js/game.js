@@ -13,9 +13,9 @@ var game    = new Phaser.Game( 480, 360, Phaser.AUTO, 'gameDiv' );
 game.state.add( 'boot', BootState );
 game.state.add( 'load', LoadState );
 game.state.add( 'menu', MenuState );
-game.state.add( 'play', PlayState );
 
 // LEVELS
+game.state.add( 'level_1', Level_1 );
 
 // INTROS
 
