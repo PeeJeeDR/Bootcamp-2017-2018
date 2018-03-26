@@ -9,5 +9,4 @@
 
 ## Packman variatie
 - als speler is het de bedoeling dat je packman gaat ontwijken.
-- accelerometer?
-- 
+- accelerometer? Projectiel spawnen die de pacman kan raken.
