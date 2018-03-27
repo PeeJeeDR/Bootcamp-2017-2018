@@ -7,6 +7,8 @@ var LoadState   = {
         game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         game.load.image('coin', 'assets/sprites/coin.png');
+        game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
+
     },
 
     create: function ()

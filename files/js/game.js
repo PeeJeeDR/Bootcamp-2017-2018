@@ -1,13 +1,13 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = true;
+var onMobile    = false;
 
 var map;
 
 var enemy;
 var enemies         = [];
-var nbrOfEnemies    = 5;
+var nbrOfEnemies    = 2;
 
 var coin;
 var coins;
@@ -22,6 +22,10 @@ var groundLayer;
 var borderLayer;
 
 /* ===== SETTINGS ===== */
+var playerSettings = {
+    moveSpeed: 200,
+}
+
 var enemySettings = {
     moveSpeed: 200,
 }
@@ -86,24 +90,30 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls (enemy)
+function cursorControls (sprite, autoMovement)
 {
+    if (!autoMovement)
+    {
+        sprite.body.velocity.x  = 0;
+        sprite.body.velocity.y  = 0;
+    }
+
     if (cursors.down.isDown)
     {
-        enemy.body.velocity.y   = 200;
+        sprite.body.velocity.y   = 200;
     }
     else if (cursors.up.isDown)
     {
-        enemy.body.velocity.y   = -200;
+        sprite.body.velocity.y   = -200;
     }
 
     if (cursors.left.isDown)
     {
-        enemy.body.velocity.x   = -200;
+        sprite.body.velocity.x   = -200;
     } 
     else if (cursors.right.isDown)
     {
-        enemy.body.velocity.x   = 200;
+        sprite.body.velocity.x   = 200;
     }
 }
 
@@ -112,10 +122,6 @@ function collectCoin (enemy, coin)
     coin.kill();
     coinsCollected += 1;
 }
-
-
-
-
 
 /* ===== STATES ===== */
 
