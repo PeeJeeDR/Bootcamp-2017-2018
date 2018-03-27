@@ -40,6 +40,10 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
+var pacman;
+var mariokart;
+var menuBackground;
+
 
 /* ===== FUNCTIONS ===== */
 function moveEnemy (enemy)
