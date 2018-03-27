@@ -74,10 +74,10 @@ var MenuState   = {
     },
 
     instructions: function () {
-    	console.log('Instructions');
+    	game.state.start( 'instructions' );
     },
 
     credits: function () {
-    	console.log('Credits');
+    	game.state.start( 'credits' );
     }
 }

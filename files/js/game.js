@@ -231,6 +231,8 @@ game.state.add('boot', BootState);
 game.state.add('load', LoadState);
 game.state.add('menu', MenuState);
 game.state.add('reset', ResetState);
+game.state.add('instructions', InstructionState);
+game.state.add('credits', CreditState);
 
 // LEVELS
 game.state.add('level_1', Level_1);
