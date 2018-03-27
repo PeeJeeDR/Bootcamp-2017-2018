@@ -2,6 +2,7 @@ var Level_1   = {
     create: function ()
     {
         currentLevel    = 1;
+        coinsCollected  = 0;
         this.addMap();
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
@@ -34,7 +35,10 @@ var Level_1   = {
 
     update: function ()
     {
-
+        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        {
+            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+        }
     },
 
     addMap: function ()

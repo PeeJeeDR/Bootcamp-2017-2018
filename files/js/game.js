@@ -6,6 +6,10 @@ var onMobile    = false;
 var scoreText;
 var lvlText;
 
+var graphicOverlay;
+var restartButton;
+var menuButton;
+
 var currentLevel;
 
 var map;
@@ -151,6 +155,26 @@ function collectCoin (enemy, coin)
     coin.kill();
     coinsCollected += 1;
     scoreText.text  = coinsCollected
+}
+
+function killPlayer (player, enemy)
+{
+    graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
+    graphicOverlay.beginFill(0x000000, 0.7);
+    graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
+    graphicOverlay.endFill();
+    this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
+    this.overlay.inputEnabled = true;
+
+    restartButton   = game.add.button(game.world.centerX, game.world.centerY, 'intro_lvl2', resetGame, this);
+    restartButton.anchor.setTo(0.5);
+
+    game.camera.shake(0.01, 300);
+    player.kill();
+}
+
+function resetGame () {
+    game.state.start('level_1');
 }
 
 function displayScore ()
