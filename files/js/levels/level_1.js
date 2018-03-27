@@ -10,8 +10,7 @@ var Level_1   = {
             enemies.push(enemy);
         }
 
-        player  = new Player(48, 48);
-        game.physics.arcade.enable(player);
+        player  = new Player(399, 304);
     
         points  = game.add.group();
         points.enableBody   = true;
@@ -28,12 +27,7 @@ var Level_1   = {
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
-        gyro.frequency = 10;
-
-        gyro.startTracking(function(o) {
-            player.body.velocity.x += o.gamma/20;
-            player.body.velocity.y += o.beta/20;
-        });
+        this.gyro();
     }, 
 
     update: function ()
@@ -48,5 +42,15 @@ var Level_1   = {
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
+    },
+
+    gyro: function ()
+    {
+        gyro.frequency = 10;
+
+        gyro.startTracking(function(o) {
+            player.body.velocity.x += o.gamma/20;
+            player.body.velocity.y += o.beta/20;
+        });
     },
 }

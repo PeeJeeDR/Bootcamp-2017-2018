@@ -8,7 +8,7 @@ var Player  = function (x, y)
 
     _player.update  = function ()
     {
-        cursorControls(_player, true);
+        cursorControls(_player, false);
         touchControls(_player);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);

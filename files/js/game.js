@@ -1,7 +1,9 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = true;
+var onMobile    = false;
+
+var scoreText;
 
 var map;
 
@@ -145,6 +147,21 @@ function collectCoin (enemy, coin)
 {     
     coin.kill();
     coinsCollected += 1;
+}
+
+function displayScore ()
+{
+    scoreText    = game.add.text( 
+        game.world.centerX, 
+        game.world.centerY, 
+        coinsCollected, 
+        { 
+            font: "32px Arial", 
+            fill: "#fff" 
+        } 
+    );
+
+    scoreText.anchor.setTo( 0.5 );
 }
 
 /* ===== STATES ===== */
