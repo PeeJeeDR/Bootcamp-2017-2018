@@ -5,7 +5,6 @@ var map;
 
 var enemy;
 var enemies;
-var startEnemyMovement  = true;
 
 
 var point;
@@ -19,22 +18,8 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-function moveEnemy ()
+function moveEnemy (enemy)
 {
-    if (startEnemyMovement)
-    {
-        startEnemyMovement  = false;
-        
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-        }
-    }
-
     if (enemy.body.blocked.up || enemy.body.blocked.down)
     {
         if (Math.random() >= 0.5)
@@ -68,6 +53,7 @@ function enemyOnPoint (enemy, point)
     margeYTop       = point.y + 1;
     margeYBottom    = point.y - 1;
 
+    console.log('onpoint');
     if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
     {
         switch (Math.floor(Math.random() * (5 - 1) + 1))
@@ -91,7 +77,7 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls ()
+function cursorControls (enemy)
 {
     if (cursors.down.isDown)
     {

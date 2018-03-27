@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="193">
-=======
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="202">
  <tileset firstgid="1" name="pacman_tileset" tilewidth="32" tileheight="32" tilecount="30" columns="10">
   <image source="../assets/sprites/pacman_tileset.png" width="320" height="96"/>
  </tileset>
- <layer name="ground" width="25" height="18">
+ <layer name="background" width="25" height="18">
   <data encoding="csv">
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
@@ -24,6 +23,28 @@
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
+</data>
+ </layer>
+ <layer name="ground" width="25" height="18">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,12,12,12,12,12,12,12,12,12,12,12,0,12,12,12,12,12,12,12,12,12,12,12,0,
+0,12,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,12,0,
+0,12,0,12,0,12,12,12,0,12,0,12,12,12,0,12,0,12,12,12,0,12,0,12,0,
+0,12,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,12,0,
+0,12,0,12,12,12,12,12,12,12,12,12,0,12,12,12,12,12,12,12,12,12,0,12,0,
+0,12,0,0,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,0,0,12,0,
+0,12,12,12,12,12,12,12,12,12,0,12,0,12,0,12,12,12,12,12,12,12,12,12,0,
+0,0,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,0,0,
+0,12,12,12,12,12,12,12,12,12,0,12,12,12,0,12,12,12,12,12,12,12,12,12,0,
+0,12,0,0,12,0,0,0,0,0,0,12,0,12,0,0,0,0,0,0,12,0,0,12,0,
+0,12,0,12,12,12,12,12,12,12,12,12,0,12,12,12,12,12,12,12,12,12,0,12,0,
+0,12,0,12,0,0,0,0,0,0,0,12,0,12,0,0,0,0,0,0,0,12,0,12,0,
+0,12,0,12,12,12,12,0,12,12,12,12,0,12,12,12,12,0,12,12,12,12,0,12,0,
+0,12,12,12,0,0,12,12,12,0,0,12,12,12,0,0,12,12,12,0,0,12,12,12,0,
+0,12,0,0,0,0,0,12,0,0,0,0,12,0,0,0,0,12,0,0,0,0,0,12,0,
+0,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="coins" width="25" height="18">
@@ -70,49 +91,8 @@
 24,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,26
 </data>
  </layer>
- <objectgroup name="detection_points" visible="0">
-  <object id="90" name="tl" x="32" y="32" width="32" height="32"/>
-  <object id="91" name="bl" x="32" y="224" width="32" height="32"/>
-  <object id="92" name="tr" x="352" y="32" width="32" height="32"/>
-  <object id="93" name="br" x="256" y="448" width="32" height="32"/>
-  <object id="94" name="bl" x="192" y="448" width="32" height="32"/>
-  <object id="95" name="tl" x="256" y="416" width="32" height="32"/>
-  <object id="96" name="tr" x="192" y="416" width="32" height="32"/>
-  <object id="97" name="br" x="96" y="448" width="32" height="32"/>
-  <object id="98" name="bl" x="32" y="512" width="32" height="32"/>
-  <object id="100" name="br" x="288" y="288" width="32" height="32"/>
-  <object id="101" name="tl" x="32" y="288" width="32" height="32"/>
-  <object id="102" name="bl" x="480" y="288" width="32" height="32"/>
-  <object id="103" name="tr" x="736" y="288" width="32" height="32"/>
-  <object id="106" name="tr" x="736" y="32" width="32" height="32"/>
-  <object id="107" name="tl" x="416" y="32" width="32" height="32"/>
-  <object id="108" name="br" x="416" y="448" width="32" height="32"/>
-  <object id="109" name="bl" x="352" y="448" width="32" height="32"/>
-  <object id="110" name="tr" x="512" y="416" width="32" height="32"/>
-  <object id="111" name="bl" x="96" y="160" width="32" height="32"/>
-  <object id="112" name="br" x="672" y="160" width="32" height="32"/>
-  <object id="113" name="br" x="736" y="512" width="32" height="32"/>
-  <object id="114" name="br" x="576" y="448" width="32" height="32"/>
-  <object id="115" name="bl" x="512" y="448" width="32" height="32"/>
-  <object id="116" name="tl" x="576" y="416" width="32" height="32"/>
-  <object id="117" name="tl" x="96" y="352" width="32" height="32"/>
-  <object id="118" name="tr" x="672" y="352" width="32" height="32"/>
-  <object id="119" name="br" x="736" y="224" width="32" height="32"/>
-  <object id="120" name="4-way" x="480" y="160" width="32" height="32"/>
-  <object id="122" name="4-way" x="288" y="160" width="32" height="32"/>
-  <object id="123" name="rb" x="352" y="160" width="32" height="32"/>
-  <object id="124" name="lb" x="416" y="160" width="32" height="32"/>
-  <object id="125" name="lb" x="352" y="288" width="32" height="32"/>
-  <object id="126" name="rb" x="416" y="288" width="32" height="32"/>
-  <object id="127" name="lb" x="416" y="352" width="32" height="32"/>
-  <object id="128" name="rb" x="352" y="352" width="32" height="32"/>
-  <object id="129" name="bb" x="128" y="352" width="32" height="32"/>
-  <object id="130" name="bb" x="640" y="352" width="32" height="32"/>
-  <object id="131" name="bb" x="672" y="288" width="32" height="32"/>
-  <object id="132" name="bb" x="96" y="288" width="32" height="32"/>
-  <object id="133" name="rb" x="288" y="224" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="Detection_Points">
+ <objectgroup name="mystery_boxes"/>
+ <objectgroup name="detection_points">
   <object id="140" x="288" y="160" width="32" height="32"/>
   <object id="141" x="352" y="160" width="32" height="32"/>
   <object id="143" x="288" y="224" width="32" height="32"/>
