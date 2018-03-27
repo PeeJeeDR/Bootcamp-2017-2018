@@ -14,7 +14,7 @@ var Level_1   = {
     update: function ()
     {
         this.controls();
-
+        this.movePlayer();
         game.physics.arcade.collide(player, borderLayer, this.collide, null, this);
         game.physics.arcade.overlap(player, groundLayer, this.onGround, null, this);
         
@@ -44,10 +44,14 @@ var Level_1   = {
         map.setCollisionBetween(0, 10000, true, borderLayer);
     },
 
+    movePlayer: function ()
+    {
+
+     },
 
     controls: function ()
     {
-        if (cursors.down.isDown)
+        if (cursors.down.isDown  && !player.body.blocked.down)
         {
            
             player.body.velocity.y   = 200;
@@ -55,7 +59,7 @@ var Level_1   = {
             
            
         }
-        else if (cursors.up.isDown)
+        else if (cursors.up.isDown && !player.body.blocked.up)
         {
             
             
@@ -63,14 +67,14 @@ var Level_1   = {
             player.frame = 1;
         }
 
-        else if (cursors.left.isDown)
+        else if (cursors.left.isDown  && !player.body.blocked.right)
         {
             
             player.body.velocity.x   = -200;
             player.frame = 3;
             
         } 
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown  && !player.body.blocked.left)
         {
            
             player.frame = 5;
