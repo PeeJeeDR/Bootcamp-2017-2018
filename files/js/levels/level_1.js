@@ -7,17 +7,16 @@ var Level_1   = {
         borderLayer     = map.createLayer('borders');
         detectionLayer  = map.createLayer('detection');
         coinsLayer      = map.createLayer('coins');
-        mysteryboxLayer = map.coinsLayer('mysterybox');
+       // mysteryboxLayer = map.coinsLayer('mysterybox');
         map.setCollisionBetween(0, 10000, true, groundLayer);
 
-       //----------------------------------------
+      
 
-       /* 
-*/           
+         
 
-       /* 
+       
 
-        this.physics.add.overlap(player, mysteryBoxes, collectMysteryBox, null, this);*/
+        this.physics.add.overlap(player, mysteryBoxes, collectMysteryBox, null, this);
     }, 
 
     update: function ()
@@ -25,7 +24,7 @@ var Level_1   = {
 
     },
 
-   /* collectMysteryBox: function(){
+    collectMysteryBox: function(){
         
         mysteryBoxes.disableBody(true, true);
 
@@ -52,7 +51,7 @@ var Level_1   = {
     projectile: function(){
 // console.log('shoot projectile');
 
-    },*/
+    },
 
     
 
