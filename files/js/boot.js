@@ -10,6 +10,6 @@ var BootState   = {
         }
 
         game.physics.startSystem( Phaser.Physics.ARCADE );
-        game.state.start( 'load' );
+        game.state.start('load');
     }
 }

@@ -13,7 +13,7 @@ var LoadState   = {
 
     create: function ()
     {
-        game.state.start( 'menu' );
+        game.state.start('menu');
     },
 
     loadTileMaps: function ()

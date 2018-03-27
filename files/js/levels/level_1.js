@@ -2,7 +2,6 @@ var Level_1   = {
     create: function ()
     {
         currentLevel    = 1;
-        coinsCollected  = 0;
         gameOver        = false;
         this.addMap();
 

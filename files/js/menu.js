@@ -18,7 +18,7 @@ var MenuState   = {
     {
         if (game.input.activePointer.isDown)
         {
-            game.state.start( 'level_1' );
+            game.state.start('reset');
         }
     }
 }
