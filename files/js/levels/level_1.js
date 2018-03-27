@@ -1,6 +1,7 @@
 var Level_1   = {
     create: function ()
     {
+
         this.addMap();
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
@@ -10,6 +11,7 @@ var Level_1   = {
         }
 
         player  = new Player(48, 48);
+        game.physics.arcade.enable(player);
     
         points  = game.add.group();
         points.enableBody   = true;
@@ -25,10 +27,18 @@ var Level_1   = {
         map.objects.coins.forEach(function (coin) {
             coins.create(coin.x, coin.y, 'coin');
         }, this);
+
+        gyro.frequency = 10;
+
+        gyro.startTracking(function(o) {
+            player.body.velocity.x += o.gamma/20;
+            player.body.velocity.y += o.beta/20;
+        });
     }, 
 
     update: function ()
     {
+
     },
 
     addMap: function ()
