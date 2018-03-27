@@ -53,7 +53,6 @@ function enemyOnPoint (enemy, point)
     margeYTop       = point.y + 1;
     margeYBottom    = point.y - 1;
 
-    console.log('onpoint');
     if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
     {
         switch (Math.floor(Math.random() * (5 - 1) + 1))
