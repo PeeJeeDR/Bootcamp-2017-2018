@@ -4,15 +4,13 @@ var Level_1   = {
         this.addMap();
 
         player = this.add.sprite(120,48, 'player');
-        player.anchor.set(0.5);
+        player.anchor.set(0.5,0.5);
        
 
         this.physics.arcade.enable(player);
         
 
       
-
-        
 
     }, 
 
@@ -54,21 +52,28 @@ var Level_1   = {
     {
         if (cursors.down.isDown)
         {
+            
             player.body.velocity.y   = 200;
-            player.
+           
         }
         else if (cursors.up.isDown)
         {
+            
             player.body.velocity.y   = -200;
+            
         }
 
-        if (cursors.left.isDown)
+        else if (cursors.left.isDown)
         {
+            
             player.body.velocity.x   = -200;
+            player.scale.y = 1; 
         } 
         else if (cursors.right.isDown)
         {
+           
             player.body.velocity.x   = 200;
+            player.scale.y = -1; 
         }
     }
 }
