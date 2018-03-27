@@ -26,9 +26,9 @@ var Level_1   = {
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
-        console.log(map.objects.start_position);
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
+            handleOrientation();
         }, this);
 
         displayScore();

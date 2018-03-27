@@ -1,7 +1,7 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = false;
+var onMobile    = true;
 
 var scoreText;
 var lvlText;
@@ -28,12 +28,14 @@ var point;
 var points;
 var pointArray  = [];
 
+var player;
+
 var groundLayer;
 var borderLayer;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 200,
+    moveSpeed: 20,
 }
 
 var enemySettings = {
@@ -183,7 +185,8 @@ function killPlayer (player, enemy)
     gameOver    = true;
 }
 
-function resetGame () {
+function resetGame () 
+{
     game.state.start('reset');
 }
 
@@ -222,6 +225,17 @@ function displayLevel ()
     lvlText.anchor.setTo( 0.5 );
 
     lvlText.text    = currentLevel;
+}
+
+function fixFallthrough() 
+{
+    game.physics.arcade.TILE_BIAS = 40;
+}
+
+function handleOrientation (e)
+{
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 
 /* ===== STATES ===== */
