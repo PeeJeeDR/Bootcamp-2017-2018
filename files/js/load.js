@@ -4,7 +4,7 @@ var LoadState   = {
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
-        game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
+        game.load.image('mysteryboxImg', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         
     },

@@ -2,6 +2,7 @@ var Level_1   = {
     create: function ()
     {
         this.addMap();
+       
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
@@ -17,6 +18,15 @@ var Level_1   = {
             points.create(point.x, point.y);
         }, this);
 
+     
+        game.time.events.add(Phaser.Timer.SECOND * 10, this.mysterybox, this);
+       
+
+       
+
+     
+
+       
         console.log(enemies);
     }, 
 
@@ -66,4 +76,31 @@ var Level_1   = {
 
         return _enemy;
     },
+
+  mysterybox: function(){
+        map.objects.mystery_boxes.forEach(function (singleBox) {
+        boxPointArr.push(singleBox);
+        
+        }, this);
+        
+        console.log(boxPointArr);
+       
+
+        
+        rndTraitNbr = Math.floor(Math.random()*12);
+
+        /*console.log(rndTraitNbr);
+        console.log(boxPointArr[rndTraitNbr]);
+        console.log(boxPointArr[rndTraitNbr].x);
+        console.log(boxPointArr[rndTraitNbr].y);*/
+
+        game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
+
+         
+
+       
+
+
+
+     },
 }

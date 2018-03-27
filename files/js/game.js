@@ -15,7 +15,11 @@ var points;
 var pointArray  = [];
 
 
+var rndTraitNbr;
 var mysteryBoxes;
+var mysteryBoxe;
+var boxPointArr = [];
+
 var collectMysteryBox;
 var mysteryArr     =[];
 var rndMysteryBox;
@@ -109,11 +113,10 @@ function cursorControls (enemy)
 function collectCoin (enemy, coin)
 {     
     coins += 1;
-    console.log("Coins: ",coins);
     map.removeTile(coin.x,coin.y,coinsLayer);
 }
 
-function collectMysteryBox (){
+function collectMysteryBox ( player, mysteryBox){
         
     mysteryBoxes.disableBody(true, true);
 
