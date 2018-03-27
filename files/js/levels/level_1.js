@@ -19,8 +19,10 @@ var Level_1   = {
         }, this);
 
      
-        game.time.events.add(Phaser.Timer.SECOND * 10, this.mysterybox, this);
-       
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
+       // game.time.events.add(Phaser.Timer.SECOND * 30, collectMysteryBox, this);
+
+       //this.physics.add.overlap(player, mysteryBoxc, collectMysteryBox, null, this);
 
        
 
@@ -77,30 +79,16 @@ var Level_1   = {
         return _enemy;
     },
 
-  mysterybox: function(){
-        map.objects.mystery_boxes.forEach(function (singleBox) {
-        boxPointArr.push(singleBox);
-        
-        }, this);
-        
-        console.log(boxPointArr);
-       
 
-        
+
+    /* mysterybox: function(){
+
         rndTraitNbr = Math.floor(Math.random()*12);
+        mysteryBox2 = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
 
-        /*console.log(rndTraitNbr);
-        console.log(boxPointArr[rndTraitNbr]);
-        console.log(boxPointArr[rndTraitNbr].x);
-        console.log(boxPointArr[rndTraitNbr].y);*/
-
-        game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
-
-         
-
-       
+        console.log('second box');
 
 
 
-     },
+     },*/
 }

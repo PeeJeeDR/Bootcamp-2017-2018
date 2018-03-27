@@ -14,11 +14,19 @@ var point;
 var points;
 var pointArray  = [];
 
+var timer;
+
 
 var rndTraitNbr;
 var mysteryBoxes;
-var mysteryBoxe;
+var mysteryBox;
+var mysteryBox2;
 var boxPointArr = [];
+var player;
+var event;
+
+var firstBoxSpawned = false;
+var boxCollected = false;
 
 var collectMysteryBox;
 var mysteryArr     =[];
@@ -114,11 +122,65 @@ function collectCoin (enemy, coin)
 {     
     coins += 1;
     map.removeTile(coin.x,coin.y,coinsLayer);
+
 }
 
+function createBox(){
+    map.objects.mystery_boxes.forEach(function (singleBox) {
+    boxPointArr.push(singleBox);
+    
+    }, this);
+    
+    console.log(boxPointArr);
+   
+
+     rndTraitNbr = Math.floor(Math.random()*12);
+
+    /*console.log(rndTraitNbr);
+    console.log(boxPointArr[rndTraitNbr]);
+    console.log(boxPointArr[rndTraitNbr].x);
+    console.log(boxPointArr[rndTraitNbr].y);*/
+
+   
+
+    
+   
+    
+   
+
+
+ }
+
+ /*function waitTime(){
+
+    event = new Phaser.TimerEvent(this, 5000, callback);
+    this.events.push(event);
+
+
+
+    
+
+   // game.time.events.add(Phaser.Timer.SECOND * 20, createBox , this);
+   // createBox();
+
+ }
+*/
+
+function boxDestroy(){
+
+    mysteryBox.destroy();
+    
+
+   
+}
+
+
+
 function collectMysteryBox ( player, mysteryBox){
-        
-    mysteryBoxes.disableBody(true, true);
+    boxCollected = true;
+
+    boxDestroy();
+
 
     mysteryArr=[ "immortal", "bananaDrop", "projectile" ];
     rndMysteryBox = Phaser.ArrayUtils.getRandomItem(mysteryArr);
@@ -128,21 +190,30 @@ function collectMysteryBox ( player, mysteryBox){
    if(rndMysteryBox == "immortal"){ immortal();}
    else if(rndMysteryBox == "bananaDrop"){ bananaDrop();}
    else{ projectile(); }
+
 }
+
 
 function immortal  (){
     //console.log('I"m immortal');
+
+    waitTime();
+    createBox();
        }
    
 function bananaDrop (){
     //  console.log('drop banana');
    
-   
+    waitTime();
+    createBox();
+    
        }
    
 function projectile (){
    // console.log('shoot projectile');
-   
+  
+   waitTime();
+   createBox();
        }
 
 
