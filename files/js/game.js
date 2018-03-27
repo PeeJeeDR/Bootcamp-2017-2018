@@ -4,8 +4,11 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 var map;
 
 var enemy;
-var enemies;
+var enemies         = [];
+var nbrOfEnemies    = 3;
 
+var coin;
+var coins   = 0;
 
 var point;
 var points;
@@ -95,6 +98,13 @@ function cursorControls (enemy)
     {
         enemy.body.velocity.x   = 200;
     }
+}
+
+function collectCoin (enemy, coin)
+{     
+    coins += 1;
+    console.log("Coins: ",coins);
+    map.removeTile(coin.x,coin.y,coinsLayer);
 }
 
 /* ===== STATES ===== */

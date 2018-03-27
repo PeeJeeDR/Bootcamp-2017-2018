@@ -4,7 +4,7 @@ var LoadState   = {
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
-        game.load.spritesheet('enemy', 'assets/sprites/pacman_prototype.png');
+        game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
     },
 
     create: function ()
