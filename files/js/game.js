@@ -231,6 +231,7 @@ game.state.add('reset', ResetState);
 // LEVELS
 game.state.add('level_1', Level_1);
 game.state.add('level_2', Level_2);
+game.state.add('level_3', Level_3);
 
 // INTROS
 
