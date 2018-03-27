@@ -3,6 +3,7 @@ var Level_1   = {
     {
         currentLevel    = 1;
         coinsCollected  = 0;
+        gameOver        = false;
         this.addMap();
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
@@ -28,7 +29,6 @@ var Level_1   = {
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
-        this.gyro();
         displayScore();
         displayLevel();
     }, 
@@ -48,15 +48,5 @@ var Level_1   = {
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
-    },
-
-    gyro: function ()
-    {
-        gyro.frequency = 10;
-
-        gyro.startTracking(function(o) {
-            player.body.velocity.x += o.gamma/20;
-            player.body.velocity.y += o.beta/20;
-        });
     },
 }

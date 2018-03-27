@@ -9,6 +9,7 @@ var lvlText;
 var graphicOverlay;
 var restartButton;
 var menuButton;
+var gameOver        = false;
 
 var currentLevel;
 
@@ -166,15 +167,25 @@ function killPlayer (player, enemy)
     this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
     this.overlay.inputEnabled = true;
 
-    restartButton   = game.add.button(game.world.centerX, game.world.centerY, 'intro_lvl2', resetGame, this);
+    restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
     restartButton.anchor.setTo(0.5);
+
+    menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
+    menuButton.anchor.setTo(0.5);
 
     game.camera.shake(0.01, 300);
     player.kill();
+
+    gameOver    = true;
 }
 
 function resetGame () {
     game.state.start('level_1');
+}
+
+function backToMenu ()
+{
+    game.state.start('menu');
 }
 
 function displayScore ()
