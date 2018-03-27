@@ -1,7 +1,7 @@
 var Level_1   = {
     create: function ()
     {
-
+        currentLevel    = 1;
         this.addMap();
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
@@ -28,6 +28,8 @@ var Level_1   = {
         }, this);
 
         this.gyro();
+        displayScore();
+        displayLevel();
     }, 
 
     update: function ()

@@ -4,6 +4,9 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 var onMobile    = false;
 
 var scoreText;
+var lvlText;
+
+var currentLevel;
 
 var map;
 
@@ -147,13 +150,14 @@ function collectCoin (enemy, coin)
 {     
     coin.kill();
     coinsCollected += 1;
+    scoreText.text  = coinsCollected
 }
 
 function displayScore ()
 {
     scoreText    = game.add.text( 
-        game.world.centerX, 
-        game.world.centerY, 
+        208, 
+        115, 
         coinsCollected, 
         { 
             font: "32px Arial", 
@@ -162,6 +166,23 @@ function displayScore ()
     );
 
     scoreText.anchor.setTo( 0.5 );
+}
+
+function displayLevel ()
+{
+    lvlText    = game.add.text( 
+        592, 
+        115, 
+        currentLevel, 
+        { 
+            font: "32px Arial", 
+            fill: "#fff" 
+        } 
+    );
+
+    lvlText.anchor.setTo( 0.5 );
+
+    lvlText.text    = currentLevel;
 }
 
 /* ===== STATES ===== */
