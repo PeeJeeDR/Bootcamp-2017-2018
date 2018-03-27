@@ -8,16 +8,21 @@ var Level_1   = {
         
 
         this.physics.arcade.enable(player);
+       
         
     }, 
 
     update: function ()
     {
         this.controls();
-        this.movePlayer();
+        this.moveSprites();
         game.physics.arcade.collide(player, borderLayer, this.collide, null, this);
         game.physics.arcade.overlap(player, groundLayer, this.onGround, null, this);
-        
+
+        //player.body.velocity.x = 0;
+        console.log('x= ' + player.body.velocity.x);
+        console.log('y= ' +player.body.velocity.y);
+
     },
 
     render: function ()
@@ -44,40 +49,53 @@ var Level_1   = {
         map.setCollisionBetween(0, 10000, true, borderLayer);
     },
 
-    movePlayer: function ()
+    moveSprites: function ()
     {
+        
+        
+        if(player.body.velocity.x < 0 )
+        {
+            player.frame = 3;
+        }
+        else if(player.body.velocity.x > 0){
+            player.frame = 5;
+        }
+        
+        if(player.body.velocity.y < 0){
+            player.frame = 1;
+        }
+        else if(player.body.velocity.y > 0){
+            player.frame = 4;
+        }
+        
+    },
 
-     },
 
     controls: function ()
     {
-        if (cursors.down.isDown  && !player.body.blocked.down)
+        if (cursors.down.isDown)
         {
            
             player.body.velocity.y   = 200;
-            player.frame = 4;
-            
            
         }
-        else if (cursors.up.isDown && !player.body.blocked.up)
+        else if (cursors.up.isDown)
         {
             
-            
             player.body.velocity.y   = -200;
-            player.frame = 1;
+            
         }
 
-        else if (cursors.left.isDown  && !player.body.blocked.right)
+        else if (cursors.left.isDown)
         {
             
             player.body.velocity.x   = -200;
-            player.frame = 3;
+            
             
         } 
-        else if (cursors.right.isDown  && !player.body.blocked.left)
+        else if (cursors.right.isDown)
         {
            
-            player.frame = 5;
             player.body.velocity.x   = 200;
             
         }
