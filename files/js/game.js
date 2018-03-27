@@ -114,6 +114,10 @@ function collectCoin (enemy, coin)
     }
 }
 
+
+
+
+
 /* ===== STATES ===== */
 
 // CORE STATES
