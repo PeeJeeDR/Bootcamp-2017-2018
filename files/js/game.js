@@ -126,6 +126,7 @@ function collectCoin (enemy, coin)
 }
 
 function createBox(){
+    boxCollected = false;
     map.objects.mystery_boxes.forEach(function (singleBox) {
     boxPointArr.push(singleBox);
     
@@ -141,37 +142,28 @@ function createBox(){
     console.log(boxPointArr[rndTraitNbr].x);
     console.log(boxPointArr[rndTraitNbr].y);*/
 
-   
+   mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
 
-    
+   setTimeout(notCollected, 5000);
    
-    
+   
    
 
 
  }
 
- /*function waitTime(){
-
-    event = new Phaser.TimerEvent(this, 5000, callback);
-    this.events.push(event);
+function notCollected(){
 
 
 
-    
-
-   // game.time.events.add(Phaser.Timer.SECOND * 20, createBox , this);
-   // createBox();
-
- }
-*/
-
-function boxDestroy(){
-
+if(!boxCollected){
     mysteryBox.destroy();
-    
+    setTimeout(createBox, 5000);
 
-   
+
+
+}
+
 }
 
 
@@ -179,13 +171,14 @@ function boxDestroy(){
 function collectMysteryBox ( player, mysteryBox){
     boxCollected = true;
 
-    boxDestroy();
+    mysteryBox.destroy();
 
 
     mysteryArr=[ "immortal", "bananaDrop", "projectile" ];
     rndMysteryBox = Phaser.ArrayUtils.getRandomItem(mysteryArr);
 
    // console.log(rndMysteryBox)
+
 
    if(rndMysteryBox == "immortal"){ immortal();}
    else if(rndMysteryBox == "bananaDrop"){ bananaDrop();}
@@ -196,24 +189,25 @@ function collectMysteryBox ( player, mysteryBox){
 
 function immortal  (){
     //console.log('I"m immortal');
+    setTimeout(createBox, 5000);
+    
 
-    waitTime();
-    createBox();
+    ;
        }
    
 function bananaDrop (){
     //  console.log('drop banana');
    
-    waitTime();
-    createBox();
+    
+    setTimeout(createBox, 5000);
     
        }
    
 function projectile (){
    // console.log('shoot projectile');
   
-   waitTime();
-   createBox();
+  
+   setTimeout(createBox, 5000);
        }
 
 
