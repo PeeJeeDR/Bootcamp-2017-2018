@@ -40,7 +40,6 @@ var MenuState   = {
 
     update: function () 
     {
-
         playtext.events.onInputDown.add(this.play, this);
     },
 
@@ -61,6 +60,6 @@ var MenuState   = {
 	},
 
 	play: function () {
-    	game.state.start( 'level_1' );
+    	game.state.start( 'reset' );
     }
 }

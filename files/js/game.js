@@ -184,7 +184,7 @@ function killPlayer (player, enemy)
 }
 
 function resetGame () {
-    game.state.start('level_1');
+    game.state.start('reset');
 }
 
 function backToMenu ()
@@ -227,14 +227,17 @@ function displayLevel ()
 /* ===== STATES ===== */
 
 // CORE STATES
-game.state.add( 'boot', BootState );
-game.state.add( 'load', LoadState );
-game.state.add( 'menu', MenuState );
+game.state.add('boot', BootState);
+game.state.add('load', LoadState);
+game.state.add('menu', MenuState);
+game.state.add('reset', ResetState);
 
 // LEVELS
-game.state.add( 'level_1', Level_1 );
+game.state.add('level_1', Level_1);
+game.state.add('level_2', Level_2);
+game.state.add('level_3', Level_3);
 
 // INTROS
 
 // START
-game.state.start( 'boot' );
+game.state.start('boot');
