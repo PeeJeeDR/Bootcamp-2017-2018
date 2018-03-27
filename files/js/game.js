@@ -1,7 +1,7 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = false;
+var onMobile    = true;
 
 var scoreText;
 var lvlText;
@@ -28,12 +28,14 @@ var point;
 var points;
 var pointArray  = [];
 
+var player;
+
 var groundLayer;
 var borderLayer;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 200,
+    moveSpeed: 20,
 }
 
 var enemySettings = {
@@ -131,30 +133,6 @@ function cursorControls (sprite, autoMovement)
     }
 }
 
-function touchControls (sprite)
-{
-    if (game.input.activePointer.isDown)
-    {
-        if (game.input.activePointer.position.x < game.world.centerX)
-        {
-            sprite.body.velocity.x   = -200;
-        }
-        else if (game.input.activePointer.position.x > game.world.centerX)
-        {
-            sprite.body.velocity.x   = 200;
-        }
-
-        if (game.input.activePointer.position.y < game.world.centerY)
-        {
-            sprite.body.velocity.y   = -200;
-        } 
-        else if (game.input.activePointer.position.y > game.world.centerY)
-        {
-            sprite.body.velocity.y   = 200;
-        }
-    }
-}
-
 function collectCoin (enemy, coin)
 {     
     coin.kill();
@@ -183,7 +161,8 @@ function killPlayer (player, enemy)
     gameOver    = true;
 }
 
-function resetGame () {
+function resetGame () 
+{
     game.state.start('reset');
 }
 
@@ -224,6 +203,17 @@ function displayLevel ()
     lvlText.text    = currentLevel;
 }
 
+function fixFallthrough() 
+{
+    game.physics.arcade.TILE_BIAS = 40;
+}
+
+function handleOrientation (e)
+{
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+}
+
 /* ===== STATES ===== */
 
 // CORE STATES
@@ -236,6 +226,8 @@ game.state.add('reset', ResetState);
 game.state.add('level_1', Level_1);
 game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
+game.state.add('level_4', Level_4);
+game.state.add('level_5', Level_5);
 
 // INTROS
 

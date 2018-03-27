@@ -1,7 +1,7 @@
-var Level_1   = {
+var Level_5   = {
     create: function ()
     {
-        currentLevel    = 1;
+        currentLevel    = 5;
         gameOver        = false;
         this.addMap();
 
@@ -10,6 +10,8 @@ var Level_1   = {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
         }
+
+        
     
         points  = game.add.group();
         points.enableBody   = true;
@@ -28,7 +30,6 @@ var Level_1   = {
 
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
-            handleOrientation();
         }, this);
 
         displayScore();
@@ -45,10 +46,10 @@ var Level_1   = {
 
     addMap: function ()
     {
-        map     = game.add.tilemap('level_1');
+        map     = game.add.tilemap('level_5');
         map.addTilesetImage('pacman_tileset', 'tiles');
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
-    },
+    }
 }

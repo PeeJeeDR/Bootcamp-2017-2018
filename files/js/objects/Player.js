@@ -6,19 +6,13 @@ var Player  = function (x, y)
     _player.scale.setTo(0.99);
     _player.frame   = 4;
 
-    /*
-    gyro.frequency = 10;
-
-    gyro.startTracking(function(o) {
-        _player.body.velocity.x += o.gamma/20;
-        _player.body.velocity.y += o.beta/20;
-    });
-    */
-
+    // Enable da terug als de shit morgen nie meer werkt :p
+    // window.addEventListener("deviceorientation", handleOrientation, true);
+    fixFallthrough();
+    
     _player.update  = function ()
     {
         cursorControls(_player, false);
-        touchControls(_player);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
     }
