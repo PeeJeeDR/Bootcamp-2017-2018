@@ -1,10 +1,12 @@
 var LoadState   = {
     preload: function ()
     {
+        
+    
         this.loadTileMaps();
         
         cursors = game.input.keyboard.createCursorKeys();
-        game.load.image('player', 'assets/sprites/car.png');
+        game.load.spritesheet('player','assets/sprites/mario-sprite.png',32,32)
     },
 
     create: function ()

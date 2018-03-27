@@ -3,15 +3,12 @@ var Level_1   = {
     {
         this.addMap();
 
-        player = this.add.sprite(120,48, 'player');
-        player.anchor.set(0.5,0.5);
-       
+        player = this.game.add.sprite(150,30, 'player');
+        player.frame = 5;
+        
 
         this.physics.arcade.enable(player);
         
-
-      
-
     }, 
 
     update: function ()
@@ -52,28 +49,33 @@ var Level_1   = {
     {
         if (cursors.down.isDown)
         {
-            
+           
             player.body.velocity.y   = 200;
+            player.frame = 4;
+            
            
         }
         else if (cursors.up.isDown)
         {
             
-            player.body.velocity.y   = -200;
             
+            player.body.velocity.y   = -200;
+            player.frame = 1;
         }
 
         else if (cursors.left.isDown)
         {
             
             player.body.velocity.x   = -200;
-            player.scale.y = 1; 
+            player.frame = 3;
+            
         } 
         else if (cursors.right.isDown)
         {
            
+            player.frame = 5;
             player.body.velocity.x   = 200;
-            player.scale.y = -1; 
+            
         }
     }
 }
