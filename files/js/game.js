@@ -133,30 +133,6 @@ function cursorControls (sprite, autoMovement)
     }
 }
 
-function touchControls (sprite)
-{
-    if (game.input.activePointer.isDown)
-    {
-        if (game.input.activePointer.position.x < game.world.centerX)
-        {
-            sprite.body.velocity.x   = -200;
-        }
-        else if (game.input.activePointer.position.x > game.world.centerX)
-        {
-            sprite.body.velocity.x   = 200;
-        }
-
-        if (game.input.activePointer.position.y < game.world.centerY)
-        {
-            sprite.body.velocity.y   = -200;
-        } 
-        else if (game.input.activePointer.position.y > game.world.centerY)
-        {
-            sprite.body.velocity.y   = 200;
-        }
-    }
-}
-
 function collectCoin (enemy, coin)
 {     
     coin.kill();
@@ -250,6 +226,8 @@ game.state.add('reset', ResetState);
 game.state.add('level_1', Level_1);
 game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
+game.state.add('level_4', Level_4);
+game.state.add('level_5', Level_5);
 
 // INTROS
 
