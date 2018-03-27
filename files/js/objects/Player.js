@@ -12,18 +12,6 @@ var Player  = function (x, y)
         touchControls(_player);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
-
-        gyro.frequency = 10;
-
-        gyro.startTracking(function(o) {
-            _player.body.velocity.x += o.gamma/20;
-            _player.body.velocity.y += o.beta/20;
-        });
-    }
-
-    _player.render  = function ()
-    {
-        
     }
 
     return _player;
