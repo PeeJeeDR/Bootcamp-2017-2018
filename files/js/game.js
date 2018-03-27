@@ -1,6 +1,11 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
+var mysteryBoxes;
+var collectMysteryBox;
+var mysteryArr;
+var rndMysteryBox;
+
 
 
 

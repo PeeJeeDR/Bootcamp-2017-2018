@@ -2,11 +2,14 @@ var LoadState   = {
     preload: function ()
     {
         this.loadTileMaps();
+        this.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
     },
 
     create: function ()
     {
         game.state.start( 'menu' );
+
+
     },
 
     loadTileMaps: function ()
