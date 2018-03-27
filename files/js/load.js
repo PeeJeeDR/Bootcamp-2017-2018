@@ -5,6 +5,7 @@ var LoadState   = {
 
         cursors = game.input.keyboard.createCursorKeys();
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
+        game.load.image('coin', 'assets/coin.png');
     },
 
     create: function ()

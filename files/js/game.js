@@ -5,14 +5,19 @@ var map;
 
 var enemy;
 var enemies         = [];
-var nbrOfEnemies    = 3;
+var nbrOfEnemies    = 5;
 
 var coin;
 var coins   = 0;
+var coinsArray  = [];
 
 var point;
 var points;
 var pointArray  = [];
+
+var groundLayer;
+var borderLayer;
+var coinsLayer;
 
 /* ===== SETTINGS ===== */
 var enemySettings = {
@@ -102,9 +107,11 @@ function cursorControls (enemy)
 
 function collectCoin (enemy, coin)
 {     
-    coins += 1;
-    console.log("Coins: ",coins);
-    map.removeTile(coin.x,coin.y,coinsLayer);
+    if (map.removeTile(coin.x,coin.y,coinsLayer))
+    {
+        coins += 1;
+        console.log("Coins: ",coins);
+    }
 }
 
 /* ===== STATES ===== */

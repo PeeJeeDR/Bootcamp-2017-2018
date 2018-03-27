@@ -17,14 +17,18 @@ var Level_1   = {
             points.create(point.x, point.y);
         }, this);
 
-        console.log(enemies);
+        map.objects.coins.forEach(function (point) {
+            pointArray.push(point);
+            points.create(point.x, point.y);
+        }, this);
     }, 
 
     update: function ()
     {
+        
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
-            game.physics.arcade.collide(enemies[i], coinsLayer, collectCoin, null, this);
+            game.physics.arcade.overlap(enemies[i], coinsLayer, collectCoin, null, this);
         }
     },
 
