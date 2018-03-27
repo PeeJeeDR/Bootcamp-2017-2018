@@ -9,6 +9,8 @@ var point;
 var points;
 var pointArray  = [];
 
+var coins = 0;
+
 var counter     = 0;
 
 /* ===== SETTINGS ===== */

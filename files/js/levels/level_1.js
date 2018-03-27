@@ -8,6 +8,13 @@ var Level_1   = {
         enemies.enableBody  = true;
         enemy       = enemies.create(48, 48, 'enemy');
         enemy.anchor.setTo(0.5);
+        enemy.scale.setTo(0.3);
+
+        //enemies.callAll('animations.add', 'animations', 'fly3', [0,1], 4, true);
+        //enemies.callAll('play', null, 'fly3');
+        enemies.forEachAlive(function (enemy) {
+            enemy.animations.add('enemy_idle', [0,1,2,3], 12, true);
+        })
 
         points  = game.add.group();
         points.enableBody   = true;
@@ -21,12 +28,20 @@ var Level_1   = {
                 points.create(point.x, point.y);
             }, this);
         }
+
     }, 
 
     update: function ()
     {
         game.physics.arcade.collide(enemy, borderLayer);
+
+        game.physics.arcade.collide(enemy, coinsLayer, this.collectCoin, null, this);
+
         game.physics.arcade.overlap(enemy, points, this.onPoint, null, this);
+
+        enemies.forEachAlive(function (enemy) {
+            enemy.animations.play('enemy_idle');
+        })
 
         this.controls();
         this.moveEnemy();
@@ -96,7 +111,9 @@ var Level_1   = {
         map.addTilesetImage('pacman_tileset', 'tiles');
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
+        coinsLayer     = map.createLayer('coins');
         map.setCollisionBetween(0, 10000, true, borderLayer);
+        map.setCollisionBetween(30, 30, true, coinsLayer);
     },
 
     controls: function ()
@@ -123,5 +140,12 @@ var Level_1   = {
         {
             enemy.body.velocity.x   = 200;
         }
+    },
+
+    collectCoin: function (enemy, coin)
+    {     
+        coins += 1;
+        console.log("Coins: ",coins);
+        map.removeTile(coin.x,coin.y,coinsLayer);
     }
 }
