@@ -2,6 +2,9 @@ var LoadState   = {
     preload: function ()
     {
         this.loadTileMaps();
+        
+        cursors = game.input.keyboard.createCursorKeys();
+        game.load.image('player', 'assets/sprites/car.png');
     },
 
     create: function ()
