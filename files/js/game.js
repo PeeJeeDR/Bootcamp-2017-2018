@@ -107,6 +107,10 @@ function collectCoin (enemy, coin)
     map.removeTile(coin.x,coin.y,coinsLayer);
 }
 
+
+
+
+
 /* ===== STATES ===== */
 
 // CORE STATES
