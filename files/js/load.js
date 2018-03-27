@@ -19,6 +19,7 @@ var LoadState   = {
     loadTileMaps: function ()
     {
         game.load.tilemap('level_1', 'assets/maps/level_1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_2', 'assets/maps/level_2.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }
