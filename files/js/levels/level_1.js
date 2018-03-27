@@ -29,7 +29,7 @@ var Level_1   = {
         }, this);
 
         gyro.frequency = 10;
-
+        
         gyro.startTracking(function(o) {
             player.body.velocity.x += o.gamma/20;
             player.body.velocity.y += o.beta/20;

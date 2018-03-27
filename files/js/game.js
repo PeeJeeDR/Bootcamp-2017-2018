@@ -117,6 +117,7 @@ function cursorControls (sprite, autoMovement)
     }
 }
 
+
 function touchControls (sprite)
 {
     if (game.input.activePointer.isDown)
@@ -146,6 +147,27 @@ function collectCoin (enemy, coin)
     coin.kill();
     coinsCollected += 1;
 }
+
+
+function moveSprites(sprite)
+{
+    
+    if(sprite.body.velocity.x < 0 )
+    {
+        sprite.frame = 3;
+    }
+    else if(sprite.body.velocity.x > 0){
+        sprite.frame = 5;
+    }
+    else if(sprite.body.velocity.y < 0){
+        sprite.frame = 1;
+    }
+    else if(sprite.body.velocity.y > 0){
+        sprite.frame = 4;
+    }
+    
+}
+
 
 /* ===== STATES ===== */
 
