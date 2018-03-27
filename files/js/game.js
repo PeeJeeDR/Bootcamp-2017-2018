@@ -1,15 +1,114 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var mysteryBoxes;
-var collectMysteryBox;
-var mysteryArr;
-var rndMysteryBox;
+var map;
+
+var enemy;
+var enemies         = [];
+var nbrOfEnemies    = 3;
+
+var coin;
+var coins   = 0;
+
+var point;
+var points;
+var pointArray  = [];
+
+/* ===== SETTINGS ===== */
+var enemySettings = {
+    moveSpeed: 200,
+}
+
+
+/* ===== FUNCTIONS ===== */
+function moveEnemy (enemy)
+{
+    if (enemy.body.blocked.up || enemy.body.blocked.down)
+    {
+        if (Math.random() >= 0.5)
+        {
+            enemy.body.velocity.x  = -200;
+        } 
+        else 
+        {
+            enemy.body.velocity.x  = 200;
+        }
+    }
+
+    else if (enemy.body.blocked.left || enemy.body.blocked.right)
+    {
+        if (Math.random() >= 0.5)
+        {
+            enemy.body.velocity.y  = 200;
+        } 
+        else 
+        {
+            enemy.body.velocity.y  = -200;
+        }
+    }
+}
+
+function enemyOnPoint (enemy, point)
+{
+    margeXTop       = point.x + 1;
+    margeXBottom    = point.x - 1;
+
+    margeYTop       = point.y + 1;
+    margeYBottom    = point.y - 1;
+
+    if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
+    {
+        switch (Math.floor(Math.random() * (5 - 1) + 1))
+        {
+            case 1:
+                enemy.body.velocity.x   = 200;
+            break;
+
+            case 2:
+                enemy.body.velocity.x   = -200;
+            break;
+
+            case 3:
+                enemy.body.velocity.y   = 200;
+            break;
+
+            case 4:
+                enemy.body.velocity.y   = -200;
+            break;
+        }
+    }
+}
+
+function cursorControls (enemy)
+{
+    if (cursors.down.isDown)
+    {
+        enemy.body.velocity.y   = 200;
+    }
+    else if (cursors.up.isDown)
+    {
+        enemy.body.velocity.y   = -200;
+    }
+
+    if (cursors.left.isDown)
+    {
+        enemy.body.velocity.x   = -200;
+    } 
+    else if (cursors.right.isDown)
+    {
+        enemy.body.velocity.x   = 200;
+    }
+}
+
+function collectCoin (enemy, coin)
+{     
+    coins += 1;
+    console.log("Coins: ",coins);
+    map.removeTile(coin.x,coin.y,coinsLayer);
+}
 
 
 
-
-/* === FUNCTIONS === */
 
 
 /* ===== STATES ===== */
