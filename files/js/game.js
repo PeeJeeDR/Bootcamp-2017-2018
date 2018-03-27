@@ -14,6 +14,12 @@ var point;
 var points;
 var pointArray  = [];
 
+
+var mysteryBoxes;
+var collectMysteryBox;
+var mysteryArr     =[];
+var rndMysteryBox;
+
 /* ===== SETTINGS ===== */
 var enemySettings = {
     moveSpeed: 200,
@@ -106,6 +112,35 @@ function collectCoin (enemy, coin)
     console.log("Coins: ",coins);
     map.removeTile(coin.x,coin.y,coinsLayer);
 }
+
+function collectMysteryBox (){
+        
+    mysteryBoxes.disableBody(true, true);
+
+    mysteryArr=[ "immortal", "bananaDrop", "projectile" ];
+    rndMysteryBox = Phaser.ArrayUtils.getRandomItem(mysteryArr);
+
+   // console.log(rndMysteryBox)
+
+   if(rndMysteryBox == "immortal"){ immortal();}
+   else if(rndMysteryBox == "bananaDrop"){ bananaDrop();}
+   else{ projectile(); }
+}
+
+function immortal  (){
+    //console.log('I"m immortal');
+       }
+   
+function bananaDrop (){
+    //  console.log('drop banana');
+   
+   
+       }
+   
+function projectile (){
+   // console.log('shoot projectile');
+   
+       }
 
 
 
