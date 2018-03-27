@@ -15,17 +15,16 @@ var points;
 var pointArray  = [];
 
 var timer;
-
+var min = 20000;
+var max = 30000;
 
 var rndTraitNbr;
 var mysteryBoxes;
 var mysteryBox;
-var mysteryBox2;
 var boxPointArr = [];
 var player;
-var event;
 
-var firstBoxSpawned = false;
+
 var boxCollected = false;
 
 var collectMysteryBox;
@@ -137,30 +136,17 @@ function createBox(){
 
      rndTraitNbr = Math.floor(Math.random()*12);
 
-    /*console.log(rndTraitNbr);
-    console.log(boxPointArr[rndTraitNbr]);
-    console.log(boxPointArr[rndTraitNbr].x);
-    console.log(boxPointArr[rndTraitNbr].y);*/
-
    mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
 
-   setTimeout(notCollected, 5000);
+   setTimeout(notCollected, min);
    
-   
-   
-
-
  }
 
 function notCollected(){
 
-
-
 if(!boxCollected){
     mysteryBox.destroy();
-    setTimeout(createBox, 5000);
-
-
+    timeOut();
 
 }
 
@@ -169,6 +155,7 @@ if(!boxCollected){
 
 
 function collectMysteryBox ( player, mysteryBox){
+
     boxCollected = true;
 
     mysteryBox.destroy();
@@ -189,17 +176,17 @@ function collectMysteryBox ( player, mysteryBox){
 
 function immortal  (){
     //console.log('I"m immortal');
-    setTimeout(createBox, 5000);
+    timeOut();
     
 
-    ;
+    
        }
    
 function bananaDrop (){
     //  console.log('drop banana');
    
     
-    setTimeout(createBox, 5000);
+    timeOut();
     
        }
    
@@ -207,10 +194,19 @@ function projectile (){
    // console.log('shoot projectile');
   
   
-   setTimeout(createBox, 5000);
+   timeOut();
        }
 
+function timeOut(){
+   
+    var rndTime = Math.floor(Math.random()*(max - min+1)+min);
+ console.log(rndTime);
 
+    setTimeout(createBox, rndTime);
+
+
+
+}
 
 
 
