@@ -1,42 +1,42 @@
 var Level_1   = {
     create: function ()
     {
+
         this.addMap();
 
-        player = this.game.add.sprite(150,30, 'player');
-        player.frame = 5;
-        
+        for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
+        {
+            enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
+            enemies.push(enemy);
+        }
 
-        this.physics.arcade.enable(player);
-       
-        
+        player  = new Player(48, 48);
+        game.physics.arcade.enable(player);
+    
+        points  = game.add.group();
+        points.enableBody   = true;
+
+        coins   = game.add.group();
+        coins.enableBody    = true;
+
+        map.objects.detection_points.forEach(function (point) {
+            pointArray.push(point);
+            points.create(point.x, point.y);
+        }, this);
+
+        map.objects.coins.forEach(function (coin) {
+            coins.create(coin.x, coin.y, 'coin');
+        }, this);
+
+        gyro.frequency = 10;
+
+        gyro.startTracking(function(o) {
+            player.body.velocity.x += o.gamma/20;
+            player.body.velocity.y += o.beta/20;
+        });
     }, 
 
     update: function ()
-    {
-        this.controls();
-        this.moveSprites();
-        this.moveplayer();
-        game.physics.arcade.collide(player, borderLayer, this.collide, null, this);
-        game.physics.arcade.overlap(player, groundLayer, this.onGround, null, this);
-
-        //player.body.velocity.x = 0;
-        console.log('x= ' + player.body.velocity.x);
-        console.log('y= ' +player.body.velocity.y);
-
-    },
-
-    render: function ()
-    {
-
-    },
-
-    collide: function ()
-    {
-       
-    },
-
-    onGround: function ()
     {
 
     },
@@ -49,70 +49,4 @@ var Level_1   = {
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
     },
-
-    moveplayer: function()
-    {
-        if(gyro.getFeatures().length > 0) 
-        { 
-            gyro.frequency = 5;  
-
-            gyro.startTracking(function(o) 
-            {
-                player.body.velocity.x += o.x;
-                player.body.velocity.y += o.y;     
-            });
-        }
-    },
-
-    moveSprites: function ()
-    {
-        
-        
-        if(player.body.velocity.x < 0 )
-        {
-            player.frame = 3;
-        }
-        else if(player.body.velocity.x > 0){
-            player.frame = 5;
-        }
-        
-        if(player.body.velocity.y < 0){
-            player.frame = 1;
-        }
-        else if(player.body.velocity.y > 0){
-            player.frame = 4;
-        }
-        
-    },
-
-
-    controls: function ()
-    {
-        if (cursors.down.isDown)
-        {
-           
-            player.body.velocity.y   = 200;
-           
-        }
-        else if (cursors.up.isDown)
-        {
-            
-            player.body.velocity.y   = -200;
-            
-        }
-
-        else if (cursors.left.isDown)
-        {
-            
-            player.body.velocity.x   = -200;
-            
-            
-        } 
-        else if (cursors.right.isDown)
-        {
-           
-            player.body.velocity.x   = 200;
-            
-        }
-    }
 }
