@@ -35,12 +35,16 @@ var MenuState   = {
 
 	    mariokart.events.onOutOfBounds.add(this.marioOut, this);
 
-	    playtext.inputEnabled = true;
+	    playText.inputEnabled 			= true;
+	    instructionText.inputEnabled 	= true;
+	    creditsText.inputEnabled 	 	= true;
     },
 
     update: function () 
     {
-        playtext.events.onInputDown.add(this.play, this);
+        playText.events.onInputDown.add(this.play, this);
+        instructionText.events.onInputDown.add(this.instructions, this);
+        creditsText.events.onInputDown.add(this.credits, this);
     },
 
     pacmanOut: function () {
@@ -55,11 +59,22 @@ var MenuState   = {
 
     createText: function () {
 
-		playtext = game.add.text(game.world.centerX,game.world.centerY, "Play",{font:"32px Arial", fill:"#fff", align:"center"});
-		playtext.anchor.setTo(0.5,0.5);
+		playText.anchor.setTo(0.5,0.5);
+
+		instructionText.anchor.setTo(0.5,0.5);
+
+		creditsText.anchor.setTo(0.5,0.5);
 	},
 
 	play: function () {
     	game.state.start( 'reset' );
+    },
+
+    instructions: function () {
+    	console.log('Instructions');
+    },
+
+    credits: function () {
+    	console.log('Credits');
     }
 }
