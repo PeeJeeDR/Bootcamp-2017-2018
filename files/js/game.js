@@ -2,14 +2,15 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 var map;
-var enemies;
+
 var enemy;
+var enemies;
+var startEnemyMovement  = true;
+
 
 var point;
 var points;
 var pointArray  = [];
-
-var counter     = 0;
 
 /* ===== SETTINGS ===== */
 var enemySettings = {
@@ -18,7 +19,98 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
+function moveEnemy ()
+{
+    if (startEnemyMovement)
+    {
+        startEnemyMovement  = false;
+        
+        if (Math.random() >= 0.5)
+        {
+            enemy.body.velocity.x  = -200;
+        } 
+        else 
+        {
+            enemy.body.velocity.x  = 200;
+        }
+    }
 
+    if (enemy.body.blocked.up || enemy.body.blocked.down)
+    {
+        if (Math.random() >= 0.5)
+        {
+            enemy.body.velocity.x  = -200;
+        } 
+        else 
+        {
+            enemy.body.velocity.x  = 200;
+        }
+    }
+
+    else if (enemy.body.blocked.left || enemy.body.blocked.right)
+    {
+        if (Math.random() >= 0.5)
+        {
+            enemy.body.velocity.y  = 200;
+        } 
+        else 
+        {
+            enemy.body.velocity.y  = -200;
+        }
+    }
+}
+
+function enemyOnPoint (enemy, point)
+{
+    margeXTop       = point.x + 1;
+    margeXBottom    = point.x - 1;
+
+    margeYTop       = point.y + 1;
+    margeYBottom    = point.y - 1;
+
+    if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
+    {
+        switch (Math.floor(Math.random() * (5 - 1) + 1))
+        {
+            case 1:
+                enemy.body.velocity.x   = 200;
+            break;
+
+            case 2:
+                enemy.body.velocity.x   = -200;
+            break;
+
+            case 3:
+                enemy.body.velocity.y   = 200;
+            break;
+
+            case 4:
+                enemy.body.velocity.y   = -200;
+            break;
+        }
+    }
+}
+
+function cursorControls ()
+{
+    if (cursors.down.isDown)
+    {
+        enemy.body.velocity.y   = 200;
+    }
+    else if (cursors.up.isDown)
+    {
+        enemy.body.velocity.y   = -200;
+    }
+
+    if (cursors.left.isDown)
+    {
+        enemy.body.velocity.x   = -200;
+    } 
+    else if (cursors.right.isDown)
+    {
+        enemy.body.velocity.x   = 200;
+    }
+}
 
 /* ===== STATES ===== */
 
