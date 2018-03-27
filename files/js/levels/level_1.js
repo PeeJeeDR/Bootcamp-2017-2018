@@ -16,6 +16,7 @@ var Level_1   = {
     {
         this.controls();
         this.moveSprites();
+        this.moveplayer();
         game.physics.arcade.collide(player, borderLayer, this.collide, null, this);
         game.physics.arcade.overlap(player, groundLayer, this.onGround, null, this);
 
@@ -47,6 +48,20 @@ var Level_1   = {
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
         map.setCollisionBetween(0, 10000, true, borderLayer);
+    },
+
+    moveplayer: function()
+    {
+        if(gyro.getFeatures().length > 0) 
+        { 
+            gyro.frequency = 5;  
+
+            gyro.startTracking(function(o) 
+            {
+                player.body.velocity.x += o.x;
+                player.body.velocity.y += o.y;     
+            });
+        }
     },
 
     moveSprites: function ()

@@ -5,8 +5,7 @@ var map;
 var player;
 var detectionPoints;
 var points;
-var random_direction
-
+var random_direction;
 
 /* === FUNCTIONS === */
 
