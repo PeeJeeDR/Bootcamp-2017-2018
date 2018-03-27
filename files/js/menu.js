@@ -59,10 +59,13 @@ var MenuState   = {
 
     createText: function () {
 
+		playText = game.add.text(game.world.centerX,game.world.centerY -40, "Play",{font:"32px Arial", fill:"#fff", align:"center"});
 		playText.anchor.setTo(0.5,0.5);
 
+		instructionText = game.add.text(game.world.centerX,game.world.centerY + 20, "Instructions",{font:"32px Arial", fill:"#fff", align:"center"});
 		instructionText.anchor.setTo(0.5,0.5);
 
+		creditsText = game.add.text(game.world.centerX,game.world.centerY + 80, "Credits",{font:"32px Arial", fill:"#fff", align:"center"});
 		creditsText.anchor.setTo(0.5,0.5);
 	},
 
