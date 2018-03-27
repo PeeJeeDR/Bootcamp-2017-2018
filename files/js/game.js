@@ -1,6 +1,8 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
+var onMobile    = true;
+
 var map;
 
 var enemy;
