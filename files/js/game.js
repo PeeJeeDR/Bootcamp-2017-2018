@@ -4,9 +4,11 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 var map;
 
 var enemy;
-var enemies;
-var startEnemyMovement  = true;
+var enemies         = [];
+var nbrOfEnemies    = 3;
 
+var coin;
+var coins   = 0;
 
 var point;
 var points;
@@ -19,22 +21,8 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-function moveEnemy ()
+function moveEnemy (enemy)
 {
-    if (startEnemyMovement)
-    {
-        startEnemyMovement  = false;
-        
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-        }
-    }
-
     if (enemy.body.blocked.up || enemy.body.blocked.down)
     {
         if (Math.random() >= 0.5)
@@ -91,7 +79,7 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls ()
+function cursorControls (enemy)
 {
     if (cursors.down.isDown)
     {
@@ -110,6 +98,13 @@ function cursorControls ()
     {
         enemy.body.velocity.x   = 200;
     }
+}
+
+function collectCoin (enemy, coin)
+{     
+    coins += 1;
+    console.log("Coins: ",coins);
+    map.removeTile(coin.x,coin.y,coinsLayer);
 }
 
 /* ===== STATES ===== */
