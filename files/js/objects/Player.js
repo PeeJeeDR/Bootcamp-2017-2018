@@ -9,6 +9,7 @@ var Player  = function (x, y)
     _player.update  = function ()
     {
         cursorControls(_player, true);
+        touchControls(_player);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
 
@@ -18,6 +19,11 @@ var Player  = function (x, y)
             _player.body.velocity.x += o.gamma/20;
             _player.body.velocity.y += o.beta/20;
         });
+    }
+
+    _player.render  = function ()
+    {
+        
     }
 
     return _player;

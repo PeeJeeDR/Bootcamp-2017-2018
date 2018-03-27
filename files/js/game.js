@@ -1,7 +1,7 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = false;
+var onMobile    = true;
 
 var map;
 
@@ -114,6 +114,30 @@ function cursorControls (sprite, autoMovement)
     else if (cursors.right.isDown)
     {
         sprite.body.velocity.x   = 200;
+    }
+}
+
+function touchControls (sprite)
+{
+    if (game.input.activePointer.isDown)
+    {
+        if (game.input.activePointer.position.x < game.world.centerX)
+        {
+            sprite.body.velocity.x   = -200;
+        }
+        else if (game.input.activePointer.position.x > game.world.centerX)
+        {
+            sprite.body.velocity.x   = 200;
+        }
+
+        if (game.input.activePointer.position.y < game.world.centerY)
+        {
+            sprite.body.velocity.y   = -200;
+        } 
+        else if (game.input.activePointer.position.y > game.world.centerY)
+        {
+            sprite.body.velocity.y   = 200;
+        }
     }
 }
 
