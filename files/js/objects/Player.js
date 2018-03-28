@@ -22,9 +22,15 @@ var Player  = function (x, y)
         cursorControls(_player, false);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
-        game.physics.arcade.collide(_player, mysteryBox, collectMysteryBox, null , this);
-//game.physics.arcade.overlap(_player, mysteryBox, collectMysteryBox, null, this);
+       // game.physics.arcade.collide(_player, mysteryBox, collectMysteryBox, null , this);
+      //game.physics.arcade.overlap(_player, mysteryBox, collectMysteryBox, null, this);
 
+
+   /* if(_player.position.y == mysteryBox.position.y && _player.position.x == mysteryBox.position.x ){
+
+    collectMysteryBox();
+
+    }*/
   
         
 

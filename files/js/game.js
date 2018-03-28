@@ -281,7 +281,7 @@ function createBox(){
 
     mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
     game.physics.arcade.enable(mysteryBox);
-    game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
+     game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
    
  }
 
