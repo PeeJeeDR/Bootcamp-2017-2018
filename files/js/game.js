@@ -11,7 +11,7 @@ var coin;
 var coins   = 0;
 
 var point;
-var points;
+var points; 
 var pointArray  = [];
 
 
@@ -176,7 +176,20 @@ function collectMysteryBox ( player, mysteryBox){
 
 
 function immortal  (){
-    //console.log('I"m immortal');
+
+    console.log('I"m immortal');
+    var count = 0;
+
+while(count< 10000){
+
+   if( game.physics.arcade.collide(_player, enemy))
+   {
+        enemy.kill();
+   }
+
+   count++;
+}
+
     timeOut();
     
 
@@ -184,7 +197,7 @@ function immortal  (){
        }
    
 function bananaDrop (){
-    //  console.log('drop banana');
+      console.log('drop banana');
    
     
     timeOut();
@@ -192,7 +205,7 @@ function bananaDrop (){
        }
    
 function projectile (){
-   // console.log('shoot projectile');
+    console.log('shoot projectile');
   
   
    timeOut();

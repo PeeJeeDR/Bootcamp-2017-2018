@@ -12,6 +12,7 @@ var Player  = function (x, y)
         checkCoins();
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
+        game.physics.arcade.overlap(_player, mysteryBox, collectMysteryBox, null, this);
 
         window.addEventListener("deviceorientation", handleOrientation, true);
         fixFallthrough();
