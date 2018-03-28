@@ -208,7 +208,13 @@ function fixFallthrough()
     game.physics.arcade.TILE_BIAS = 40;
 }
 
-function handleOrientation (e)
+function checkCoins ()
+{
+    console.log(coinsCollected);
+    console.log(coinsArray.length);
+}
+
+function accelerometer (e)
 {
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
