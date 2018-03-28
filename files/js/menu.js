@@ -68,8 +68,7 @@ var MenuState   = {
     },
 
 	play: function () {
-			game.state.start( 'reset' );
-		
+		game.state.start( 'reset' );
     },
 
     instructions: function () {

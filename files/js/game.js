@@ -9,7 +9,6 @@ var lvlText;
 var graphicOverlay;
 var restartButton;
 var menuButton;
-var gameOver        = false;
 
 var currentLevel;
 
@@ -19,7 +18,6 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 
-var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -34,7 +32,7 @@ var groundLayer;
 var borderLayer;
 
 var heart;
-var heartArray= [];
+var heartArray  = [];
 var health = 3;
 
 var enemyHitCounter = 0;
@@ -44,16 +42,25 @@ var pacman;
 var mariokart;
 var menuBackground;
 
+<<<<<<< HEAD
 //sounds
 var coinHit;
 var enemyHit;
 var pressStart;
 var theme;
 var gameMusicOver;
+=======
+var boxXPositions   = [];
+var boxYPositions   = [];
+var mysteryBox;
+var mysteryBoxes;
+var mysteryBoxOnScreen  = false;
+var timeNotTaken        = 0;
+>>>>>>> master
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 20,
+    moveSpeed: 15,
     timeToGetHit: 100,
 }
 
@@ -64,6 +71,7 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
+<<<<<<< HEAD
 function moveEnemy (enemy)
 {
     if (enemy.body.blocked.up || enemy.body.blocked.down)
@@ -90,6 +98,8 @@ function moveEnemy (enemy)
         }
     }
 }
+=======
+>>>>>>> master
 
 function enemyOnPoint (enemy, point)
 {
@@ -105,18 +115,34 @@ function enemyOnPoint (enemy, point)
         {
             case 1:
                 enemy.body.velocity.x   = 200;
+                enemy.animations.play('right');
+                enemy.animations.stop('left');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 2:
                 enemy.body.velocity.x   = -200;
+                enemy.animations.play('left');
+                enemy.animations.stop('right');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 3:
                 enemy.body.velocity.y   = 200;
+                enemy.animations.play('down');
+                enemy.animations.stop('up');
+                enemy.animations.stop('left');
+                enemy.animations.stop('right');
             break;
 
             case 4:
                 enemy.body.velocity.y   = -200;
+                enemy.animations.play('up');
+                enemy.animations.stop('down');
+                enemy.animations.stop('lerft');
+                enemy.animations.stop('right');
             break;
         }
     }
@@ -151,12 +177,26 @@ function cursorControls (sprite, autoMovement)
 
 function collectCoin (enemy, coin)
 {     
+    coin.animations.stop('spin');
+    coin.animations.play('collected');
+    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+
     coin.kill();
+<<<<<<< HEAD
     coinsCollected += 1;
     scoreText.text  = coinsCollected
     coinHit = game.add.audio('hit');
     coinHit.volume = 0.012;
     coinHit.play();
+=======
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
+
+    function killCoin () 
+    {
+        
+    }
+>>>>>>> master
 }
 
 function killPlayer ()
@@ -274,12 +314,46 @@ function checkCoins ()
     }
 }
 
+<<<<<<< HEAD
 function openNextLevel()
 {
     
 }
 
 function handleOrientation (e)
+=======
+function addMysteryBox ()
+{
+
+    var maxNbr          = boxXPositions.length;
+    var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
+
+    var randomX         = boxXPositions[randomNbr];
+    var randomY         = boxYPositions[randomNbr];
+
+    mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
+
+    game.time.events.loop(Phaser.Timer.SECOND * 1, checkTime, this);
+
+    function checkTime ()
+    {
+        timeNotTaken++;
+
+        if (timeNotTaken > 10)
+        {
+            mysteryBox.kill();
+        }
+    }
+}
+
+function collectMysteryBox (player, box)
+{
+    console.log('box collected');
+    box.kill();
+}
+
+function HandleOrientation (e) 
+>>>>>>> master
 {
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
