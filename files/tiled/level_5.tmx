@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="860">
  <tileset firstgid="1" name="pacman_tileset" tilewidth="32" tileheight="32" tilecount="30" columns="10">
-<<<<<<< HEAD
-  <image source="pacman_tileset.png" width="320" height="96"/>
-=======
   <image source="../assets/sprites/pacman_tileset.png" width="320" height="96"/>
->>>>>>> master
  </tileset>
  <layer name="background" width="25" height="18">
   <data encoding="csv">
@@ -73,11 +69,7 @@
 2147483674,2147483657,2147483657,2147483673,2147483657,2147483657,2147483657,2147483673,2147483657,2147483657,2147483657,2147483657,9,9,9,9,9,25,9,9,9,25,9,9,26
 </data>
  </layer>
-<<<<<<< HEAD
- <objectgroup name="coins">
-=======
  <objectgroup name="coins" visible="0">
->>>>>>> master
   <object id="795" x="32" y="32" width="32" height="32">
    <ellipse/>
   </object>
@@ -259,11 +251,7 @@
    <ellipse/>
   </object>
  </objectgroup>
-<<<<<<< HEAD
- <objectgroup name="detection_points">
-=======
  <objectgroup name="detection_points" visible="0">
->>>>>>> master
   <object id="637" x="318" y="629" width="1"/>
   <object id="757" x="64" y="96" width="32" height="32"/>
   <object id="758" x="64" y="160" width="32" height="32"/>
