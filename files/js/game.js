@@ -288,7 +288,7 @@ if(!boxCollected){
 
 
 
-function collectMysteryBox ( ){
+function collectMysteryBox ( player, mysteryBox){
 
     boxCollected = true;
 
