@@ -45,6 +45,7 @@ var mariokart;
 var menuBackground;
 
 
+
 /* ===== FUNCTIONS ===== */
 function moveEnemy (enemy)
 {

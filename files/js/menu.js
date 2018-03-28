@@ -3,8 +3,6 @@ var MenuState   = {
     {
         menuBackground = game.add.sprite(0,0,"menu");
 
-    	this.createText();
-
     	game.physics.setBoundsToWorld();
 
     	pacman  = game.add.sprite(0, 515, 'enemy');
@@ -35,16 +33,23 @@ var MenuState   = {
 
 	    mariokart.events.onOutOfBounds.add(this.marioOut, this);
 
-	    playText.inputEnabled 			= true;
-	    instructionText.inputEnabled 	= true;
-	    creditsText.inputEnabled 	 	= true;
+	    play_button = game.add.button(game.world.centerX, game.world.centerY -40, 'play_btn', this.delay_play, this, 2, 1, 0);
+	    play_button.anchor.setTo(0.5);
+	    play_button.animations.add('play_idle', [0,1,0], 3, true);
+	    play_button.animations.add('play_pressed', [0,1,2,3,4,5,6,7,8,9,10,11,10,9,8,7,6,5,4,3,2,1], 40, true);
+
+	    play_button.animations.play("play_pressed");
+
+	    instructions_button = game.add.button(game.world.centerX +150 , game.world.centerY +80, 'instructions_btn', this.instructions, this, 2, 1, 0);
+	    instructions_button.anchor.setTo(0.5);
+
+	    credits_button = game.add.button(game.world.centerX -150, game.world.centerY +80, 'credits_btn', this.credits, this, 2, 1, 0);
+	    credits_button.anchor.setTo(0.5);
     },
 
     update: function () 
     {
-        playText.events.onInputDown.add(this.play, this);
-        instructionText.events.onInputDown.add(this.instructions, this);
-        creditsText.events.onInputDown.add(this.credits, this);
+        
     },
 
     pacmanOut: function () {
@@ -57,20 +62,14 @@ var MenuState   = {
     	mariokart.body.velocity.x  = 200;
     },
 
-    createText: function () {
-
-		playText = game.add.text(game.world.centerX,game.world.centerY -40, "Play",{font:"32px Arial", fill:"#fff", align:"center"});
-		playText.anchor.setTo(0.5,0.5);
-
-		instructionText = game.add.text(game.world.centerX,game.world.centerY + 20, "Instructions",{font:"32px Arial", fill:"#fff", align:"center"});
-		instructionText.anchor.setTo(0.5,0.5);
-
-		creditsText = game.add.text(game.world.centerX,game.world.centerY + 80, "Credits",{font:"32px Arial", fill:"#fff", align:"center"});
-		creditsText.anchor.setTo(0.5,0.5);
+	delay_play: function () {
+		play_button.animations.play("play_pressed");
+		game.time.events.add(Phaser.Timer.SECOND * 0.5, play, this)
 	},
 
 	play: function () {
-    	game.state.start( 'reset' );
+			game.state.start( 'reset' );
+		
     },
 
     instructions: function () {
@@ -80,4 +79,9 @@ var MenuState   = {
     credits: function () {
     	game.state.start( 'credits' );
     }
+}
+
+function play ()
+{
+    game.state.start( 'reset' );
 }
