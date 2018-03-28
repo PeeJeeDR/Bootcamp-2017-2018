@@ -2,10 +2,7 @@ var Level_1   = {
     create: function ()
     {
         currentLevel    = 1;
-        gameOver        = false;
         this.addMap();
-
-        
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
@@ -35,13 +32,14 @@ var Level_1   = {
 
         coins.forEachAlive(function (singleCoin) {
             singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
+            singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
         }, this)
         
         displayScore();
         displayHearts();
 
-        fixFallthrough();
         window.addEventListener("deviceorientation", HandleOrientation, true);
+        fixFallthrough();
     }, 
 
     update: function ()

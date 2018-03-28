@@ -18,6 +18,18 @@ var LoadState   = {
         game.load.image('menu_btn', 'assets/sprites/menu_btn.png');
         game.load.image('restart_btn', 'assets/sprites/restart_btn.png');
         game.load.spritesheet('coin', 'assets/sprites/coin-sprite.png', 32, 32);
+
+        continueText   = game.add.text( 
+            game.world.centerX, 
+            game.world.centerY + 100, 
+            "Loading...", 
+            { 
+                font: "28px Arial", 
+                fill: "#fff" 
+            } 
+        );
+
+        continueText.anchor.setTo( 0.5 );
     },
 
     create: function ()

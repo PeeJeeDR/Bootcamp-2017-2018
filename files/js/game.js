@@ -72,18 +72,34 @@ function enemyOnPoint (enemy, point)
         {
             case 1:
                 enemy.body.velocity.x   = 200;
+                enemy.animations.play('right');
+                enemy.animations.stop('left');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 2:
                 enemy.body.velocity.x   = -200;
+                enemy.animations.play('left');
+                enemy.animations.stop('right');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 3:
                 enemy.body.velocity.y   = 200;
+                enemy.animations.play('down');
+                enemy.animations.stop('up');
+                enemy.animations.stop('left');
+                enemy.animations.stop('right');
             break;
 
             case 4:
                 enemy.body.velocity.y   = -200;
+                enemy.animations.play('up');
+                enemy.animations.stop('down');
+                enemy.animations.stop('lerft');
+                enemy.animations.stop('right');
             break;
         }
     }
@@ -118,9 +134,18 @@ function cursorControls (sprite, autoMovement)
 
 function collectCoin (enemy, coin)
 {     
+    coin.animations.stop('spin');
+    coin.animations.play('collected');
+    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+
     coin.kill();
-    coinsCollected += 1;
-    scoreText.text  = coinsCollected
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
+
+    function killCoin () 
+    {
+        
+    }
 }
 
 function killPlayer ()
@@ -226,8 +251,8 @@ function checkCoins ()
 
 function HandleOrientation (e) 
 {
-    player.body.velocity.y = e.gamma * speed;
-    player.body.velocity.x = e.beta * speed;
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 /* ===== STATES ===== */
 
