@@ -6,15 +6,7 @@ var Player  = function (x, y)
     _player.scale.setTo(0.99);
     _player.frame   = 4;
 
-    hearts   = game.add.group();
-    hearts.enableBody    = true;
-
-    hearts.scale.setTo(0.15);
-
-    for (var i = 0; i < 3; i++)
-    {
-        heart = hearts.create(i * 100, 125, 'heart');
-    }
+    
 
 
     // Enable da terug als de shit morgen nie meer werkt :p
@@ -23,11 +15,25 @@ var Player  = function (x, y)
     
     _player.update  = function ()
     {
-        game.physics.arcade.overlap(player, enemies, killHeart, null, this);
+        console.log(enemyHitCounter);
+        console.log('ena' + enableToHit);
+        console.log('health=' + health);
+        if(enemyHitCounter > 200 || !enableToHit){
+            
+            if(game.physics.arcade.collide(player, enemies, killHeart, null, this)){
 
+                enableToHit = true;
+                enemyHitCounter = 0;
+            }
+        }
         cursorControls(_player, false);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
+
+        if(enableToHit){
+            enemyHitCounter++;
+        }
+        
     }
 
     return _player;

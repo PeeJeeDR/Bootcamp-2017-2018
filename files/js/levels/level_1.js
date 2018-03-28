@@ -19,6 +19,14 @@ var Level_1   = {
         coins   = game.add.group();
         coins.enableBody    = true;
 
+        hearts   = game.add.group();
+        hearts.enableBody    = true;
+    
+        hearts.scale.setTo(0.15);
+    
+        
+        
+
         map.objects.detection_points.forEach(function (point) {
             pointArray.push(point);
             points.create(point.x, point.y);
@@ -40,12 +48,6 @@ var Level_1   = {
     update: function ()
     {
         
-        for (var i = 0, ilen = enemies.length; i < ilen; i++)
-        {   
-            game.physics.arcade.overlap(player, enemies[i], killHeart, null, this);
-        }
-
-
             for (var i = 0, ilen = enemies.length; i < ilen; i++)
             {   
                 
