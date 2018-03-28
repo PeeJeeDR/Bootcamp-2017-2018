@@ -16,6 +16,7 @@ var Level_1   = {
 
     update: function ()
     {
+        cursorControls(player, false);
         coins.callAll('play', null, 'spin');
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
