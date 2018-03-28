@@ -4,6 +4,8 @@ var Level_1   = {
         this.addMap();
        
 
+        
+
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
             enemy  = new this.Enemy(48 + (i * 32), 48 + (i * 32));
