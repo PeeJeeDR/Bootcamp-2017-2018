@@ -16,6 +16,8 @@ var Level_1   = {
         points  = game.add.group();
         points.enableBody   = true;
 
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
+
         coins   = game.add.group();
         coins.enableBody    = true;
 
@@ -24,9 +26,6 @@ var Level_1   = {
     
         hearts.scale.setTo(0.15);
     
-        
-        
-
         map.objects.detection_points.forEach(function (point) {
             pointArray.push(point);
             points.create(point.x, point.y);
@@ -42,11 +41,8 @@ var Level_1   = {
 
         map.objects.mystery_boxes.forEach(function (singleBox) {
             boxPointArr.push(singleBox);
+        }, this);
             
-            }, this);
-            
-        
-        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
 
         displayScore();
         displayLevel();
@@ -55,12 +51,21 @@ var Level_1   = {
 
     update: function ()
     {
-        
-            for (var i = 0, ilen = enemies.length; i < ilen; i++)
-            {   
-                
-                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
-            }
+        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        {   
+            
+            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+        }
+
+        game.physics.arcade.collide(player, mysteryBox, collectMysteryBox, null, this);
+    },
+
+    render: function ()
+    {
+        if (mysteryBox)
+        {
+            game.debug.body(mysteryBox)
+        }
         
     },
 

@@ -66,7 +66,6 @@ var boxPointArr = [];
 
 var boxCollected = false;
 
-var collectMysteryBox;
 var mysteryArr     =[];
 var rndMysteryBox;
 
@@ -166,7 +165,8 @@ function collectCoin (enemy, coin)
     scoreText.text  = coinsCollected
 }
 
-function killHeart(player,enemy){
+function killHeart(player,enemy)
+{
     
     
     console.log('test');
@@ -264,16 +264,14 @@ function delayKill(){
 
 function createBox(){
     boxCollected = false;
-
-    console.log(boxPointArr);
    
 
-     rndTraitNbr = Math.floor(Math.random()*12);
+    rndTraitNbr = Math.floor(Math.random()*12);
 
     mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
+    game.physics.arcade.enable(mysteryBox);
 
-     game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
-   
+    game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
  }
 
 function notCollected(){
@@ -288,9 +286,11 @@ if(!boxCollected){
 
 
 
-function collectMysteryBox ( player, mysteryBox){
+function collectMysteryBox (player, mysteryBox){
 
     boxCollected = true;
+
+    console.log('in mystery');
 
     mysteryBox.destroy();
 
@@ -330,34 +330,23 @@ function immortal  (){
        }
    
 function bananaDrop (){
-     console.log('drop banana');
+    console.log('drop banana');
 
-   //  banaan = game.add.image(game.world.centerX , game.world.centerY , 'banaan');
-
-   
-    
+   //  banaan = game.add.image(game.world.centerX , game.world.centerY , 'banaan'); 
     timeOut();
-    
-       }
+}
    
 function projectile (){
+
     console.log('shoot projectile');
-  
-  
-   timeOut();
-       }
+    timeOut();
+}
 
-function timeOut(){
-   
-  
-   var rndTime = Math.floor(Math.random()*(max - min+1)+min);
+function timeOut()
+{
+    var rndTime = Math.floor(Math.random()*(max - min+1)+min);
     console.log(rndTime);
-
-
     game.time.events.repeat(Phaser.Timer.SECOND*rndTime, 1, createBox,this);
-
-
-
 }
 /* ===== STATES ===== */
 
