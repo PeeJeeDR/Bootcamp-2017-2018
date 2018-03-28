@@ -26,7 +26,8 @@ var Level_1   = {
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
         }, this);
-
+       
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
        
         console.log(enemies);
     }, 
@@ -79,15 +80,5 @@ var Level_1   = {
     },
 
 
-
-    /* mysterybox: function(){
-
-        rndTraitNbr = Math.floor(Math.random()*12);
-        mysteryBox2 = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
-
-        console.log('second box');
-
-
-
-     },*/
+    
 }
