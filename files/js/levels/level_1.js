@@ -27,7 +27,7 @@ var Level_1   = {
             player  = new Player(pos.x + 16, pos.y + 16);
         }, this);
        
-        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
        
         console.log(enemies);
     }, 
