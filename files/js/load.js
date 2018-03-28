@@ -4,21 +4,38 @@ var LoadState   = {
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
+<<<<<<< HEAD
         game.load.image('mysteryboxImg', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         
+=======
+        game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
+        game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
+        game.load.image('coin', 'assets/sprites/coin.png');
+        game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
+        game.load.image('menu', 'assets/sprites/menu.png');
+
+>>>>>>> master
     },
 
     create: function ()
     {
+<<<<<<< HEAD
         game.state.start( 'menu' );
 
 
+=======
+        game.state.start('menu');
+>>>>>>> master
     },
 
     loadTileMaps: function ()
     {
         game.load.tilemap('level_1', 'assets/maps/level_1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_2', 'assets/maps/level_2.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_3', 'assets/maps/level_3.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_4', 'assets/maps/level_4.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_5', 'assets/maps/level_5.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }

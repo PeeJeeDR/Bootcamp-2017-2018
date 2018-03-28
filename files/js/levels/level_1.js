@@ -24,7 +24,17 @@ var Level_1   = {
 
        //this.physics.add.overlap(player, mysteryBoxc, collectMysteryBox, null, this);
 
-       
+       map.objects.coins.forEach(function (coin) {
+        coins.create(coin.x, coin.y, 'coin');
+    }, this);
+
+    map.objects.start_position.forEach(function (pos) {
+        player  = new Player(pos.x + 16, pos.y + 16);
+        handleOrientation();
+    }, this);
+
+    displayScore();
+    displayLevel();
 
      
 
