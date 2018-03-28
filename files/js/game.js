@@ -164,6 +164,11 @@ function killPlayer ()
         graphicOverlay.endFill();
         this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
         this.overlay.inputEnabled = true;
+        
+        game_over = game.add.sprite(game.world.centerX , game.world.centerY - 150, 'game_over');
+        game_over.anchor.setTo(0.5);
+        game_over.animations.add('game_over', [0,1,2,3,4,5,4,5,6,7,8,9], 5, true);
+	    game_over.animations.play("game_over");
 
         restartButton   = game.add.button(game.world.centerX - 150, game.world.centerY, 'restart_btn', resetGame, this);
         restartButton.anchor.setTo(0.5);
