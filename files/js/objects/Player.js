@@ -1,26 +1,37 @@
 var Player  = function (x, y)
 {
     var _player     =  game.add.sprite(x, y, 'car');
+
     game.physics.arcade.enable(_player);
     _player.anchor.setTo(0.5);
-    _player.scale.setTo(0.99);
+    _player.scale.setTo(0.90);
     _player.frame   = 4;
 
-    /*
-    gyro.frequency = 10;
-
-    gyro.startTracking(function(o) {
-        _player.body.velocity.x += o.gamma/20;
-        _player.body.velocity.y += o.beta/20;
-    });
-    */
-
+   
+    // Enable da terug als de shit morgen nie meer werkt :p
+    // window.addEventListener("deviceorientation", handleOrientation, true);
+    fixFallthrough();
+    
     _player.update  = function ()
     {
+        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
+            
+            if(game.physics.arcade.overlap(player, enemies, killHeart, null, this)){
+
+                enableToHit = true;
+                enemyHitCounter = 0;
+            }
+        }
+        
         cursorControls(_player, false);
-        touchControls(_player);
+        checkCoins();
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
+
+        if(enableToHit){
+            enemyHitCounter++;
+        }
+        
     }
 
     return _player;

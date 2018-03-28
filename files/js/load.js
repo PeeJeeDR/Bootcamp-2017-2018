@@ -14,6 +14,7 @@ var LoadState   = {
         game.load.image('instructions_btn', 'assets/sprites/instructions_btn.png');
         game.load.image('back_btn', 'assets/sprites/back_btn.png');
         game.load.spritesheet('instructions_image', 'assets/sprites/instructions.png', 555, 361);
+        game.load.image('heart', 'assets/sprites/heart.png');
     },
 
     create: function ()
@@ -26,6 +27,8 @@ var LoadState   = {
         game.load.tilemap('level_1', 'assets/maps/level_1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_2', 'assets/maps/level_2.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_3', 'assets/maps/level_3.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_4', 'assets/maps/level_4.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_5', 'assets/maps/level_5.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }

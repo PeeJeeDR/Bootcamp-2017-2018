@@ -1,7 +1,7 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
-var onMobile    = false;
+var onMobile    = true;
 
 var scoreText;
 var lvlText;
@@ -28,21 +28,31 @@ var point;
 var points;
 var pointArray  = [];
 
+var player;
+
 var groundLayer;
 var borderLayer;
 
+var heart;
+var heartArray= [];
+var health = 3;
+
+var enemyHitCounter = 0;
+var enableToHit = false;
+
+var pacman;
+var mariokart;
+var menuBackground;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 200,
+    moveSpeed: 20,
+    timeToGetHit: 100,
 }
 
 var enemySettings = {
     moveSpeed: 200,
 }
-
-var pacman;
-var mariokart;
-var menuBackground;
 
 
 
@@ -132,30 +142,6 @@ function cursorControls (sprite, autoMovement)
     }
 }
 
-function touchControls (sprite)
-{
-    if (game.input.activePointer.isDown)
-    {
-        if (game.input.activePointer.position.x < game.world.centerX)
-        {
-            sprite.body.velocity.x   = -200;
-        }
-        else if (game.input.activePointer.position.x > game.world.centerX)
-        {
-            sprite.body.velocity.x   = 200;
-        }
-
-        if (game.input.activePointer.position.y < game.world.centerY)
-        {
-            sprite.body.velocity.y   = -200;
-        } 
-        else if (game.input.activePointer.position.y > game.world.centerY)
-        {
-            sprite.body.velocity.y   = 200;
-        }
-    }
-}
-
 function collectCoin (enemy, coin)
 {     
     coin.kill();
@@ -163,28 +149,32 @@ function collectCoin (enemy, coin)
     scoreText.text  = coinsCollected
 }
 
-function killPlayer (player, enemy)
+function killPlayer ()
 {
-    graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
-    graphicOverlay.beginFill(0x000000, 0.7);
-    graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
-    graphicOverlay.endFill();
-    this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
-    this.overlay.inputEnabled = true;
+    if(health == 0){
 
-    restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
-    restartButton.anchor.setTo(0.5);
+        graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
+        graphicOverlay.beginFill(0x000000, 0.7);
+        graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
+        graphicOverlay.endFill();
+        this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
+        this.overlay.inputEnabled = true;
 
-    menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
-    menuButton.anchor.setTo(0.5);
+        restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
+        restartButton.anchor.setTo(0.5);
 
-    game.camera.shake(0.01, 300);
-    player.kill();
+        menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
+        menuButton.anchor.setTo(0.5);
 
-    gameOver    = true;
+        game.camera.shake(0.01, 300);
+        player.kill();
+
+        gameOver    = true;
+    }
 }
 
-function resetGame () {
+function resetGame () 
+{
     game.state.start('reset');
 }
 
@@ -196,7 +186,7 @@ function backToMenu ()
 function displayScore ()
 {
     scoreText    = game.add.text( 
-        208, 
+        592, 
         115, 
         coinsCollected, 
         { 
@@ -225,6 +215,51 @@ function displayLevel ()
     lvlText.text    = currentLevel;
 }
 
+function displayHearts ()
+{
+    map.objects.health.forEach(function (hp) {
+        heart      = game.add.image(hp.x, hp.y, 'heart');
+        heartArray.push(heart);
+    }, this);
+}
+
+function killHeart(player, enemy)
+{
+    game.camera.shake(0.008, 300);
+    health--;
+
+    heartArray[health].destroy();
+    
+    if (health  === 0)
+    {
+        killPlayer();
+    }
+}
+
+function fixFallthrough() 
+{
+    game.physics.arcade.TILE_BIAS = 40;
+}
+
+function checkCoins ()
+{
+    // coinsArray.length
+    if (coinsCollected === 10)
+    {
+        openNextLevel();
+    }
+}
+
+function openNextLevel()
+{
+    
+}
+
+function handleOrientation (e)
+{
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+}
 /* ===== STATES ===== */
 
 // CORE STATES
@@ -239,6 +274,8 @@ game.state.add('credits', CreditState);
 game.state.add('level_1', Level_1);
 game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
+game.state.add('level_4', Level_4);
+game.state.add('level_5', Level_5);
 
 // INTROS
 

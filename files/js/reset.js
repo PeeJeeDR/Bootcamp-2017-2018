@@ -6,6 +6,6 @@ var ResetState   = {
 
     update: function ()
     {
-        this.state.start('level_3');
+        this.state.start('level_1');
     }
 }
