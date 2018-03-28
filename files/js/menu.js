@@ -3,8 +3,6 @@ var MenuState   = {
     {
         menuBackground = game.add.sprite(0,0,"menu");
 
-    	this.createText();
-
     	game.physics.setBoundsToWorld();
 
     	pacman  = game.add.sprite(0, 515, 'enemy');
@@ -35,12 +33,22 @@ var MenuState   = {
 
 	    mariokart.events.onOutOfBounds.add(this.marioOut, this);
 
-	    playtext.inputEnabled = true;
+	    play_button = game.add.button(game.world.centerX, game.world.centerY -40, 'play_btn', this.play, this, 2, 1, 0);
+	    play_button.anchor.setTo(0.5);
+	    play_button.animations.add('play_flash', [0,1,2,3,4,5,6,7,8,9,10,11,10,9,8,7,6,5,4,3,2,1], 40, true);
+
+	    play_button.animations.play("play_flash");
+
+	    instructions_button = game.add.button(game.world.centerX +150 , game.world.centerY +80, 'instructions_btn', this.instructions, this, 2, 1, 0);
+	    instructions_button.anchor.setTo(0.5);
+
+	    credits_button = game.add.button(game.world.centerX -150, game.world.centerY +80, 'credits_btn', this.credits, this, 2, 1, 0);
+	    credits_button.anchor.setTo(0.5);
     },
 
     update: function () 
     {
-        playtext.events.onInputDown.add(this.play, this);
+        
     },
 
     pacmanOut: function () {
@@ -53,13 +61,21 @@ var MenuState   = {
     	mariokart.body.velocity.x  = 200;
     },
 
-    createText: function () {
-
-		playtext = game.add.text(game.world.centerX,game.world.centerY, "Play",{font:"32px Arial", fill:"#fff", align:"center"});
-		playtext.anchor.setTo(0.5,0.5);
-	},
-
 	play: function () {
-    	game.state.start( 'reset' );
+			game.state.start( 'reset' );
+		
+    },
+
+    instructions: function () {
+    	game.state.start( 'instructions' );
+    },
+
+    credits: function () {
+    	game.state.start( 'credits' );
     }
+}
+
+function play ()
+{
+    game.state.start( 'reset' );
 }
