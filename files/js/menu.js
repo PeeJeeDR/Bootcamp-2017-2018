@@ -1,6 +1,7 @@
 var MenuState   = {
     create: function ()
     {
+		
         menuBackground = game.add.sprite(0,0,"menu");
 
     	game.physics.setBoundsToWorld();
@@ -43,7 +44,12 @@ var MenuState   = {
 	    instructions_button.anchor.setTo(0.5);
 
 	    credits_button = game.add.button(game.world.centerX -150, game.world.centerY +80, 'credits_btn', this.credits, this, 2, 1, 0);
-	    credits_button.anchor.setTo(0.5);
+		credits_button.anchor.setTo(0.5);
+		
+		pressStart = game.add.audio('pressStart');
+		pressStart.volume = 0.05;
+		
+		pressStart.play(); 
     },
 
     update: function () 

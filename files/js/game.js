@@ -44,6 +44,12 @@ var pacman;
 var mariokart;
 var menuBackground;
 
+//sounds
+var coinHit;
+var enemyHit;
+var pressStart;
+var theme;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
@@ -147,6 +153,9 @@ function collectCoin (enemy, coin)
     coin.kill();
     coinsCollected += 1;
     scoreText.text  = coinsCollected
+    coinHit = game.add.audio('hit');
+    coinHit.volume = 0.011;
+    coinHit.play();
 }
 
 function killPlayer ()
@@ -166,8 +175,14 @@ function killPlayer ()
         menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
         menuButton.anchor.setTo(0.5);
 
-        game.camera.shake(0.01, 300);
+        game.camera.shake(0.02, 300);
         player.kill();
+
+        theme.stop();
+
+        gameOver = game.add.audio('gameOver');
+        gameOver.volume = 0.1;
+        gameOver.play();
 
         gameOver    = true;
     }
@@ -225,7 +240,14 @@ function displayHearts ()
 
 function killHeart(player, enemy)
 {
-    game.camera.shake(0.008, 300);
+    game.camera.shake(0.01, 300);
+    game.camera.flash(0xff0000, 500);
+    
+    enemyHit = game.add.audio('enemyHit');
+    enemyHit.volume = 0.6;
+    enemyHit.play();
+
+    window.navigator.vibrate([1000,2000,1000]);
     health--;
 
     heartArray[health].destroy();
