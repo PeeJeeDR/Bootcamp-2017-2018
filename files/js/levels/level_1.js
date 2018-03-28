@@ -23,14 +23,12 @@ var Level_1   = {
         }, this);
 
         map.objects.coins.forEach(function (coin) {
-            console.log(coin);
             coinsArray.push(coin);
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
-            accelerometer(player);
         }, this);
 
         displayScore();

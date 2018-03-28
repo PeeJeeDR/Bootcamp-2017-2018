@@ -210,8 +210,15 @@ function fixFallthrough()
 
 function checkCoins ()
 {
-    console.log(coinsCollected);
-    console.log(coinsArray.length);
+    if (coinsCollected === coinsArray.length)
+    {
+        openNextLevel();
+    }
+}
+
+function openNextLevel()
+{
+    
 }
 
 function accelerometer (e)
