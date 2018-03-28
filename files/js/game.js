@@ -15,8 +15,10 @@ var points;
 var pointArray  = [];
 
 var timer;
-var min = 20000;
-var max = 30000;
+var min = 20;
+var max = 30;
+var count =0;
+var count2=0;
 
 var rndTraitNbr;
 var mysteryBoxes;
@@ -138,7 +140,7 @@ function createBox(){
 
    mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
 
-   setTimeout(notCollected, min);
+   game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
    
  }
 
@@ -199,10 +201,12 @@ function projectile (){
 
 function timeOut(){
    
-    var rndTime = Math.floor(Math.random()*(max - min+1)+min);
- console.log(rndTime);
+  
+   var rndTime = Math.floor(Math.random()*(max - min+1)+min);
+    console.log(rndTime);
 
-    setTimeout(createBox, rndTime);
+
+    game.time.events.repeat(Phaser.Timer.SECOND*rndTime, 1, createBox,this);
 
 
 
