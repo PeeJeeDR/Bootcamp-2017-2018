@@ -29,7 +29,11 @@ var Player  = function (x, y)
         cursorControls(_player, false);
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
-        game.physics.arcade.overlap(_player, mysteryBox, collectMysteryBox, null, this);
+        game.physics.arcade.collide(_player, mysteryBox, collectMysteryBox, null , this);
+//game.physics.arcade.overlap(_player, mysteryBox, collectMysteryBox, null, this);
+
+  
+        
 
         if(enableToHit){
             enemyHitCounter++;
