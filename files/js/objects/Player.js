@@ -6,22 +6,15 @@ var Player  = function (x, y)
     _player.scale.setTo(0.99);
     _player.frame   = 4;
 
-    
-
-
     // Enable da terug als de shit morgen nie meer werkt :p
     // window.addEventListener("deviceorientation", handleOrientation, true);
     fixFallthrough();
     
     _player.update  = function ()
     {
-        console.log(enemyHitCounter);
-        console.log('ena' + enableToHit);
-        console.log('health=' + health);
         if(enemyHitCounter > 200 || !enableToHit){
             
             if(game.physics.arcade.collide(player, enemies, killHeart, null, this)){
-
                 enableToHit = true;
                 enemyHitCounter = 0;
             }
@@ -35,7 +28,8 @@ var Player  = function (x, y)
   
         
 
-        if(enableToHit){
+        if(enableToHit)
+        {
             enemyHitCounter++;
         }
         
