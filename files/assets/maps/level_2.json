@@ -36,6 +36,137 @@
         }, 
         {
          "draworder":"topdown",
+         "name":"mystery_boxes",
+         "objects":[
+                {
+                 "height":33,
+                 "id":452,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33,
+                 "x":193,
+                 "y":31
+                }, 
+                {
+                 "height":31,
+                 "id":453,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":580,
+                 "y":32
+                }, 
+                {
+                 "height":31,
+                 "id":454,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":736,
+                 "y":67
+                }, 
+                {
+                 "height":32,
+                 "id":455,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":31,
+                 "y":97
+                }, 
+                {
+                 "height":35,
+                 "id":456,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":95,
+                 "y":353
+                }, 
+                {
+                 "height":37,
+                 "id":457,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":539,
+                 "y":382
+                }, 
+                {
+                 "height":35,
+                 "id":458,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":382,
+                 "y":318
+                }, 
+                {
+                 "height":34,
+                 "id":459,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":610,
+                 "y":510
+                }, 
+                {
+                 "height":34,
+                 "id":460,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":30,
+                 "y":417
+                }, 
+                {
+                 "height":32,
+                 "id":461,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33,
+                 "x":197,
+                 "y":448
+                }, 
+                {
+                 "height":34,
+                 "id":462,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33,
+                 "x":162,
+                 "y":259
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "name":"coins",
          "objects":[
                 {
@@ -1802,7 +1933,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":452,
+ "nextobjectid":463,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",
