@@ -46,7 +46,7 @@ var menuBackground;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 20,
+    moveSpeed: 15,
     timeToGetHit: 100,
 }
 
