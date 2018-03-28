@@ -127,19 +127,15 @@ function collectCoin (enemy, coin)
 
 function createBox(){
     boxCollected = false;
-    map.objects.mystery_boxes.forEach(function (singleBox) {
-    boxPointArr.push(singleBox);
-    
-    }, this);
-    
+
     console.log(boxPointArr);
    
 
      rndTraitNbr = Math.floor(Math.random()*12);
 
-   mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
+    mysteryBox = game.add.image(boxPointArr[rndTraitNbr].x , boxPointArr[rndTraitNbr].y , 'mysteryboxImg');
 
-   game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
+     game.time.events.repeat(Phaser.Timer.SECOND*min,1, notCollected, this);
    
  }
 

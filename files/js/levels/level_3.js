@@ -32,8 +32,13 @@ var Level_3   = {
             player  = new Player(pos.x + 16, pos.y + 16);
         }, this);
 
+        map.objects.mystery_boxes.forEach(function (singleBox) {
+            boxPointArr.push(singleBox);
+            
+            }, this);
+
         game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
-        
+
         displayScore();
         displayLevel();
     }, 
