@@ -31,6 +31,8 @@ var pointArray  = [];
 
 var player;
 
+var stars;
+
 var groundLayer;
 var borderLayer;
 
@@ -237,6 +239,8 @@ function killHeart(player, enemy)
 {
     game.camera.shake(0.008, 300);
     health--;
+
+    stars.animations.play('onHit');
 
     heartArray[health].destroy();
     

@@ -7,6 +7,10 @@ var Player  = function (x, y)
     _player.scale.setTo(0.90);
     _player.frame   = 4;
 
+    stars = _player.addChild(game.make.sprite(0, 0, 'stars'));
+    stars.frame = 0;
+    stars.anchor.setTo(0.5,1);
+    stars.animations.add('onHit', [0, 1, 2, 3,0], 12, false);
    
     // Enable da terug als de shit morgen nie meer werkt :p
     // window.addEventListener("deviceorientation", handleOrientation, true);
