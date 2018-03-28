@@ -4,29 +4,21 @@ var LoadState   = {
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
-<<<<<<< HEAD
-        game.load.image('mysteryboxImg', 'assets/sprites/mysteryBox.png');
-        game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
-        
-=======
+       
         game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         game.load.image('coin', 'assets/sprites/coin.png');
         game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
         game.load.image('menu', 'assets/sprites/menu.png');
 
->>>>>>> master
     },
 
     create: function ()
     {
-<<<<<<< HEAD
         game.state.start( 'menu' );
 
 
-=======
-        game.state.start('menu');
->>>>>>> master
+        
     },
 
     loadTileMaps: function ()
