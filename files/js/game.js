@@ -48,7 +48,7 @@ var menuBackground;
 var boxXPositions   = [];
 var boxYPositions   = [];
 var mystery_box;
-var activated       = false;
+var mysteryBoxOnScreen  = false;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -260,6 +260,12 @@ function checkCoins ()
     {
         // Wat doen als alle levels gecleared zijn?
     }
+}
+
+function addNewMysteryBox ()
+{  
+    mysteryBoxOnScreen  = true;
+    mystery_box     = new MysteryBox();
 }
 
 function HandleOrientation (e) 

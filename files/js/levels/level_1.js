@@ -11,15 +11,16 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        mystery_box     = new MysteryBox();
+        if (!mysteryBoxOnScreen)
+        {
+            game.time.events.loop(Phaser.Timer.SECOND * 1, addNewMysteryBox, this);
+        }
 
         fixFallthrough();
     }, 
 
     update: function ()
     {
-
-        
         cursorControls(player, false);
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
@@ -89,10 +90,4 @@ var Level_1   = {
             enemies.push(enemy);
         }
     },
-
-    addNewMysteryBox: function ()
-    {
-        activated   = true;
-        console.log('test');
-    }
 }
