@@ -33,27 +33,27 @@ var Level_1   = {
         }, this);
 
         map.objects.coins.forEach(function (coin) {
+            coinsArray.push(coin);
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
-            handleOrientation();
         }, this);
 
         displayScore();
         displayLevel();
+
+        fixFallthrough();
+        window.addEventListener("deviceorientation", handleOrientation, true);
     }, 
 
     update: function ()
     {
-        
-            for (var i = 0, ilen = enemies.length; i < ilen; i++)
-            {   
-                
-                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
-            }
-        
+        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        {
+            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+        }
     },
 
     addMap: function ()

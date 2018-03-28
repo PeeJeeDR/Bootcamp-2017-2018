@@ -33,6 +33,7 @@ var player;
 var groundLayer;
 var borderLayer;
 
+
 var hearts;
 var heart;
 var heartArray= [];
@@ -40,6 +41,11 @@ var health = 3;
 
 var enemyHitCounter = 0;
 var enableToHit = false;
+
+var pacman;
+var mariokart;
+var menuBackground;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
@@ -48,10 +54,6 @@ var playerSettings = {
 var enemySettings = {
     moveSpeed: 200,
 }
-
-var pacman;
-var mariokart;
-var menuBackground;
 
 
 /* ===== FUNCTIONS ===== */
@@ -231,6 +233,20 @@ function displayLevel ()
 function fixFallthrough() 
 {
     game.physics.arcade.TILE_BIAS = 40;
+}
+
+function checkCoins ()
+{
+    // coinsArray.length
+    if (coinsCollected === 10)
+    {
+        openNextLevel();
+    }
+}
+
+function openNextLevel()
+{
+    
 }
 
 function handleOrientation (e)
