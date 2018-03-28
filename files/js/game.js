@@ -1,4 +1,5 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
+// 800, 576
 
 /* ===== GLOBALS ===== */
 var onMobile    = true;
