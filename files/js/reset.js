@@ -3,6 +3,8 @@ var ResetState   = {
     {
         coinsCollected  = 0;
         health          = 3;
+        enableToHit     = false;
+        heartArray      = []
     },
 
     update: function ()

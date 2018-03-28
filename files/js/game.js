@@ -10,7 +10,6 @@ var lvlText;
 var graphicOverlay;
 var restartButton;
 var menuButton;
-var gameOver        = false;
 
 var currentLevel;
 
@@ -35,7 +34,7 @@ var groundLayer;
 var borderLayer;
 
 var heart;
-var heartArray= [];
+var heartArray  = [];
 var health = 3;
 
 var enemyHitCounter = 0;
@@ -65,12 +64,10 @@ function moveEnemy (enemy)
         if (Math.random() >= 0.5)
         {
             enemy.body.velocity.x  = -200;
-            enemy.angle = 180;
         } 
         else 
         {
             enemy.body.velocity.x  = 200;
-            enemy.angle = -180;
         }
     }
 
@@ -79,12 +76,10 @@ function moveEnemy (enemy)
         if (Math.random() >= 0.5)
         {
             enemy.body.velocity.y  = 200;
-            enemy.angle = -90;
         } 
         else 
         {
             enemy.body.velocity.y  = -200;
-            enemy.angle = 90;
         }
     }
 }

@@ -14,8 +14,8 @@ var Player  = function (x, y)
     
     _player.update  = function ()
     {
-        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
-            
+        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit)
+        {
             if(game.physics.arcade.overlap(player, enemies, killHeart, null, this))
             {
                 enableToHit = true;
