@@ -247,19 +247,14 @@ function checkCoins ()
     // coinsArray.length
     if (coinsCollected === 10)
     {
-        openNextLevel();
+        // Wat doen als alle levels gecleared zijn?
     }
 }
 
-function openNextLevel()
+function HandleOrientation (e) 
 {
-    
-}
-
-function handleOrientation (e)
-{
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    player.body.velocity.y = e.gamma * speed;
+    player.body.velocity.x = e.beta * speed;
 }
 /* ===== STATES ===== */
 

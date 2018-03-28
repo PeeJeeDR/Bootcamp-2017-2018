@@ -37,7 +37,7 @@ var Level_1   = {
         displayHearts();
 
         fixFallthrough();
-        window.addEventListener("deviceorientation", handleOrientation, true);
+        window.addEventListener("deviceorientation", HandleOrientation, true);
     }, 
 
     update: function ()

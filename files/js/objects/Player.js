@@ -10,13 +10,14 @@ var Player  = function (x, y)
    
     // Enable da terug als de shit morgen nie meer werkt :p
     // window.addEventListener("deviceorientation", handleOrientation, true);
-    fixFallthrough();
+    // fixFallthrough();
     
     _player.update  = function ()
     {
         if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
             
-            if(game.physics.arcade.overlap(player, enemies, killHeart, null, this)){
+            if(game.physics.arcade.overlap(player, enemies, killHeart, null, this))
+            {
                 enableToHit = true;
                 enemyHitCounter = 0;
             }
