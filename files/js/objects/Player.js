@@ -18,8 +18,8 @@ var Player  = function (x, y)
     
     _player.update  = function ()
     {
-        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
-            
+        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit)
+        {
             if(game.physics.arcade.overlap(player, enemies, killHeart, null, this))
             {
                 enableToHit = true;
@@ -45,7 +45,6 @@ var Player  = function (x, y)
             _player.frame   = 4;
         }
         
-        cursorControls(_player, false);
         checkCoins();
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);

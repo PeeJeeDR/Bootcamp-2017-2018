@@ -10,7 +10,6 @@ var lvlText;
 var graphicOverlay;
 var restartButton;
 var menuButton;
-var gameOver        = false;
 
 var currentLevel;
 
@@ -37,7 +36,7 @@ var groundLayer;
 var borderLayer;
 
 var heart;
-var heartArray= [];
+var heartArray  = [];
 var health = 3;
 
 var enemyHitCounter = 0;
@@ -49,7 +48,7 @@ var menuBackground;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 20,
+    moveSpeed: 15,
     timeToGetHit: 100,
 }
 
@@ -60,36 +59,6 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-function moveEnemy (enemy)
-{
-    if (enemy.body.blocked.up || enemy.body.blocked.down)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-            enemy.angle = 180;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-            enemy.angle = -180;
-        }
-    }
-
-    else if (enemy.body.blocked.left || enemy.body.blocked.right)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.y  = 200;
-            enemy.angle = -90;
-        } 
-        else 
-        {
-            enemy.body.velocity.y  = -200;
-            enemy.angle = 90;
-        }
-    }
-}
 
 function enemyOnPoint (enemy, point)
 {
@@ -105,18 +74,34 @@ function enemyOnPoint (enemy, point)
         {
             case 1:
                 enemy.body.velocity.x   = 200;
+                enemy.animations.play('right');
+                enemy.animations.stop('left');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 2:
                 enemy.body.velocity.x   = -200;
+                enemy.animations.play('left');
+                enemy.animations.stop('right');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 3:
                 enemy.body.velocity.y   = 200;
+                enemy.animations.play('down');
+                enemy.animations.stop('up');
+                enemy.animations.stop('left');
+                enemy.animations.stop('right');
             break;
 
             case 4:
                 enemy.body.velocity.y   = -200;
+                enemy.animations.play('up');
+                enemy.animations.stop('down');
+                enemy.animations.stop('lerft');
+                enemy.animations.stop('right');
             break;
         }
     }
@@ -151,9 +136,18 @@ function cursorControls (sprite, autoMovement)
 
 function collectCoin (enemy, coin)
 {     
+    coin.animations.stop('spin');
+    coin.animations.play('collected');
+    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+
     coin.kill();
-    coinsCollected += 1;
-    scoreText.text  = coinsCollected
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
+
+    function killCoin () 
+    {
+        
+    }
 }
 
 function killPlayer ()
@@ -266,8 +260,8 @@ function checkCoins ()
 
 function HandleOrientation (e) 
 {
-    player.body.velocity.y = e.gamma * speed;
-    player.body.velocity.x = e.beta * speed;
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 /* ===== STATES ===== */
 
