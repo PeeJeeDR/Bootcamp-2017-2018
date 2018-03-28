@@ -33,6 +33,15 @@ var player;
 var groundLayer;
 var borderLayer;
 
+
+var hearts;
+var heart;
+var heartArray= [];
+var health = 3;
+
+var enemyHitCounter = 0;
+var enableToHit = false;
+
 var pacman;
 var mariokart;
 var menuBackground;
@@ -140,25 +149,43 @@ function collectCoin (enemy, coin)
     scoreText.text  = coinsCollected
 }
 
+function killHeart(player,enemy){
+    
+    
+    console.log('test');
+    health--;    
+
+    for(i=0;i<heartArray.length;i++){
+        if(heartArray[i] === health){
+            heart.kill();
+            
+        }
+    }
+    
+}
+
 function killPlayer (player, enemy)
 {
-    graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
-    graphicOverlay.beginFill(0x000000, 0.7);
-    graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
-    graphicOverlay.endFill();
-    this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
-    this.overlay.inputEnabled = true;
+    if(health == 0){
 
-    restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
-    restartButton.anchor.setTo(0.5);
+        graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
+        graphicOverlay.beginFill(0x000000, 0.7);
+        graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
+        graphicOverlay.endFill();
+        this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
+        this.overlay.inputEnabled = true;
 
-    menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
-    menuButton.anchor.setTo(0.5);
+        restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
+        restartButton.anchor.setTo(0.5);
 
-    game.camera.shake(0.01, 300);
-    player.kill();
+        menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
+        menuButton.anchor.setTo(0.5);
 
-    gameOver    = true;
+        game.camera.shake(0.01, 300);
+        player.kill();
+
+        gameOver    = true;
+    }
 }
 
 function resetGame () 
@@ -236,6 +263,9 @@ function handleOrientation (e)
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 
+function delayKill(){
+    console.log(enemyHitCounter);
+}
 /* ===== STATES ===== */
 
 // CORE STATES
