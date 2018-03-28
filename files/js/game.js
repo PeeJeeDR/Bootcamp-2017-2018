@@ -14,17 +14,16 @@ var point;
 var points;
 var pointArray  = [];
 
-var timer;
+
 var min = 20;
 var max = 30;
-var count =0;
-var count2=0;
+
 
 var rndTraitNbr;
 var mysteryBoxes;
 var mysteryBox;
 var boxPointArr = [];
-var player;
+
 
 
 var boxCollected = false;
@@ -244,6 +243,10 @@ var player;
 var groundLayer;
 var borderLayer;
 
+var pacman;
+var mariokart;
+var menuBackground;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
@@ -252,10 +255,6 @@ var playerSettings = {
 var enemySettings = {
     moveSpeed: 200,
 }
-
-var pacman;
-var mariokart;
-var menuBackground;
 
 
 /* ===== FUNCTIONS ===== */
@@ -419,10 +418,23 @@ function fixFallthrough()
     game.physics.arcade.TILE_BIAS = 40;
 }
 
+function checkCoins ()
+{
+    if (coinsCollected === coinsArray.length)
+    {
+        openNextLevel();
+    }
+}
+
+function openNextLevel()
+{
+    
+}
+
 function handleOrientation (e)
 {
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    player.body.velocity.x = e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.y = e.beta * playerSettings.moveSpeed;
 }
 
 /* ===== STATES ===== */

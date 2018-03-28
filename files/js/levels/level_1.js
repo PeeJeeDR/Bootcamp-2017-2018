@@ -18,25 +18,14 @@ var Level_1   = {
             points.create(point.x, point.y);
         }, this);
 
-     
-        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
-       // game.time.events.add(Phaser.Timer.SECOND * 30, collectMysteryBox, this);
+        map.objects.coins.forEach(function (coin) {
+            coinsArray.push(coin);
+            coins.create(coin.x, coin.y, 'coin');
+        }, this);
 
-       //this.physics.add.overlap(player, mysteryBoxc, collectMysteryBox, null, this);
-
-       map.objects.coins.forEach(function (coin) {
-        coins.create(coin.x, coin.y, 'coin');
-    }, this);
-
-    map.objects.start_position.forEach(function (pos) {
-        player  = new Player(pos.x + 16, pos.y + 16);
-        handleOrientation();
-    }, this);
-
-    displayScore();
-    displayLevel();
-
-     
+        map.objects.start_position.forEach(function (pos) {
+            player  = new Player(pos.x + 16, pos.y + 16);
+        }, this);
 
        
         console.log(enemies);
