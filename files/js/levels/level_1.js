@@ -33,6 +33,7 @@ var Level_1   = {
 
         displayScore();
         displayLevel();
+        displayHearts();
 
         fixFallthrough();
         window.addEventListener("deviceorientation", handleOrientation, true);

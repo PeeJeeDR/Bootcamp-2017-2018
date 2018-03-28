@@ -1317,8 +1317,54 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"health",
+         "objects":[
+                {
+                 "ellipse":true,
+                 "height":32,
+                 "id":290,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":160,
+                 "y":96
+                }, 
+                {
+                 "ellipse":true,
+                 "height":32,
+                 "id":291,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":192,
+                 "y":96
+                }, 
+                {
+                 "ellipse":true,
+                 "height":32,
+                 "id":292,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":96
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":290,
+ "nextobjectid":293,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",

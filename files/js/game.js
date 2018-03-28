@@ -203,6 +203,14 @@ function displayLevel ()
     lvlText.text    = currentLevel;
 }
 
+function displayHearts ()
+{
+    console.log(map.objects.health);
+    map.objects.health.forEach(function (hp) {
+        game.add.image(hp.x, hp.y, 'heart');
+    }, this);
+}
+
 function fixFallthrough() 
 {
     game.physics.arcade.TILE_BIAS = 40;
