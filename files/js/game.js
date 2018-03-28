@@ -161,10 +161,10 @@ function killPlayer ()
         this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
         this.overlay.inputEnabled = true;
 
-        restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
+        restartButton   = game.add.button(game.world.centerX - 150, game.world.centerY, 'restart_btn', resetGame, this);
         restartButton.anchor.setTo(0.5);
 
-        menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
+        menuButton   = game.add.button(game.world.centerX + 150, game.world.centerY, 'menu_btn', backToMenu, this);
         menuButton.anchor.setTo(0.5);
 
         game.camera.shake(0.01, 300);
