@@ -33,6 +33,11 @@ var player;
 var groundLayer;
 var borderLayer;
 
+var hearts;
+var heart;
+var heartsArray = [];
+var health = 3;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
@@ -140,8 +145,17 @@ function collectCoin (enemy, coin)
     scoreText.text  = coinsCollected
 }
 
+function killHeart(player,enemy){
+    
+    health--;    
+    heart.kill();
+    
+}
+
 function killPlayer (player, enemy)
 {
+    
+
     graphicOverlay = new Phaser.Graphics(this.game, 0 , 0);
     graphicOverlay.beginFill(0x000000, 0.7);
     graphicOverlay.drawRect(0,0, game.world.width, game.world.height);
@@ -159,6 +173,7 @@ function killPlayer (player, enemy)
     player.kill();
 
     gameOver    = true;
+    
 }
 
 function resetGame () 

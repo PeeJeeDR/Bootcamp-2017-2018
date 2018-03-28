@@ -5,6 +5,8 @@ var Level_1   = {
         gameOver        = false;
         this.addMap();
 
+        
+
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
@@ -37,10 +39,19 @@ var Level_1   = {
 
     update: function ()
     {
+        
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
-        {
-            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+        {   
+            game.physics.arcade.overlap(player, enemies[i], killHeart, null, this);
         }
+
+
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {   
+                
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
+        
     },
 
     addMap: function ()
