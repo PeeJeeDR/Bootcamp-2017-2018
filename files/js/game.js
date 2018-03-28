@@ -210,7 +210,8 @@ function fixFallthrough()
 
 function checkCoins ()
 {
-    if (coinsCollected === coinsArray.length)
+    // coinsArray.length
+    if (coinsCollected === 10)
     {
         openNextLevel();
     }
@@ -223,8 +224,8 @@ function openNextLevel()
 
 function handleOrientation (e)
 {
-    player.body.velocity.x = e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.y = e.beta * playerSettings.moveSpeed;
+    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 
 /* ===== STATES ===== */

@@ -33,10 +33,15 @@ var Level_1   = {
 
         displayScore();
         displayLevel();
+
+        fixFallthrough();
+        window.addEventListener("deviceorientation", handleOrientation, true);
     }, 
 
     update: function ()
     {
+        console.log(coinsCollected);
+
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
