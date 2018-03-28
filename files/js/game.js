@@ -49,6 +49,7 @@ var coinHit;
 var enemyHit;
 var pressStart;
 var theme;
+var gameMusicOver;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -154,7 +155,7 @@ function collectCoin (enemy, coin)
     coinsCollected += 1;
     scoreText.text  = coinsCollected
     coinHit = game.add.audio('hit');
-    coinHit.volume = 0.011;
+    coinHit.volume = 0.012;
     coinHit.play();
 }
 
@@ -180,9 +181,10 @@ function killPlayer ()
 
         theme.stop();
 
-        gameOver = game.add.audio('gameOver');
-        gameOver.volume = 0.1;
-        gameOver.play();
+        gameMusicOver = game.add.audio('gameOver');
+        gameMusicOver.volume = 0.17;
+        gameMusicOver.play();
+        
 
         gameOver    = true;
     }
@@ -244,7 +246,7 @@ function killHeart(player, enemy)
     game.camera.flash(0xff0000, 500);
     
     enemyHit = game.add.audio('enemyHit');
-    enemyHit.volume = 0.6;
+    enemyHit.volume = 0.65;
     enemyHit.play();
 
     window.navigator.vibrate([1000,2000,1000]);

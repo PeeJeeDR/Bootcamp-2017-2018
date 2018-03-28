@@ -6,7 +6,7 @@ var Level_1   = {
         this.addMap();
 
         theme = game.add.audio('theme');
-        theme.volume = 0.03;
+        theme.volume = 0.05;
         theme.play();
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)

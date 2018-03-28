@@ -15,11 +15,14 @@ var LoadState   = {
         game.load.image('back_btn', 'assets/sprites/back_btn.png');
         game.load.spritesheet('instructions_image', 'assets/sprites/instructions.png', 555, 361);
         game.load.image('heart', 'assets/sprites/heart.png');
+
         game.load.audio('hit','assets/sounds/Mario-coin-sound.mp3');
         game.load.audio('enemyHit','assets/sounds/mariopain.mp3');
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
-        game.load.audio('theme','assets/sounds/mariotheme.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
+        game.load.audio('theme','assets/sounds/mariotheme.mp3');
+
+       
     },
 
     create: function ()
