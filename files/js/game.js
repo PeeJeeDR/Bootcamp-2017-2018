@@ -57,32 +57,6 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-function moveEnemy (enemy)
-{
-    if (enemy.body.blocked.up || enemy.body.blocked.down)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-        }
-    }
-
-    else if (enemy.body.blocked.left || enemy.body.blocked.right)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.y  = 200;
-        } 
-        else 
-        {
-            enemy.body.velocity.y  = -200;
-        }
-    }
-}
 
 function enemyOnPoint (enemy, point)
 {
