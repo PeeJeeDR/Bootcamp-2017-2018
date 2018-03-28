@@ -32,6 +32,10 @@ var Level_1   = {
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
         }, this);
+
+        coins.forEachAlive(function (singleCoin) {
+            singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
+        }, this)
         
         displayScore();
         displayHearts();
@@ -42,6 +46,7 @@ var Level_1   = {
 
     update: function ()
     {
+        coins.callAll('play', null, 'spin');
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
