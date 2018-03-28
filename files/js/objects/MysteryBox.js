@@ -6,6 +6,7 @@ var MysteryBox  = function () {
     var randomY         = boxYPositions[randomNbr];
 
     var _mysteryBox     = game.add.image(randomX, randomY, 'mysterybox');
+    game.physics.arcade.enable(_mysteryBox);
 
     return _mysteryBox;
 }

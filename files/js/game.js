@@ -47,8 +47,10 @@ var menuBackground;
 
 var boxXPositions   = [];
 var boxYPositions   = [];
-var mystery_box;
+var mysteryBox;
+var mysteryBoxes;
 var mysteryBoxOnScreen  = false;
+var timeNotTaken        = 0;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -262,10 +264,34 @@ function checkCoins ()
     }
 }
 
-function addNewMysteryBox ()
-{  
-    mysteryBoxOnScreen  = true;
-    mystery_box     = new MysteryBox();
+function addMysteryBox ()
+{
+
+    var maxNbr          = boxXPositions.length;
+    var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
+
+    var randomX         = boxXPositions[randomNbr];
+    var randomY         = boxYPositions[randomNbr];
+
+    mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
+
+    game.time.events.loop(Phaser.Timer.SECOND * 1, checkTime, this);
+
+    function checkTime ()
+    {
+        timeNotTaken++;
+
+        if (timeNotTaken > 10)
+        {
+            mysteryBox.kill();
+        }
+    }
+}
+
+function collectMysteryBox (player, box)
+{
+    console.log('box collected');
+    box.kill();
 }
 
 function HandleOrientation (e) 

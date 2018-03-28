@@ -11,21 +11,33 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        if (!mysteryBoxOnScreen)
-        {
-            game.time.events.loop(Phaser.Timer.SECOND * 1, addNewMysteryBox, this);
-        }
+        game.time.events.add(Phaser.Timer.SECOND * 1, addMysteryBox, this);
 
         fixFallthrough();
+        
     }, 
 
     update: function ()
     {
         cursorControls(player, false);
+
+        game.physics.arcade.overlap(player, mysteryBox);
+        // Niewe spawnen door lengte van groep te meten.
+
+        if ('length' == "0")
+        {
+            "do shizzle";
+        }
+
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
+    },
+
+    test: function () 
+    {
+        console.log('eindelijk');
     },
 
     addMap: function (currentLevel)
@@ -44,6 +56,9 @@ var Level_1   = {
 
         coins   = game.add.group();
         coins.enableBody    = true;
+
+        mysteryBoxes    = game.add.group();
+        mysteryBoxes.enableBody     = true;
 
         coins.forEachAlive(function (singleCoin) {
             singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
@@ -71,6 +86,7 @@ var Level_1   = {
 
         map.objects.start_position.forEach(function (obj) {
             player  = new Player(obj.x + 16, obj.y + 16);
+            game.physics.arcade.enable(player);
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
