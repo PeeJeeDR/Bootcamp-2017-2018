@@ -36,6 +36,148 @@
         }, 
         {
          "draworder":"topdown",
+         "name":"mystery_boxes",
+         "objects":[
+                {
+                 "height":32,
+                 "id":860,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":195,
+                 "y":33
+                }, 
+                {
+                 "height":32,
+                 "id":861,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":576,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":862,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":512,
+                 "y":512
+                }, 
+                {
+                 "height":32,
+                 "id":863,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":256,
+                 "y":512
+                }, 
+                {
+                 "height":32,
+                 "id":864,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":160
+                }, 
+                {
+                 "height":13,
+                 "id":865,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":46,
+                 "x":285,
+                 "y":583
+                }, 
+                {
+                 "height":32,
+                 "id":866,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":736,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":867,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":868,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":448,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":869,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":544,
+                 "y":256
+                }, 
+                {
+                 "height":32,
+                 "id":870,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":256
+                }, 
+                {
+                 "height":32,
+                 "id":871,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":512
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "name":"coins",
          "objects":[
                 {
@@ -1236,7 +1378,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":860,
+ "nextobjectid":872,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",
@@ -1251,7 +1393,7 @@
          "margin":0,
          "name":"pacman_tileset",
          "spacing":0,
-         "tilecount":30,
+         "tilecount":0,
          "tileheight":32,
          "tilewidth":32
         }],
