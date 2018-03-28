@@ -30,6 +30,8 @@ var LoadState   = {
         );
 
         continueText.anchor.setTo( 0.5 );
+        game.load.spritesheet('game_over', 'assets/sprites/game_over.png', 250, 75);
+        game.load.spritesheet('stars', 'assets/sprites/stars.png', 32, 32);
     },
 
     create: function ()
