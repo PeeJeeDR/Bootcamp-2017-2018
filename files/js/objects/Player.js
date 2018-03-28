@@ -22,6 +22,24 @@ var Player  = function (x, y)
                 enemyHitCounter = 0;
             }
         }
+
+        if (_player.body.velocity.x < 0) 
+        {
+            _player.frame   = 3;
+        } 
+        else if (_player.body.velocity.x > 0)
+        {
+            _player.frame   = 5;
+        } 
+
+        if (_player.body.velocity.y < 0)
+        {
+            _player.frame   = 1;
+        }
+        else if (_player.body.velocity.y > 0)
+        {
+            _player.frame   = 4;
+        }
         
         cursorControls(_player, false);
         checkCoins();
