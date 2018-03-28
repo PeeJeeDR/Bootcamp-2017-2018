@@ -11,10 +11,6 @@ var Player  = function (x, y)
     stars.frame = 0;
     stars.anchor.setTo(0.5,1);
     stars.animations.add('onHit', [0, 1, 2, 3,0], 12, false);
-   
-    // Enable da terug als de shit morgen nie meer werkt :p
-    // window.addEventListener("deviceorientation", handleOrientation, true);
-    // fixFallthrough();
     
     _player.update  = function ()
     {

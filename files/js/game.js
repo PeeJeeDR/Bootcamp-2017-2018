@@ -19,7 +19,6 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 
-var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -45,6 +44,11 @@ var enableToHit = false;
 var pacman;
 var mariokart;
 var menuBackground;
+
+var boxXPositions   = [];
+var boxYPositions   = [];
+var mystery_box;
+var activated       = false;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {

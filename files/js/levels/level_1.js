@@ -4,28 +4,32 @@ var Level_1   = {
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
         currentLevel    = 1;
-        this.addMap();
+        this.addMap(currentLevel);
         this.groups();
         this.mapObjects();
         this.addEnemies();
         displayScore();
         displayHearts();
 
+        mystery_box     = new MysteryBox();
+
         fixFallthrough();
     }, 
 
     update: function ()
     {
-        coins.callAll('play', null, 'spin');
+
+        
+        cursorControls(player, false);
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
     },
 
-    addMap: function ()
+    addMap: function (currentLevel)
     {
-        map     = game.add.tilemap('level_1');
+        map     = game.add.tilemap('level_' + currentLevel);
         map.addTilesetImage('pacman_tileset', 'tiles');
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
@@ -48,19 +52,33 @@ var Level_1   = {
 
     mapObjects: function ()
     {
-        map.objects.detection_points.forEach(function (point) {
-            pointArray.push(point);
-            points.create(point.x, point.y);
+        map.objects.detection_points.forEach(function (obj) {
+            pointArray.push(obj);
+            points.create(obj.x, obj.y);
+
+            boxXPositions.push(obj.x);
+            boxYPositions.push(obj.y);
         }, this);
 
-        map.objects.coins.forEach(function (coin) {
-            coinsArray.push(coin);
-            coins.create(coin.x, coin.y, 'coin');
+        map.objects.coins.forEach(function (obj) {
+            coinsArray.push(obj);
+            coins.create(obj.x, obj.y, 'coin');
+
+            boxXPositions.push(obj.x);
+            boxYPositions.push(obj.y);
         }, this);
 
-        map.objects.start_position.forEach(function (pos) {
-            player  = new Player(pos.x + 16, pos.y + 16);
+        map.objects.start_position.forEach(function (obj) {
+            player  = new Player(obj.x + 16, obj.y + 16);
+
+            boxXPositions.push(obj.x);
+            boxYPositions.push(obj.y);
         }, this);
+
+        map.objects.mystery_boxes.forEach(function (obj) {
+            boxXPositions.push(obj.x);
+            boxYPositions.push(obj.y);
+        })
     },
 
     addEnemies: function ()
@@ -70,5 +88,11 @@ var Level_1   = {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
         }
+    },
+
+    addNewMysteryBox: function ()
+    {
+        activated   = true;
+        console.log('test');
     }
 }
