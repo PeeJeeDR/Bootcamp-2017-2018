@@ -33,12 +33,11 @@ var MenuState   = {
 
 	    mariokart.events.onOutOfBounds.add(this.marioOut, this);
 
-	    play_button = game.add.button(game.world.centerX, game.world.centerY -40, 'play_btn', this.delay_play, this, 2, 1, 0);
+	    play_button = game.add.button(game.world.centerX, game.world.centerY -40, 'play_btn', this.play, this, 2, 1, 0);
 	    play_button.anchor.setTo(0.5);
-	    play_button.animations.add('play_idle', [0,1,0], 3, true);
-	    play_button.animations.add('play_pressed', [0,1,2,3,4,5,6,7,8,9,10,11,10,9,8,7,6,5,4,3,2,1], 40, true);
+	    play_button.animations.add('play_flash', [0,1,2,3,4,5,6,7,8,9,10,11,10,9,8,7,6,5,4,3,2,1], 40, true);
 
-	    play_button.animations.play("play_pressed");
+	    play_button.animations.play("play_flash");
 
 	    instructions_button = game.add.button(game.world.centerX +150 , game.world.centerY +80, 'instructions_btn', this.instructions, this, 2, 1, 0);
 	    instructions_button.anchor.setTo(0.5);
@@ -61,11 +60,6 @@ var MenuState   = {
     	mariokart.reset(0, 515);
     	mariokart.body.velocity.x  = 200;
     },
-
-	delay_play: function () {
-		play_button.animations.play("play_pressed");
-		game.time.events.add(Phaser.Timer.SECOND * 0.5, play, this)
-	},
 
 	play: function () {
 			game.state.start( 'reset' );

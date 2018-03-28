@@ -12,6 +12,8 @@ var LoadState   = {
         game.load.spritesheet('play_btn', 'assets/sprites/play_btn_spritesheet.png', 250, 75);
         game.load.image('credits_btn', 'assets/sprites/credits_btn.png');
         game.load.image('instructions_btn', 'assets/sprites/instructions_btn.png');
+        game.load.image('back_btn', 'assets/sprites/back_btn.png');
+        game.load.spritesheet('instructions_image', 'assets/sprites/instructions.png', 555, 361);
     },
 
     create: function ()
