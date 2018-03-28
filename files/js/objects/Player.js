@@ -14,17 +14,15 @@ var Player  = function (x, y)
     
     _player.update  = function ()
     {
-        console.log(enemyHitCounter);
-        console.log('ena' + enableToHit);
-        console.log('health=' + health);
-        if(enemyHitCounter > 200 || !enableToHit){
+        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
             
-            if(game.physics.arcade.collide(player, enemies, killHeart, null, this)){
+            if(game.physics.arcade.overlap(player, enemies, killHeart, null, this)){
 
                 enableToHit = true;
                 enemyHitCounter = 0;
             }
         }
+        
         cursorControls(_player, false);
         checkCoins();
         game.physics.arcade.collide(_player, borderLayer);

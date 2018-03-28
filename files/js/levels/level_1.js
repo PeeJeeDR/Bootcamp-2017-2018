@@ -18,15 +18,7 @@ var Level_1   = {
 
         coins   = game.add.group();
         coins.enableBody    = true;
-
-        hearts   = game.add.group();
-        hearts.enableBody    = true;
     
-        hearts.scale.setTo(0.15);
-    
-        
-        
-
         map.objects.detection_points.forEach(function (point) {
             pointArray.push(point);
             points.create(point.x, point.y);
@@ -40,9 +32,8 @@ var Level_1   = {
         map.objects.start_position.forEach(function (pos) {
             player  = new Player(pos.x + 16, pos.y + 16);
         }, this);
-
+        
         displayScore();
-        displayLevel();
         displayHearts();
 
         fixFallthrough();

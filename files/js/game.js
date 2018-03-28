@@ -33,8 +33,6 @@ var player;
 var groundLayer;
 var borderLayer;
 
-
-var hearts;
 var heart;
 var heartArray= [];
 var health = 3;
@@ -49,6 +47,7 @@ var menuBackground;
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
+    timeToGetHit: 100,
 }
 
 var enemySettings = {
@@ -149,22 +148,7 @@ function collectCoin (enemy, coin)
     scoreText.text  = coinsCollected
 }
 
-function killHeart(player,enemy){
-    
-    
-    console.log('test');
-    health--;    
-
-    for(i=0;i<heartArray.length;i++){
-        if(heartArray[i] === health){
-            heart.kill();
-            
-        }
-    }
-    
-}
-
-function killPlayer (player, enemy)
+function killPlayer ()
 {
     if(health == 0){
 
@@ -201,7 +185,7 @@ function backToMenu ()
 function displayScore ()
 {
     scoreText    = game.add.text( 
-        208, 
+        592, 
         115, 
         coinsCollected, 
         { 
@@ -232,10 +216,23 @@ function displayLevel ()
 
 function displayHearts ()
 {
-    console.log(map.objects.health);
     map.objects.health.forEach(function (hp) {
-        game.add.image(hp.x, hp.y, 'heart');
+        heart      = game.add.image(hp.x, hp.y, 'heart');
+        heartArray.push(heart);
     }, this);
+}
+
+function killHeart(player, enemy)
+{
+    game.camera.shake(0.008, 300);
+    health--;
+
+    heartArray[health].destroy();
+    
+    if (health  === 0)
+    {
+        killPlayer();
+    }
 }
 
 function fixFallthrough() 
@@ -261,10 +258,6 @@ function handleOrientation (e)
 {
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
-}
-
-function delayKill(){
-    console.log(enemyHitCounter);
 }
 /* ===== STATES ===== */
 
