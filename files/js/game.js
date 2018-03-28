@@ -33,6 +33,10 @@ var player;
 var groundLayer;
 var borderLayer;
 
+var pacman;
+var mariokart;
+var menuBackground;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 20,
@@ -41,10 +45,6 @@ var playerSettings = {
 var enemySettings = {
     moveSpeed: 200,
 }
-
-var pacman;
-var mariokart;
-var menuBackground;
 
 
 /* ===== FUNCTIONS ===== */
@@ -221,10 +221,10 @@ function openNextLevel()
     
 }
 
-function accelerometer (e)
+function handleOrientation (e)
 {
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    player.body.velocity.x = e.gamma * playerSettings.moveSpeed;
+    player.body.velocity.y = e.beta * playerSettings.moveSpeed;
 }
 
 /* ===== STATES ===== */
