@@ -36,8 +36,9 @@ var Level_4   = {
             boxPointArr.push(singleBox);
             
             }, this);
-
-        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
+            
+       
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
 
         displayScore();
         displayLevel();

@@ -37,7 +37,8 @@ var Level_2   = {
             
             }, this);
             
-        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this);
+       
+        game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
 
         displayScore();
         displayLevel();

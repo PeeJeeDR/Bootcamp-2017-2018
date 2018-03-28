@@ -1,19 +1,31 @@
 var Level_1   = {
     create: function ()
     {
+        currentLevel    = 1;
+        gameOver        = false;
         this.addMap();
-       
 
         
 
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
-            enemy  = new this.Enemy(48 + (i * 32), 48 + (i * 32));
+            enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
         }
     
         points  = game.add.group();
         points.enableBody   = true;
+
+        coins   = game.add.group();
+        coins.enableBody    = true;
+
+        hearts   = game.add.group();
+        hearts.enableBody    = true;
+    
+        hearts.scale.setTo(0.15);
+    
+        
+        
 
         map.objects.detection_points.forEach(function (point) {
             pointArray.push(point);
@@ -21,7 +33,6 @@ var Level_1   = {
         }, this);
 
         map.objects.coins.forEach(function (coin) {
-            coinsArray.push(coin);
             coins.create(coin.x, coin.y, 'coin');
         }, this);
 
@@ -36,16 +47,21 @@ var Level_1   = {
             
        
         game.time.events.add(Phaser.Timer.SECOND * 10, createBox , this); 
-       
-        console.log(enemies);
+
+        displayScore();
+        displayLevel();
+        window.addEventListener("deviceorientation", handleOrientation, true);
     }, 
 
     update: function ()
     {
-        for (var i = 0, ilen = enemies.length; i < ilen; i++)
-        {
-            game.physics.arcade.collide(enemies[i], coinsLayer, collectCoin, null, this);
-        }
+        
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {   
+                
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
+        
     },
 
     addMap: function ()
@@ -54,39 +70,6 @@ var Level_1   = {
         map.addTilesetImage('pacman_tileset', 'tiles');
         groundLayer     = map.createLayer('ground');
         borderLayer     = map.createLayer('borders');
-        coinsLayer      = map.createLayer('coins');
         map.setCollisionBetween(0, 10000, true, borderLayer);
-        map.setCollisionBetween(30, 30, true, coinsLayer);
     },
-
-    Enemy: function (x, y)
-    {
-        var _enemy  = game.add.sprite(x, y, 'enemy');
-        game.physics.arcade.enable(_enemy);
-
-        _enemy.animations.add('enemy_idle', [0, 1, 2, 3, 4], 12, true);
-
-        var start   = true;
-        if (start)
-        {
-            start   = false;
-            _enemy.body.velocity.x  = enemySettings.moveSpeed;
-        }
-
-        game.physics.arcade.enable(_enemy);
-        _enemy.anchor.setTo(0.5);
-
-        _enemy.update =  function ()
-        {
-            _enemy.animations.play("enemy_idle");
-            game.physics.arcade.collide(_enemy, borderLayer);
-            game.physics.arcade.overlap(_enemy, points, enemyOnPoint, null, this);
-            moveEnemy(_enemy);
-        }
-
-        return _enemy;
-    },
-
-
-    
 }
