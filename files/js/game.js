@@ -22,6 +22,7 @@ var nbrOfEnemies    = 2;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
+var coinsArrayLength;
 
 var point;
 var points;
@@ -299,6 +300,15 @@ function HandleOrientation (e)
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
+
+function onWin ()
+{
+	if(coinsCollected == coinsArrayLength)
+    {
+        game.state.start('win');
+    }
+}
+
 /* ===== STATES ===== */
 
 // CORE STATES
@@ -309,6 +319,7 @@ game.state.add('reset', ResetState);
 game.state.add('instructions', InstructionState);
 game.state.add('credits', CreditState);
 game.state.add('loading-animation', LoadingAnimationState);
+game.state.add('win', WinState);
 
 // LEVELS
 game.state.add('level_1', Level_1);
