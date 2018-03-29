@@ -421,19 +421,28 @@ function collectMysteryBox ()
     var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
     powerUp         = powerUps[randomNbr];
 
-    activatePowerUp();
-
     mysteryBox.destroy();
 }
 
-function rolPowerUp(){
+function rolPowerUp()
+{
     powerUpRoller.animations.play('power');
-
-    game.time.events.add(Phaser.Timer.SECOND * 4, collectMysteryBox, this);
+    game.time.events.add(Phaser.Timer.SECOND * 4, activatePowerUp, this);
+    game.time.events.loop(Phaser.Timer.SECOND * 4, playRandomAnimation, this);
 }
+
+function playRandomAnimation ()
+{
+    powerUpRoller.animations.play('power');
+}
+
+function activatePU ()
+{
+    activatePowerUp();
+}
+
 function removeMysteryBox ()
 {
-
     timeBoxRemoved  = boxTotal;
     mysteryBox.destroy();
 }
