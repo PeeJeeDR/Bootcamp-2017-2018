@@ -13,6 +13,7 @@ var Level_1   = {
 
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
+        game.time.events.loop(Phaser.Timer.SECOND, setImmortalTime, this);
 
         fixFallthrough();
         
@@ -22,14 +23,28 @@ var Level_1   = {
     {
         cursorControls(player, false);
 
+        console.log(health);
+
         if (firstBoxSpawned)
         {
             generateBoxes();
         }
 
-        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        if (!immortalState)
         {
-            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
+        }
+        else 
+        {
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
+            }
+
+            game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
         }
     },
 
