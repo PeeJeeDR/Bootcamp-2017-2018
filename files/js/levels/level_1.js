@@ -13,7 +13,6 @@ var Level_1   = {
 
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
-        game.time.events.loop(Phaser.Timer.SECOND, setImmortalTime, this);
 
         fixFallthrough();
         
@@ -23,7 +22,7 @@ var Level_1   = {
     {
         cursorControls(player, false);
 
-        console.log(health);
+        console.log(immortalState);
 
         if (firstBoxSpawned)
         {

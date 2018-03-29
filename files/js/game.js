@@ -73,7 +73,6 @@ var powerUp;
 
 // IMMORTAL
 var immortalState   = false;
-var immortalTimer   = 0;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -309,7 +308,6 @@ function addMysteryBox ()
 
 function generateBoxes ()
 {
-    //console.log(boxTotal);
     if (boxTotal >= timeFirstBox + spawnTimeFirstBox)
     {
         spawnTimeFirstBox   = 0;
@@ -365,13 +363,7 @@ function activatePowerUp ()
 
 function immortalPowerUp ()
 {
-    console.log('immortal');
     immortalState   = true;
-}
-
-function setImmortalTime ()
-{
-    
 }
 
 function resetImmortalPowerUp ()
