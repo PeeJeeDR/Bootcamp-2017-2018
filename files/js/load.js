@@ -35,6 +35,7 @@ var LoadState   = {
         game.load.image('number9', 'assets/sprites/number9.png');
         game.load.image('completed', 'assets/sprites/completed.png');
         game.load.image('nextlvl', 'assets/sprites/nextlvl.png');
+        game.load.image('banana', 'assets/sprites/banaan.png');
         game.load.spritesheet('musicBtn','assets/sprites/sound_btn.png',75,75);
         game.load.audio('hit','assets/sounds/Mario-coin-sound.mp3');
         game.load.audio('enemyHit','assets/sounds/hitEnemy2.mp3');

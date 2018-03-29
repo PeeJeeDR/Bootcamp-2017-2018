@@ -27,7 +27,7 @@ var Rocket  = function (x, y)
 
     _rocket.getPos  = function ()
     {
-        console.log('f');
+        
     }
 
     return _rocket;

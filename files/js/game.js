@@ -527,7 +527,7 @@ function square(x, y)
     graphicsGroup.add(graphics);
 }
 
-function onTap( pointer)
+function onTap(pointer)
 {
     for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
     {

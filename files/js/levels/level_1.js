@@ -86,6 +86,9 @@ var Level_1   = {
             coinsArray.push(obj);
             coin    = coins.create(obj.x, obj.y, 'coin');
             coin.animations.add('spin', [0, 1, 2, 3], 10, true);
+
+            boxXPositions.push(obj.x);
+            boxYPositions.push(obj.y);
         }, this);
 
         map.objects.start_position.forEach(function (obj) {
