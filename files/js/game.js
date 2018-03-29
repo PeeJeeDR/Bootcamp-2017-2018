@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = false;
+var onMobile    = true;
 
 // TEXT & MENU
 var scoreText;
@@ -26,6 +26,7 @@ var enemyHitCounter = 0;
 var enableToHit = false;
 
 // COINS
+var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -88,6 +89,8 @@ var immortalState   = false;
 // ROCKET
 var rocket;
 var rocketEnableToFLy   = false;
+var rocketTimeInAir     = 0;
+var rocketKilledEnemy   = false;
 
 // LEVEL
 var levelNumber;
@@ -243,7 +246,6 @@ function killPlayer ()
 
 function killEnemy (player, enemy)
 {
-    console.log('test');
     enemy.kill();
 }
 
@@ -392,6 +394,11 @@ function updateBoxCounter ()
     boxTotal++;
 }
 
+function updateRocketCounter ()
+{
+    rocketTimeInAir++;
+}
+
 function activatePowerUp ()
 {
     switch (powerUp)
@@ -410,6 +417,7 @@ function activatePowerUp ()
     }
 }
 
+/* === IMMORTAL === */
 function immortalPowerUp ()
 {
     immortalState   = true;
@@ -419,19 +427,52 @@ function resetImmortalPowerUp ()
 {
     immortalState   = false;
 }
+/* ===== */
 
+/* === ROCKET === */
 function rocketPowerUp ()
 {
+    rocketTimeInAir     = 0;
     rocket  = new Rocket(player.x, player.y);
     rocketEnableToFLy   = true;
 }
 
+function calculateAirTime ()
+{
+    if (rocketTimeInAir > 4)
+    {
+        explosion.animations.play('explode');
+        if (rocketTimeInAir > 5)
+        {
+            rocketEnableToFLy   = false;
+            rocket.destroy();
+        }
+    }
+}
+
+function rocketCollision ()
+{
+    var animDelay   = 0;
+
+    rocketHitsEnemy     = game.physics.arcade.collide(rocket, enemies);
+
+    if (rocketHitsEnemy)
+    {
+        if (animDelay > 100)
+        {
+            enemy.destroy();
+        }
+    }
+
+    animDelay++;
+}
+/* ===== */
+
+/* === BANANA === */
 function bananaPowerUp ()
 {
     console.log('banana');
 }
-
-
 
 function HandleOrientation (e) 
 {

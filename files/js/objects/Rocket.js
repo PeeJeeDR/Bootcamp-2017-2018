@@ -10,6 +10,12 @@ var Rocket  = function (x, y)
     _rocket.animations.add('up', [3, 4, 5], 10, true);
     _rocket.animations.add('down', [0, 1, 2], 10, true);
 
+    explosion = _rocket.addChild(game.make.sprite(0, 0, 'explosion'));
+    explosion.frame = 0;
+    explosion.anchor.setTo(0.5);
+    explosion.scale.setTo(2);
+    explosion.animations.add('explode', [0, 1, 2, 3], 7, false);
+
     _rocket.update  = function ()
     {
         if (_rocket.body.velocity.x > 0) {_rocket.animations.play('right');}
