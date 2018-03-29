@@ -525,9 +525,14 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+
+  /*  if(!bananaOnScreen){
+        graphicsGroup.destroy();
+
+    }*/
 }
 
-function onTap(pointer)
+function onTap(pointer , graphics)
 {
     if(bananaOnScreen)
     {
@@ -540,6 +545,16 @@ function onTap(pointer)
                      bananaOnScreen = false;
              }
          }
+         //graphicsGroup.lineStyle(1, 0xffffff, 1);
+    }
+    else if(!bananaOnScreen){
+        
+        for(var i=0, ilen= graphicsGroup.length; i<ilen ; i++)
+        {
+            graphicsGroup.remove(graphicsGroup[i]);
+
+        }
+       
     }
 }
 
