@@ -492,7 +492,46 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-    console.log('banana');
+
+    bananaOnScreen  = true;
+
+    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    {
+        square(bananaXPos[i], bananaYPos[i]);
+    }
+
+    game.input.onTap.add(onTap, this);
+}
+
+function square(x, y)
+{
+    graphics = game.make.graphics(x, y);
+    graphics.lineStyle(1, 0x408046, 1);
+    
+    // draw a square
+    graphics.lineTo(0, 32);
+    graphics.lineTo(32, 32);
+    graphics.lineTo(32, 0);
+    graphics.lineTo(0, 0)
+    
+    graphicsGroup.add(graphics);
+}
+
+function onTap( pointer)
+{
+    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+    {
+        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+        {
+            banaan   = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+        }
+    }
+}
+
+function enemyOnBanana (enemie, banana)
+{
+    enemie.destroy();
+    banana.destroy();
 }
 
 function HandleOrientation (e) 
