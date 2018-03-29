@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = true;
+var onMobile    = false;
 
 // TEXT & MENU
 var scoreText;
@@ -37,6 +37,7 @@ var pointArray  = [];
 
 // PLAYER
 var player;
+var playerFaceDirection;
 
 // STARS
 var stars;
@@ -174,22 +175,21 @@ function collectCoin (enemy, coin)
 {     
     coin.animations.stop('spin');
     coin.animations.play('collected');
-    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+    // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+    killCoin();
 
     if(playMusic){
 
     coinHit = game.add.audio('hit');
     coinHit.volume = 0.012;
     coinHit.play();
-
     }
-    coin.kill();
-        coinsCollected += 1;
-        scoreText.text  = coinsCollected
 
     function killCoin () 
     {
-        
+        coin.kill();
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
     }
 }
 

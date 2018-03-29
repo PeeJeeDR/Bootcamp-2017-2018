@@ -10,7 +10,6 @@ var LoadState   = {
         cursors = game.input.keyboard.createCursorKeys();
         game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
-        // game.load.image('coin', 'assets/sprites/coin.png');
         game.load.image('menu', 'assets/sprites/menu.png');
         game.load.spritesheet('play_btn', 'assets/sprites/play_btn_spritesheet.png', 250, 75);
         game.load.image('credits_btn', 'assets/sprites/credits_btn.png');
@@ -21,7 +20,7 @@ var LoadState   = {
         game.load.image('menu_btn', 'assets/sprites/menu_btn.png');
         game.load.image('restart_btn', 'assets/sprites/restart_btn.png');
         game.load.spritesheet('coin', 'assets/sprites/coin-sprite.png', 32, 32);
-        game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
+        game.load.spritesheet('car', 'assets/sprites/mario-sprite-immortal.png', 32, 32);
         game.load.spritesheet('game_over', 'assets/sprites/game_over.png', 250, 75);
         game.load.spritesheet('stars', 'assets/sprites/stars.png', 32, 32);
         game.load.spritesheet('musicBtn','assets/sprites/sound_btn.png',75,75);
