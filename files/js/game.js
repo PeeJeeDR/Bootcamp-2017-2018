@@ -19,9 +19,11 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 
+var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
+
 
 var point;
 var points;

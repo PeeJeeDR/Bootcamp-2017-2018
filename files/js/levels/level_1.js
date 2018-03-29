@@ -20,6 +20,10 @@ var Level_1   = {
 
         fixFallthrough();
 
+        coins.forEachAlive(function (sc) {
+            sc.animations.play('spin');
+        }, this)
+
        
         
     }, 
@@ -27,6 +31,7 @@ var Level_1   = {
     update: function ()
     {
         cursorControls(player, false);
+        
 
         game.physics.arcade.overlap(player, mysteryBox);
         // Niewe spawnen door lengte van groep te meten.
@@ -40,6 +45,10 @@ var Level_1   = {
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
+
+        
+        
+
     },
 
     test: function () 
@@ -67,10 +76,7 @@ var Level_1   = {
         mysteryBoxes    = game.add.group();
         mysteryBoxes.enableBody     = true;
 
-        coins.forEachAlive(function (singleCoin) {
-            singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
-            singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
-        }, this)
+        
     },
 
     mapObjects: function ()
@@ -85,7 +91,8 @@ var Level_1   = {
 
         map.objects.coins.forEach(function (obj) {
             coinsArray.push(obj);
-            coins.create(obj.x, obj.y, 'coin');
+            coin = coins.create(obj.x, obj.y, 'coin');
+            coin.animations.add('spin', [0, 1, 2, 3], 10, true);
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
