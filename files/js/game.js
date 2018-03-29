@@ -297,7 +297,6 @@ function killHeart(player, enemy)
 
     game.camera.shake(0.025, 300);
     game.camera.flash(0xff0000, 100);
-    health--;
 
     stars.animations.play('onHit');
     window.navigator.vibrate([1000,2000,1000]);

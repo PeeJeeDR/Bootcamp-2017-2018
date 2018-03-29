@@ -51,11 +51,11 @@ var MenuState   = {
 
 
 		
-		if(playMusic){
-			pressStart = game.add.audio('pressStart');
-			pressStart.volume = 0.08;
-			pressStart.play();
-		} 
+      if(playMusic){
+        pressStart = game.add.audio('pressStart');
+        pressStart.volume = 0.08;
+        pressStart.play();
+      } 
     },
 
     update: function () 

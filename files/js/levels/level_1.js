@@ -25,13 +25,12 @@ var Level_1   = {
         coinsArrayLength = coinsArray.length;
     }, 
 
-
-
     update: function ()
     {
-        cursorControls(player, false);
-
-        console.log(immortalState);
+        if (!onMobile)
+        {
+            cursorControls(player, false);
+        }
 
         if (firstBoxSpawned)
         {
