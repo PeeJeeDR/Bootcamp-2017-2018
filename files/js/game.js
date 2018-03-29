@@ -476,6 +476,11 @@ function calculateAirTime ()
     game.input.onTap.add(onTap, this);
 }
 
+function rocketCollision ()
+{
+    game.physics.arcade.overlap(rocket, enemies, rocketKill, null, this);
+}
+
 function square(x, y)
 {
     graphics = game.make.graphics(x, y);
