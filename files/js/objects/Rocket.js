@@ -4,6 +4,7 @@ var Rocket  = function (x, y)
     game.physics.arcade.enable(_rocket);
     _rocket.frame   = 0;
     _rocket.anchor.setTo(0.5);
+    _rocket.scale.setTo(2);
 
     _rocket.animations.add('left', [6, 7, 8], 10, true);
     _rocket.animations.add('right', [9, 10, 11], 10, true);
@@ -14,7 +15,7 @@ var Rocket  = function (x, y)
     explosion.frame = 0;
     explosion.anchor.setTo(0.5);
     explosion.scale.setTo(2);
-    explosion.animations.add('explode', [0, 1, 2, 3], 7, false);
+    explosion.animations.add('explode', [0, 1, 2, 3, 0], 7, false);
 
     _rocket.update  = function ()
     {

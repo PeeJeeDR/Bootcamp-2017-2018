@@ -91,6 +91,7 @@ var rocket;
 var rocketEnableToFLy   = false;
 var rocketTimeInAir     = 0;
 var rocketKilledEnemy   = false;
+var rocketExploded      = false;
 
 // LEVEL
 var levelNumber;
@@ -441,30 +442,38 @@ function calculateAirTime ()
 {
     if (rocketTimeInAir > 4)
     {
+        rocket.body.velocity.x  = 0;
+        rocket.body.velocity.y  = 0;
+        game.camera.shake(0.025, 600);
+        rocketEnableToFLy   = false;
         explosion.animations.play('explode');
+        game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
         if (rocketTimeInAir > 5)
         {
-            rocketEnableToFLy   = false;
-            rocket.destroy();
+            destroyRocket();
         }
     }
 }
 
 function rocketCollision ()
 {
-    var animDelay   = 0;
+    game.physics.arcade.overlap(rocket, enemies, rocketKill, null, this);
+}
 
-    rocketHitsEnemy     = game.physics.arcade.collide(rocket, enemies);
+function rocketKill (rocket, enemy)
+{
+    rocket.body.velocity.x  = 0;
+    rocket.body.velocity.y  = 0;
+    explosion.animations.play('explode');
+    game.camera.shake(0.025, 600);
+    rocketEnableToFLy   = false;
+    game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+    enemy.destroy();
+}
 
-    if (rocketHitsEnemy)
-    {
-        if (animDelay > 100)
-        {
-            enemy.destroy();
-        }
-    }
-
-    animDelay++;
+function destroyRocket ()
+{
+    rocket.destroy();
 }
 /* ===== */
 
@@ -478,8 +487,8 @@ function HandleOrientation (e)
 {
     if (rocketEnableToFLy)
     {
-        rocket.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-        rocket.body.velocity.x = e.beta * playerSettings.moveSpeed;
+        rocket.angularVelocity = -e.gamma * playerSettings.moveSpeed;
+        rocket.angularVelocity = e.beta * playerSettings.moveSpeed;
     }
     else 
     {
