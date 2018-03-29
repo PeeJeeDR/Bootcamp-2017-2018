@@ -5,6 +5,8 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // MOBILE
 var onMobile    = false;
 
+var pauseBtn;
+
 // TEXT & MENU
 var scoreText;
 var lvlText;
@@ -26,6 +28,7 @@ var enemyHitCounter = 0;
 var enableToHit = false;
 
 // COINS
+var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -82,28 +85,50 @@ var randomY;
 // POWERUPS
 var powerUps    = [
     // "rocket",
-    "immortal",
-    // "banana"
+    // "immortal",
+    "banana"
 ]
 var powerUp;
 
 // IMMORTAL
 var immortalState   = false;
 
+// ROCKET
+var rocket;
+var rocketEnableToFLy   = false;
+var rocketTimeInAir     = 0;
+var rocketKilledEnemy   = false;
+var rocketExploded      = false;
+
+// BANANA
+var bananaPowerActive = false;
+var bananas;
+var graphicsGroup;
+var banana;
+var bananaOnScreen  = false;
+var bananaXPos  = [];
+var bananaYPos  = [];
+var graphics;
+
+// LEVEL
+var levelNumber;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 15,
     timeToGetHit: 100,
+    timeImmortal: 6 // in seconds
 }
 
 var enemySettings = {
     moveSpeed: 200,
 }
 
-var levelNumber;
+var scoreString = "0";
+var firstScoreNbr = "0";
+var secondScoreNbr = "0";
 
 /* ===== FUNCTIONS ===== */
-
 function enemyOnPoint (enemy, point)
 {
     margeXTop       = point.x + 1;
@@ -151,7 +176,7 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls (sprite, autoMovement)
+function cursorControls (sprite, autoMovement, velocity)
 {
     if (!autoMovement)
     {
@@ -161,20 +186,20 @@ function cursorControls (sprite, autoMovement)
 
     if (cursors.down.isDown)
     {
-        sprite.body.velocity.y   = 200;
+        sprite.body.velocity.y   = velocity;
     }
     else if (cursors.up.isDown)
     {
-        sprite.body.velocity.y   = -200;
+        sprite.body.velocity.y   = -velocity;
     }
 
     if (cursors.left.isDown)
     {
-        sprite.body.velocity.x   = -200;
+        sprite.body.velocity.x   = -velocity;
     } 
     else if (cursors.right.isDown)
     {
-        sprite.body.velocity.x   = 200;
+        sprite.body.velocity.x   = velocity;
     }
 }
 
@@ -185,18 +210,19 @@ function collectCoin (enemy, coin)
     // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
     killCoin();
 
-    if(playMusic){
-
-    coinHit = game.add.audio('hit');
-    coinHit.volume = 0.012;
-    coinHit.play();
+    if(playMusic)
+    {
+        coinHit = game.add.audio('hit');
+        coinHit.volume = 0.012;
+        coinHit.play();
     }
 
     function killCoin () 
     {
         coin.kill();
         coinsCollected += 1;
-        scoreText.text  = coinsCollected
+        //scoreText.text  = coinsCollected
+        scoreString = coinsCollected.toString();
     }
 }
 
@@ -240,8 +266,18 @@ function killPlayer ()
 
 function killEnemy (player, enemy)
 {
-    console.log('test');
+    pacman_dead = game.add.sprite(enemy.x, enemy.y, 'pacman_dead');
+    pacman_dead.frame = 0;
+    pacman_dead.anchor.setTo(0.5);
+    pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
+    pacman_dead.animations.play('onDead');
+    game.time.events.add(Phaser.Timer.SECOND * 1, pacmanDead, this);
     enemy.kill();
+}
+
+function pacmanDead () 
+{
+	pacman_dead.destroy();
 }
 
 function resetGame () 
@@ -255,18 +291,32 @@ function backToMenu ()
 }
 
 function displayScore ()
-{
-    scoreText    = game.add.text( 
-        592, 
-        115, 
-        coinsCollected, 
-        { 
-            font: "32px Arial", 
-            fill: "#fff" 
-        } 
-    );
+{	
+    if(scoreString.length > 1)
+    {
+    	firstScoreNbr = scoreString.slice(0,1);
+    	secondScoreNbr = scoreString.slice(1,2);
+    }
+    else
+    {
+    	firstScoreNbr = '0'
+    	secondScoreNbr = scoreString;
+    }
 
-    scoreText.anchor.setTo( 0.5 );
+    if(scoreString != '0')
+    {
+    	destroyPreviousScore();
+    	scoreImage1 = game.add.sprite(576, 110, 'number' + firstScoreNbr + '');
+        scoreImage2 = game.add.sprite(608, 110, 'number' + secondScoreNbr + '');
+        scoreImage1.anchor.setTo(0.5);
+        scoreImage2.anchor.setTo(0.5);
+    }
+}
+
+function destroyPreviousScore () 
+{
+	scoreImage1.destroy();
+    scoreImage2.destroy();
 }
 
 function displayLevel ()
@@ -411,6 +461,11 @@ function updateBoxCounter ()
     boxTotal++;
 }
 
+function updateRocketCounter ()
+{
+    rocketTimeInAir++;
+}
+
 function activatePowerUp ()
 {
     switch (powerUp)
@@ -429,6 +484,7 @@ function activatePowerUp ()
     }
 }
 
+/* === IMMORTAL === */
 function immortalPowerUp ()
 {
     immortalState   = true;
@@ -438,23 +494,134 @@ function resetImmortalPowerUp ()
 {
     immortalState   = false;
 }
+/* ===== */
 
+/* === ROCKET === */
 function rocketPowerUp ()
 {
-    console.log('rocket');
+    rocketTimeInAir     = 0;
+    rocket  = new Rocket(player.x, player.y);
+    rocketEnableToFLy   = true;
 }
 
+function calculateAirTime ()
+{
+    game.camera.shake(0.0025, 300);
+    if (rocketTimeInAir > 4)
+    {
+        rocket.body.velocity.x  = 0;
+        rocket.body.velocity.y  = 0;
+        game.camera.shake(0.025, 600);
+        rocketEnableToFLy   = false;
+        explosion.animations.play('explode');
+        game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+        if (rocketTimeInAir > 5)
+        {
+            destroyRocket();
+        }
+    }
+}
+
+function rocketCollision ()
+{
+    game.physics.arcade.overlap(rocket, enemies, rocketKill, null, this);
+}
+
+function rocketKill (rocket, enemy)
+{
+    rocket.body.velocity.x  = 0;
+    rocket.body.velocity.y  = 0;
+    explosion.animations.play('explode');
+    game.camera.shake(0.025, 600);
+    rocketEnableToFLy   = false;
+    game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+    enemy.destroy();
+}
+
+function destroyRocket ()
+{
+    rocket.destroy();
+}
+/* ===== */
+
+/* === BANANA === */
 function bananaPowerUp ()
 {
-    console.log('banana');
+
+    bananaOnScreen  = true;
+
+    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    {
+        square(bananaXPos[i], bananaYPos[i]);
+    }
+
+    game.input.onTap.add(onTap, this);
 }
 
+function square(x, y)
+{
+    graphics = game.make.graphics(x, y);
+    graphics.lineStyle(1, 0x408046, 1);
+    
+    // draw a square
+    graphics.lineTo(0, 32);
+    graphics.lineTo(32, 32);
+    graphics.lineTo(32, 0);
+    graphics.lineTo(0, 0)
+    
+    graphicsGroup.add(graphics);
 
+  /*  if(!bananaOnScreen){
+        graphicsGroup.destroy();
+
+    }*/
+}
+
+function onTap(pointer, graphics)
+{
+    if (bananaOnScreen)
+    {
+
+        for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+        {
+             if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+            {
+                     banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+                     bananaOnScreen = false;
+             }
+         }
+    }
+    else if (!bananaOnScreen)
+    {
+        for(var i = 0, ilen = graphicsGroup.length; i < ilen; i++)
+        {
+            graphicsGroup[i].destroy();
+        }
+       
+    }
+}
+
+function enemyOnBanana (enemie, banana)
+{
+    enemie.destroy();
+    banana.destroy();
+}
 
 function HandleOrientation (e) 
 {
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    if (rocketEnableToFLy)
+    {
+        rocket.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        rocket.body.velocity.x = e.beta * playerSettings.moveSpeed;
+
+        player.body.velocity.y = 0;
+        player.body.velocity.x = 0;
+    }
+    else 
+    {
+        player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    }
 }
 
 function onWin (currentLevel)

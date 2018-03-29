@@ -35,15 +35,19 @@ var LoadState   = {
         game.load.image('number9', 'assets/sprites/number9.png');
         game.load.image('completed', 'assets/sprites/completed.png');
         game.load.image('nextlvl', 'assets/sprites/nextlvl.png');
+        game.load.image('banana', 'assets/sprites/banaan.png');
         game.load.spritesheet('musicBtn','assets/sprites/sound_btn.png',75,75);
         game.load.audio('hit','assets/sounds/Mario-coin-sound.mp3');
         game.load.audio('enemyHit','assets/sounds/hitEnemy2.mp3');
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
+        game.load.spritesheet('rocket', 'assets/sprites/projectile.png', 32, 32);
+        game.load.spritesheet('explosion', 'assets/sprites/explosion.png', 32, 32);
         game.load.spritesheet('names','assets/sprites/names.png',600,200);
         game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
-        game.load.spritesheet('clouds','assets/sprites/clouds.png',32,32);
+        game.load.spritesheet('pacman_dead','assets/sprites/pacman_dead.png',32,32);
+        game.load.spritesheet('pauseAndPlay', 'assets/sprites/pause_play.png', 48, 48);
     },
 
     create: function ()
