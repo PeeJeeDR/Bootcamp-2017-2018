@@ -27,15 +27,8 @@ var Level_1   = {
 
     update: function ()
     {
-        if (!onMobile)
-        {
-            cursorControls(player, false);
-        }
-
-        if (firstBoxSpawned)
-        {
-            generateBoxes();
-        }
+        if (!onMobile)          {cursorControls(player, false);}
+        if (firstBoxSpawned)    {generateBoxes();}
 
         if (!immortalState)
         {
