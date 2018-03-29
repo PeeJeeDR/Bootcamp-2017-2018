@@ -62,6 +62,11 @@ var Level_1   = {
 
         mysteryBoxes    = game.add.group();
         mysteryBoxes.enableBody     = true;
+
+        graphicsGroup   = game.add.group();
+
+        bananas = game.add.group();
+        bananas.enableBody  = true;
     },
 
     mapObjects: function ()
@@ -72,6 +77,9 @@ var Level_1   = {
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         }, this);
 
         map.objects.coins.forEach(function (obj) {
@@ -91,6 +99,9 @@ var Level_1   = {
         map.objects.mystery_boxes.forEach(function (obj) {
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         })
     },
 

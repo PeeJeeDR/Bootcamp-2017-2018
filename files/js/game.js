@@ -93,6 +93,16 @@ var rocketTimeInAir     = 0;
 var rocketKilledEnemy   = false;
 var rocketExploded      = false;
 
+// BANANA
+var bananaPowerActive = false;
+var bananas;
+var graphicsGroup;
+var banana;
+var bananaOnScreen  = false;
+var bananaXPos  = [];
+var bananaYPos  = [];
+var graphics;
+
 // LEVEL
 var levelNumber;
 
@@ -523,7 +533,7 @@ function onTap( pointer)
     {
         if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
         {
-            banaan   = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+            banana   = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
         }
     }
 }
