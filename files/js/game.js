@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = true;
+var onMobile    = false;
 
 // TEXT & MENU
 var scoreText;
@@ -77,23 +77,11 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    //"immortal",
-     "banana"
+    "rocket",
+    "immortal",
+    // "banana"
 ]
 var powerUp;
-
-var bananaPowerActive = false;
-var bananas;
-var graphicsGroup;
-var banana;
-var bananaOnScreen  = false;
-var bananaXPos  = [];
-var bananaYPos  = [];
-var graphics;
-
-// IMMORTAL
-var immortalState   = false;
 
 // IMMORTAL
 var immortalState   = false;
@@ -131,7 +119,6 @@ function enemyOnPoint (enemy, point)
     margeYTop       = point.y + 1;
     margeYBottom    = point.y - 1;
 
-    if(!bananaPowerUp){
     if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
     {
         switch (Math.floor(Math.random() * (5 - 1) + 1))
@@ -169,7 +156,6 @@ function enemyOnPoint (enemy, point)
             break;
         }
     }
-  } 
 }
 
 function cursorControls (sprite, autoMovement, velocity)
@@ -465,15 +451,20 @@ function rocketPowerUp ()
 
 function calculateAirTime ()
 {
-
-    bananaOnScreen  = true;
-
-    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    game.camera.shake(0.0025, 300);
+    if (rocketTimeInAir > 4)
     {
-        square(bananaXPos[i], bananaYPos[i]);
+        rocket.body.velocity.x  = 0;
+        rocket.body.velocity.y  = 0;
+        game.camera.shake(0.025, 600);
+        rocketEnableToFLy   = false;
+        explosion.animations.play('explode');
+        game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+        if (rocketTimeInAir > 5)
+        {
+            destroyRocket();
+        }
     }
-
-    game.input.onTap.add(onTap, this);
 }
 
 function rocketCollision ()
@@ -481,35 +472,27 @@ function rocketCollision ()
     game.physics.arcade.overlap(rocket, enemies, rocketKill, null, this);
 }
 
-function square(x, y)
+function rocketKill (rocket, enemy)
 {
-    graphics = game.make.graphics(x, y);
-    graphics.lineStyle(1, 0x408046, 1);
-    
-    // draw a square
-    graphics.lineTo(0, 32);
-    graphics.lineTo(32, 32);
-    graphics.lineTo(32, 0);
-    graphics.lineTo(0, 0)
-    
-    graphicsGroup.add(graphics);
+    rocket.body.velocity.x  = 0;
+    rocket.body.velocity.y  = 0;
+    explosion.animations.play('explode');
+    game.camera.shake(0.025, 600);
+    rocketEnableToFLy   = false;
+    game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+    enemy.destroy();
 }
 
-function onTap( pointer)
+function destroyRocket ()
 {
-    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
-    {
-        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
-        {
-            banaan   = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-        }
-    }
+    rocket.destroy();
 }
+/* ===== */
 
-function enemyOnBanana (enemie, banana)
+/* === BANANA === */
+function bananaPowerUp ()
 {
-    enemie.destroy();
-    banana.destroy();
+    console.log('banana');
 }
 
 function HandleOrientation (e) 
