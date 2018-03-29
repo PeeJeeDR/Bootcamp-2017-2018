@@ -3,6 +3,11 @@ var Level_1   = {
     {
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
+        if(playMusic){
+            theme = game.add.audio('theme');
+            theme.volume = 0.07;
+            theme.play();
+        }
         currentLevel    = 1;
         this.addMap(currentLevel);
         this.groups();
@@ -16,6 +21,8 @@ var Level_1   = {
         game.time.events.loop(Phaser.Timer.SECOND, setImmortalTime, this);
 
         fixFallthrough();
+
+       
         
     },
 

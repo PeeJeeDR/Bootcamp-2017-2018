@@ -43,13 +43,38 @@ var MenuState   = {
 	    instructions_button.anchor.setTo(0.5);
 
 	    credits_button = game.add.button(game.world.centerX -150, game.world.centerY +80, 'credits_btn', this.credits, this, 2, 1, 0);
-	    credits_button.anchor.setTo(0.5);
+		credits_button.anchor.setTo(0.5);
+
+		soundBtn = game.add.button(400,440,'musicBtn',this.onClickAction);
+		soundBtn.anchor.setTo(0.5);
+		soundBtn.scale.setTo(0.7);
+
+
+		
+		if(playMusic){
+			pressStart = game.add.audio('pressStart');
+			pressStart.volume = 0.08;
+			pressStart.play();
+		} 
     },
 
     update: function () 
     {
         
     },
+
+	onClickAction: function(){
+		
+		if(playMusic && soundBtn.frame == 0){
+			soundBtn.frame = 1;
+		 	playMusic = false;
+		 	pressStart.stop();
+		}
+		else{ 
+			soundBtn.frame =0;
+			playMusic = true;
+		}
+	},
 
     pacmanOut: function () {
     	pacman.reset(0, 515);
