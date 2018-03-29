@@ -1,15 +1,10 @@
 var Level_1   = {
     create: function ()
     {
-        coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
-        if(playMusic){
-            theme = game.add.audio('theme');
-            theme.volume = 0.07;
-            theme.play();
-        }
         currentLevel    = 1;
+        coinsCollected  = 0;
         this.addMap(currentLevel);
         this.groups();
         this.mapObjects();
@@ -17,8 +12,20 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
+        coins.forEachAlive(function (sc) {
+            sc.animations.play('spin');
+        }, this)
+
+        if (playMusic)
+        {
+            theme = game.add.audio('theme');
+            theme.volume = 0.07;
+            theme.play();
+        }
+
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
+        game.time.events.loop(Phaser.Timer.SECOND, updateRocketCounter, this);
 
         fixFallthrough();
 
@@ -27,24 +34,12 @@ var Level_1   = {
 
     update: function ()
     {
-        if (!onMobile)          {cursorControls(player, false);}
-        if (firstBoxSpawned)    {generateBoxes();}
+        this.controls();
+        this.immortalState();
+        rocketCollision();
 
-        if (!immortalState)
-        {
-            for (var i = 0, ilen = enemies.length; i < ilen; i++)
-            {
-                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
-            }
-        }
-        else 
-        {
-            for (var i = 0, ilen = enemies.length; i < ilen; i++)
-            {
-                game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
-            }
-            game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
-        }
+        if (firstBoxSpawned)    {generateBoxes();}
+        if (rocketEnableToFLy)  {calculateAirTime();}
         onWin(currentLevel); 
     },
 
@@ -67,11 +62,6 @@ var Level_1   = {
 
         mysteryBoxes    = game.add.group();
         mysteryBoxes.enableBody     = true;
-
-        coins.forEachAlive(function (singleCoin) {
-            singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
-            singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
-        }, this)
     },
 
     mapObjects: function ()
@@ -86,7 +76,8 @@ var Level_1   = {
 
         map.objects.coins.forEach(function (obj) {
             coinsArray.push(obj);
-            coins.create(obj.x, obj.y, 'coin');
+            coin    = coins.create(obj.x, obj.y, 'coin');
+            coin.animations.add('spin', [0, 1, 2, 3], 10, true);
         }, this);
 
         map.objects.start_position.forEach(function (obj) {
@@ -109,6 +100,41 @@ var Level_1   = {
         {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
+        }
+    },
+
+    controls: function ()
+    {
+        if (!onMobile) 
+        {
+            if (rocketEnableToFLy)
+            {
+                cursorControls(rocket, false, 200);
+                cursorControls(player, false, 0);
+            }
+            else 
+            {
+                cursorControls(player, false, 200);
+            }
+        }
+    },
+
+    immortalState: function ()
+    {
+        if (!immortalState)
+        {
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
+        }
+        else 
+        {
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
+            }
+            game.time.events.add(Phaser.Timer.SECOND * playerSettings.timeImmortal, resetImmortalPowerUp, this);
         }
     },
 }

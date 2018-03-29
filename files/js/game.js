@@ -26,6 +26,7 @@ var enemyHitCounter = 0;
 var enableToHit = false;
 
 // COINS
+var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -76,7 +77,7 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    // "rocket",
+    "rocket",
     "immortal",
     // "banana"
 ]
@@ -85,18 +86,26 @@ var powerUp;
 // IMMORTAL
 var immortalState   = false;
 
+// ROCKET
+var rocket;
+var rocketEnableToFLy   = false;
+var rocketTimeInAir     = 0;
+var rocketKilledEnemy   = false;
+var rocketExploded      = false;
+
+// LEVEL
+var levelNumber;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 15,
     timeToGetHit: 100,
+    timeImmortal: 6 // in seconds
 }
 
 var enemySettings = {
     moveSpeed: 200,
 }
-
-
-var levelNumber;
 
 
 
@@ -149,7 +158,7 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls (sprite, autoMovement)
+function cursorControls (sprite, autoMovement, velocity)
 {
     if (!autoMovement)
     {
@@ -159,20 +168,20 @@ function cursorControls (sprite, autoMovement)
 
     if (cursors.down.isDown)
     {
-        sprite.body.velocity.y   = 200;
+        sprite.body.velocity.y   = velocity;
     }
     else if (cursors.up.isDown)
     {
-        sprite.body.velocity.y   = -200;
+        sprite.body.velocity.y   = -velocity;
     }
 
     if (cursors.left.isDown)
     {
-        sprite.body.velocity.x   = -200;
+        sprite.body.velocity.x   = -velocity;
     } 
     else if (cursors.right.isDown)
     {
-        sprite.body.velocity.x   = 200;
+        sprite.body.velocity.x   = velocity;
     }
 }
 
@@ -183,11 +192,11 @@ function collectCoin (enemy, coin)
     // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
     killCoin();
 
-    if(playMusic){
-
-    coinHit = game.add.audio('hit');
-    coinHit.volume = 0.012;
-    coinHit.play();
+    if(playMusic)
+    {
+        coinHit = game.add.audio('hit');
+        coinHit.volume = 0.012;
+        coinHit.play();
     }
 
     function killCoin () 
@@ -397,6 +406,11 @@ function updateBoxCounter ()
     boxTotal++;
 }
 
+function updateRocketCounter ()
+{
+    rocketTimeInAir++;
+}
+
 function activatePowerUp ()
 {
     switch (powerUp)
@@ -415,6 +429,7 @@ function activatePowerUp ()
     }
 }
 
+/* === IMMORTAL === */
 function immortalPowerUp ()
 {
     immortalState   = true;
@@ -424,23 +439,77 @@ function resetImmortalPowerUp ()
 {
     immortalState   = false;
 }
+/* ===== */
 
+/* === ROCKET === */
 function rocketPowerUp ()
 {
-    console.log('rocket');
+    rocketTimeInAir     = 0;
+    rocket  = new Rocket(player.x, player.y);
+    rocketEnableToFLy   = true;
 }
 
+function calculateAirTime ()
+{
+    game.camera.shake(0.0025, 300);
+    if (rocketTimeInAir > 4)
+    {
+        rocket.body.velocity.x  = 0;
+        rocket.body.velocity.y  = 0;
+        game.camera.shake(0.025, 600);
+        rocketEnableToFLy   = false;
+        explosion.animations.play('explode');
+        game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+        if (rocketTimeInAir > 5)
+        {
+            destroyRocket();
+        }
+    }
+}
+
+function rocketCollision ()
+{
+    game.physics.arcade.overlap(rocket, enemies, rocketKill, null, this);
+}
+
+function rocketKill (rocket, enemy)
+{
+    rocket.body.velocity.x  = 0;
+    rocket.body.velocity.y  = 0;
+    explosion.animations.play('explode');
+    game.camera.shake(0.025, 600);
+    rocketEnableToFLy   = false;
+    game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
+    enemy.destroy();
+}
+
+function destroyRocket ()
+{
+    rocket.destroy();
+}
+/* ===== */
+
+/* === BANANA === */
 function bananaPowerUp ()
 {
     console.log('banana');
 }
 
-
-
 function HandleOrientation (e) 
 {
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    if (rocketEnableToFLy)
+    {
+        rocket.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        rocket.body.velocity.x = e.beta * playerSettings.moveSpeed;
+
+        player.body.velocity.y = 0;
+        player.body.velocity.x = 0;
+    }
+    else 
+    {
+        player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    }
 }
 
 function onWin (currentLevel)
