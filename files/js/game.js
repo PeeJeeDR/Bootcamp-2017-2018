@@ -60,10 +60,6 @@ var pressStart;
 var theme;
 var gameMusicOver;
 var playMusic = true;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 
 // MYSTERY BOXES
 var boxXPositions   = [];
