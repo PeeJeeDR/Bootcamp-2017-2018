@@ -25,7 +25,9 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 var enemyHitCounter = 0;
-var enableToHit = false;
+var enableToHit     = false;
+var startEnemiesSpawned     = false;
+var enemyCounter     = 0;
 
 // COINS
 var coin;
@@ -79,9 +81,9 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    // "immortal",
-    "banana"
+    "rocket",
+    "immortal",
+    //"banana"
 ]
 var powerUp;
 var powerUpRoller;

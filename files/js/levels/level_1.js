@@ -17,8 +17,6 @@ var Level_1   = {
 
         powerUpRoller.animations.add('power', [0,1,2], 5, true);
         
-        
-        
         this.addPauseBtn();
         displayHearts();
 
@@ -35,6 +33,7 @@ var Level_1   = {
         }
 
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
+        game.time.events.loop(Phaser.Timer.SECOND, this.updateEnemyCounter, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateRocketCounter, this);
 
@@ -54,10 +53,23 @@ var Level_1   = {
         this.immortalState();
         rocketCollision();
 
+        console.log(enemyCounter);
+
+        if (enemyCounter > (10 + Math.floor(Math.random() * (5 - 0) + 0)))
+        {
+            enemyCounter    = 0;
+            this.addEnemy();
+        }
+
         if (firstBoxSpawned)    {generateBoxes();}
         if (rocketEnableToFLy)  {calculateAirTime();}
         onWin(currentLevel); 
         displayScore();
+    },
+
+    updateEnemyCounter: function ()
+    {
+        enemyCounter++;
     },
 
     addMap: function (currentLevel)
@@ -111,9 +123,6 @@ var Level_1   = {
         map.objects.start_position.forEach(function (obj) {
             player  = new Player(obj.x + 16, obj.y + 16);
             game.physics.arcade.enable(player);
-
-            boxXPositions.push(obj.x);
-            boxYPositions.push(obj.y);
         }, this);
 
         map.objects.mystery_boxes.forEach(function (obj) {
@@ -125,11 +134,25 @@ var Level_1   = {
         })
     },
 
+    addEnemy: function ()
+    {
+        var randomNbr   = Math.floor(Math.random() * (bananaXPos.length - 0) + 0);
+        var x   = boxXPositions[randomNbr];
+        var y   = boxYPositions[randomNbr];
+
+        enemy  = new Enemy(x, y);
+        enemies.push(enemy);
+    },
+
     addEnemies: function ()
     {
         for (var i = 0, ilen = nbrOfEnemies; i < ilen; i++)
         {
-            enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
+            var randomNbr   = Math.floor(Math.random() * (bananaXPos.length - 0) + 0);
+            var x   = boxXPositions[randomNbr];
+            var y   = boxYPositions[randomNbr];
+
+            enemy  = new Enemy(x, y);
             enemies.push(enemy);
         }
     },
