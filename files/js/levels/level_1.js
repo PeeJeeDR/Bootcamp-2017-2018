@@ -25,6 +25,8 @@ var Level_1   = {
        
         
         fixFallthrough();
+
+        console.log(bananaXPos + ', ' + bananaYPos);
     
         coinsArrayLength = coinsArray.length;
     }, 
@@ -108,11 +110,17 @@ var Level_1   = {
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         }, this);
 
         map.objects.mystery_boxes.forEach(function (obj) {
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         })
     },
 
