@@ -25,7 +25,9 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 var enemyHitCounter = 0;
-var enableToHit = false;
+var enableToHit     = false;
+var startEnemiesSpawned     = false;
+var enemyCounter     = 0;
 
 // COINS
 var coin;
@@ -84,11 +86,12 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    // "immortal",
-    "banana"
+    "rocket",
+    "immortal",
+    //"banana"
 ]
 var powerUp;
+var powerUpRoller;
 
 // IMMORTAL
 var immortalState   = false;
@@ -127,6 +130,7 @@ var enemySettings = {
 var scoreString = "0";
 var firstScoreNbr = "0";
 var secondScoreNbr = "0";
+var puActivated;
 
 /* ===== FUNCTIONS ===== */
 function enemyOnPoint (enemy, point)
@@ -438,12 +442,24 @@ function collectMysteryBox ()
 {
     boxTotal   = 0;
 
+    rolPowerUp();
+    
     var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
     powerUp         = powerUps[randomNbr];
 
-    activatePowerUp();
-
     mysteryBox.destroy();
+}
+
+function rolPowerUp()
+{
+    powerUpRoller.animations.play('power');
+    game.time.events.add(Phaser.Timer.SECOND * 4, activatePowerUp, this);
+}
+
+function activatePU ()
+{
+    puActivated     = true;
+    activatePowerUp();
 }
 
 function removeMysteryBox ()
@@ -464,18 +480,22 @@ function updateRocketCounter ()
 
 function activatePowerUp ()
 {
+    powerUpRoller.animations.stop('power');
     switch (powerUp)
     {
         case 'immortal':
             immortalPowerUp();
+            powerUpRoller.frame = 2;
         break;
 
         case 'rocket':
             rocketPowerUp();
+            powerUpRoller.frame = 1;
         break;
 
         case 'banana':
             bananaPowerUp();
+            powerUpRoller.frame = 0;
         break;
     }
 }
