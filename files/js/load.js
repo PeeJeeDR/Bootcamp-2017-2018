@@ -8,12 +8,12 @@ var LoadState   = {
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
-        game.load.image('mysteryboxImg', 'assets/sprites/mysteryBox.png');
+        game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         // game.load.image('coin', 'assets/sprites/coin.png');
         game.load.image('menu', 'assets/sprites/menu.png');
 
-        game.load.image('heart','assets/sprites/health.png');
+        game.load.image('heart','assets/sprites/heart.png');
         game.load.image('rocket', 'assets/sprites/projectile.png');
         game.load.spritesheet('explosion', 'assets/sprites/explosie.png', 32, 32, 4);
         game.load.image('banana', 'assets/sprites/banaan.png');

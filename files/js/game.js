@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = true;
+var onMobile    = false;
 
 // TEXT & MENU
 var scoreText;
@@ -76,11 +76,14 @@ var boxTotal   = 0;
 // POWERUPS
 var powerUps    = [
     // "rocket",
-    "immortal",
-    // "banana"
+    //"immortal",
+     "banana"
 ]
 var powerUp;
+var bananaPowerActive =false;
 var banaan;
+var square;
+var group;
 
 // IMMORTAL
 var immortalState   = false;
@@ -113,6 +116,7 @@ function enemyOnPoint (enemy, point)
     margeYTop       = point.y + 1;
     margeYBottom    = point.y - 1;
 
+    if(!bananaPowerUp){
     if ((Math.ceil(enemy.body.x) >= margeXBottom && Math.ceil(enemy.body.x) <= margeXTop) && (Math.ceil(enemy.body.y) >= margeYBottom && Math.ceil(enemy.body.y) <= margeYTop))
     {
         switch (Math.floor(Math.random() * (5 - 1) + 1))
@@ -150,6 +154,7 @@ function enemyOnPoint (enemy, point)
             break;
         }
     }
+  } 
 }
 
 function cursorControls (sprite, autoMovement)
@@ -427,7 +432,10 @@ function rocketPowerUp ()
 function bananaPowerUp ()
 {
 
-     for( var i=0, ilen = boxXPositions.length; i>=ilen; i++)
+
+    bananaPowerActive =true;
+
+     for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
      {
 
               square(boxXPositions[i], boxYPositions[i]);
@@ -442,10 +450,19 @@ function bananaPowerUp ()
 
 function square(x , y)
 {
-    var graphics = game.add.graphics(x, y)
-    graphics.drawSquare(50, 250, 32, 32);
-    graphics.lineStyle(10, 0xffd900, 1);
- 
+     
+     group = game.add.group();
+
+    var graphics = game.make.graphics(x, y);
+    graphics.lineStyle(1, 0x408046, 1);
+    
+    // draw a square
+    graphics.lineTo(0, 32);
+    graphics.lineTo(32, 32);
+    graphics.lineTo(32, 0);
+    graphics.lineTo(0, 0)
+    
+    group.add(graphics);
 
 
 
@@ -456,9 +473,11 @@ function onTap( pointer)
 
     for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
      {
-             if ( pointer.x == boxXPositions[i] || pointer.y == boxYPositions[i])
+             if ( game.input.activePointer.x == boxXPositions[i] ||game.input.activePointer.y == boxYPositions[i])
              {
                  banaan = new Banaan(boxXPositions[i], boxYPositions[i]);
+                 group.destroy();
+                 bananaPowerActive=false;
              }
      }
 
