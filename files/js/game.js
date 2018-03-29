@@ -82,8 +82,8 @@ var powerUps    = [
 var powerUp;
 var bananaPowerActive =false;
 var banaan;
-var square;
 var group;
+var graphics;
 
 // IMMORTAL
 var immortalState   = false;
@@ -442,8 +442,9 @@ function bananaPowerUp ()
 
      }
 
-     game.input.onTap.add(onTap, this);
-   
+    game.input.onTap.add(onTap, this);
+   // graphics.events.onInputDown.add(test, this);
+    
 
     console.log('banana');
 }
@@ -453,7 +454,7 @@ function square(x , y)
      
      group = game.add.group();
 
-    var graphics = game.make.graphics(x, y);
+    graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
     // draw a square
@@ -461,23 +462,37 @@ function square(x , y)
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);
     graphics.lineTo(0, 0)
+    graphics.inputEnabled =true;
+    graphics.input.useHandCursor = true;
     
     group.add(graphics);
 
+    
+    
 
+    //game.physics.arcade.enable(group);
 
 }
 
-function onTap( pointer)
+function test ()
 {
 
-    for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    console.log('test graphics');
+}
+function onTap( pointer)
+{
+    console.log('tap registered');
+    console.log(game.input.activePointer.x, game.input.activePointer.y);
+
+    for( var i=0, ilen = 1; i<ilen; i++)
      {
-             if ( game.input.activePointer.x == boxXPositions[i] ||game.input.activePointer.y == boxYPositions[i])
+         console.log('for test')
+             if ( game.input.activePointer.x == (boxXPositions[i])||game.input.activePointer.y == (boxYPositions[i]))
              {
-                 banaan = new Banaan(boxXPositions[i], boxYPositions[i]);
+                 console.log("position matched");
+                 banaan = new Banaan(boxXPositions[i],game.input.boxYPositions[i]);
                  group.destroy();
-                 bananaPowerActive=false;
+                 bananaPowerActive = false;
              }
      }
 

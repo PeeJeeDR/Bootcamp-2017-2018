@@ -20,6 +20,10 @@ var Level_1   = {
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
 
+     
+
+       
+        
         fixFallthrough();
     
         coinsArrayLength = coinsArray.length;
