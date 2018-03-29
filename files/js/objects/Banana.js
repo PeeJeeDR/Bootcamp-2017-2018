@@ -16,6 +16,13 @@ var Banana  = function (x,y)
                 counter++;
             }
         }
+        
+        if(bananaOnScreen)
+        {
+            graphicsGroup.kill();
+          
+
+        }
     }
 
     
