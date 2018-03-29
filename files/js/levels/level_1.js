@@ -34,7 +34,7 @@ var Level_1   = {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
 
-        onWin();
+        onWin(currentLevel);
     },
 
     test: function () 

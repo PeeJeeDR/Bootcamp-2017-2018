@@ -63,7 +63,7 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
-
+var levelNumber;
 
 /* ===== FUNCTIONS ===== */
 
@@ -301,10 +301,11 @@ function HandleOrientation (e)
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
 
-function onWin ()
+function onWin (currentLevel)
 {
 	if(coinsCollected == coinsArrayLength)
-    {
+    {	
+    	levelNumber = currentLevel;
         game.state.start('win');
     }
 }
