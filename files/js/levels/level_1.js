@@ -49,6 +49,8 @@ var Level_1   = {
         onWin(currentLevel); 
         displayScore();
 
+        console.log(bananaPlaced);
+
         if (bananaPlaced)
         {
             graphicsGroup.kill();

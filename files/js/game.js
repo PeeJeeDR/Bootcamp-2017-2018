@@ -523,12 +523,18 @@ function bananaPowerUp ()
     {
         square(bananaXPos[i], bananaYPos[i]);
     }
-    game.input.onTap.add(onTap, this);
+
+    if (!bananaPlaced)
+    {
+        bananaPlaced    = true;
+        game.input.onTap.add(onTap, this);
+    }
 }
 
 function square(x, y)
 {
-    var graphics = game.make.graphics(x, y);
+    console.log('test');
+    graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
     graphics.lineTo(0, 32);
@@ -542,18 +548,13 @@ function square(x, y)
 
 function onTap(pointer, graphics)
 {
-    if (!bananaPlaced)
+    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
     {
-        for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
         {
-            if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
-            {
-                banana          = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                bananaPlaced    = true;
-            }
+                banana  = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
         }
     }
-    console.log("placed");
 }
 
 function enemyOnBanana (enemy, banana)

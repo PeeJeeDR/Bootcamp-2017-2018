@@ -18,7 +18,6 @@ var Banana  = function (x,y)
 
         if (bananaPlaced)
         {
-            
             graphicsGroup.kill();
             bananaPlaced    = false;
         }
