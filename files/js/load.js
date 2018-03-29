@@ -48,6 +48,7 @@ var LoadState   = {
         game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
         game.load.spritesheet('pacman_dead','assets/sprites/pacman_dead.png',32,32);
         game.load.spritesheet('pauseAndPlay', 'assets/sprites/pause_play.png', 48, 48);
+        game.load.spritesheet('clouds', 'assets/sprites/clouds.png', 32, 32);
     },
 
     create: function ()
