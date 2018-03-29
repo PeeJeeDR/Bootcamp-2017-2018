@@ -50,6 +50,15 @@ var health = 3;
 var pacman;
 var mariokart;
 var menuBackground;
+var soundBtn;
+
+
+var coinHit;
+var enemyHit;
+var pressStart;
+var theme;
+var gameMusicOver;
+var playMusic = true;
 
 // MYSTERY BOXES
 var boxXPositions   = [];
@@ -167,6 +176,13 @@ function collectCoin (enemy, coin)
     coin.animations.play('collected');
     game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
 
+    if(playMusic){
+
+    coinHit = game.add.audio('hit');
+    coinHit.volume = 0.012;
+    coinHit.play();
+
+    }
     coin.kill();
         coinsCollected += 1;
         scoreText.text  = coinsCollected
@@ -201,6 +217,15 @@ function killPlayer ()
 
         game.camera.shake(0.01, 300);
         player.kill();
+
+       
+        
+        if(playMusic){
+            theme.stop();
+            gameMusicOver = game.add.audio('gameOver');
+            gameMusicOver.volume = 0.2;
+            gameMusicOver.play();
+        }
 
         gameOver    = true;
     }
@@ -264,6 +289,21 @@ function displayHearts ()
 
 function killHeart(player, enemy)
 {
+
+    game.camera.shake(0.025, 300);
+    game.camera.flash(0xff0000, 100);
+    health--;
+
+    stars.animations.play('onHit');
+    window.navigator.vibrate([1000,2000,1000]);
+
+
+    if(playMusic){
+        enemyHit = game.add.audio('enemyHit');
+        enemyHit.volume = 0.1;
+        enemyHit.play();
+    }
+
     if (!immortalState)
     {
         game.camera.shake(0.008, 300);

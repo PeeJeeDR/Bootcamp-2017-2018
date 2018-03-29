@@ -24,6 +24,14 @@ var LoadState   = {
         game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
         game.load.spritesheet('game_over', 'assets/sprites/game_over.png', 250, 75);
         game.load.spritesheet('stars', 'assets/sprites/stars.png', 32, 32);
+        game.load.spritesheet('musicBtn','assets/sprites/sound_btn.png',75,75);
+
+        game.load.audio('hit','assets/sounds/Mario-coin-sound.mp3');
+        game.load.audio('enemyHit','assets/sounds/hitEnemy2.mp3');
+        game.load.audio('pressStart','assets/sounds/pressStart.mp3');
+        game.load.audio('gameOver','assets/sounds/gameOver.mp3')
+        game.load.audio('theme','assets/sounds/mariotheme.mp3');
+
     },
 
     create: function ()
