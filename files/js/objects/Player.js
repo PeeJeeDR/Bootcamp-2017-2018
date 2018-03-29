@@ -1,7 +1,6 @@
 var Player  = function (x, y)
 {
     var _player     =  game.add.sprite(x, y, 'car');
-
     game.physics.arcade.enable(_player);
     _player.anchor.setTo(0.5);
     _player.scale.setTo(0.80);
@@ -55,7 +54,8 @@ var Player  = function (x, y)
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
         game.physics.arcade.overlap(_player, mysteryBoxes, collectMysteryBox, null, this);
 
-        if(enableToHit){
+        if(enableToHit)
+        {
             enemyHitCounter++;
         }
     }

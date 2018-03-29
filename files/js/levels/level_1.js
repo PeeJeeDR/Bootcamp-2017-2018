@@ -27,8 +27,14 @@ var Level_1   = {
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateRocketCounter, this);
 
+     
+
+       
+        
         fixFallthrough();
 
+        console.log(bananaXPos + ', ' + bananaYPos);
+    
         coinsArrayLength = coinsArray.length;
     }, 
 
@@ -62,6 +68,16 @@ var Level_1   = {
 
         mysteryBoxes    = game.add.group();
         mysteryBoxes.enableBody     = true;
+
+        bananas = game.add.group();
+        bananas.enableBody  = true;
+
+        graphicsGroup   = game.add.group();
+
+        coins.forEachAlive(function (singleCoin) {
+            singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
+            singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
+        }, this)
     },
 
     mapObjects: function ()
@@ -72,6 +88,9 @@ var Level_1   = {
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         }, this);
 
         map.objects.coins.forEach(function (obj) {
@@ -86,11 +105,17 @@ var Level_1   = {
 
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         }, this);
 
         map.objects.mystery_boxes.forEach(function (obj) {
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
+
+            bananaXPos.push(obj.x);
+            bananaYPos.push(obj.y);
         })
     },
 

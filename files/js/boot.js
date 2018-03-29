@@ -2,7 +2,7 @@ var BootState   = {
     create: function ()
     {
         if (onMobile) {
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             game.scale.forceLandscape = true;
             game.scale.pageAlignHorizontally = true;
             game.scale.updateLayout(true);

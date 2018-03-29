@@ -11,6 +11,13 @@ var LoadState   = {
         game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
         game.load.image('menu', 'assets/sprites/menu.png');
+
+        game.load.image('heart','assets/sprites/heart.png');
+        game.load.image('rocket', 'assets/sprites/projectile.png');
+        game.load.spritesheet('explosion', 'assets/sprites/explosie.png', 32, 32, 4);
+        game.load.image('banana', 'assets/sprites/banaan.png');
+
+
         game.load.spritesheet('play_btn', 'assets/sprites/play_btn_spritesheet.png', 250, 75);
         game.load.image('credits_btn', 'assets/sprites/credits_btn.png');
         game.load.image('instructions_btn', 'assets/sprites/instructions_btn.png');
