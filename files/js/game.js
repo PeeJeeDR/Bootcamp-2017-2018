@@ -525,6 +525,7 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+    console.log(graphicsGroup);
 
   /*  if(!bananaOnScreen){
         graphicsGroup.destroy();
