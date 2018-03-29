@@ -49,9 +49,8 @@ var MenuState   = {
 		soundBtn.anchor.setTo(0.5);
 		soundBtn.scale.setTo(0.7);
 
-
-		
-		if(playMusic){
+		if (playMusic)
+		{
 			pressStart = game.add.audio('pressStart');
 			pressStart.volume = 0.08;
 			pressStart.play();
