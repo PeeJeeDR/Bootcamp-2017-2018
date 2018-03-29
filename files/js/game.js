@@ -48,6 +48,9 @@ var playerFaceDirection;
 // STARS
 var stars;
 
+// CLOUDS 
+var clouds;
+
 // HEARTS
 var heart;
 var heartArray  = [];
@@ -59,7 +62,7 @@ var mariokart;
 var menuBackground;
 var soundBtn;
 
-
+// AUDIO
 var coinHit;
 var enemyHit;
 var pressStart;
@@ -78,7 +81,9 @@ var timeFirstBox        = 7;
 var timeForNextBox      = 7;
 var timeBoxRemoved      = 0;
 var boxTotal   = 0;
-
+var randomX;
+var randomY;
+   
 // POWERUPS
 var powerUps    = [
     "rocket",
@@ -392,11 +397,29 @@ function checkCoins ()
 function addMysteryBox ()
 {
     firstBoxSpawned     = true;
+
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
-    var randomX         = boxXPositions[randomNbr];
-    var randomY         = boxYPositions[randomNbr];
+    randomX         = boxXPositions[randomNbr];
+    randomY         = boxYPositions[randomNbr];
+    
+    clouds = game.add.sprite(randomX, randomY, 'clouds');
+    
+    clouds.frame = 0;
+    clouds.anchor.setTo(0,0);
+    clouds.animations.add('boxAppear', [0, 1, 2, 3], 5, false);
+    clouds.animations.play('boxAppear');
+    game.time.events.add(Phaser.Timer.SECOND * 0.5,AppearMysteryBox,this);
+    
+}
+
+function AppearMysteryBox(){
+
+    clouds.destroy();
+
+    var maxNbr          = boxXPositions.length;
+    var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
 }
@@ -563,16 +586,34 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+
+  /*  if(!bananaOnScreen){
+        graphicsGroup.destroy();
+
+    }*/
 }
 
-function onTap(pointer)
+function onTap(pointer, graphics)
 {
-    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+    if (bananaOnScreen)
     {
-        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+
+        for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
-            banana   = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+             if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+            {
+                     banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+                     bananaOnScreen = false;
+             }
+         }
+    }
+    else if (!bananaOnScreen)
+    {
+        for(var i = 0, ilen = graphicsGroup.length; i < ilen; i++)
+        {
+            graphicsGroup[i].destroy();
         }
+       
     }
 }
 
