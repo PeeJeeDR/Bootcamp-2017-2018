@@ -10,6 +10,15 @@ var Level_1   = {
         this.mapObjects();
         this.addEnemies();
 
+        powerUpRoller = game.add.sprite(63.5,512.5,'powerUpRoller');
+        powerUpRoller.anchor.setTo(0.5);
+        powerUpRoller.scale.setTo(2);
+        powerUpRoller.frame = 3;
+
+        powerUpRoller.animations.add('power', [0,1,2], 5, true);
+        
+        
+        
         this.addPauseBtn();
         displayHearts();
 
@@ -19,9 +28,10 @@ var Level_1   = {
 
         if (playMusic)
         {
-            theme = game.add.audio('theme');
-            theme.volume = 0.07;
+            theme = game.add.audio('theme2');
+            theme.volume = 0.16;
             theme.play();
+            theme.loopFull();
         }
 
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);

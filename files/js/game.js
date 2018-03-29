@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = true;
+var onMobile    = false;
 
 var pauseBtn;
 
@@ -84,6 +84,7 @@ var powerUps    = [
     "banana"
 ]
 var powerUp;
+var powerUpRoller;
 
 // IMMORTAL
 var immortalState   = false;
@@ -415,6 +416,8 @@ function collectMysteryBox ()
 {
     boxTotal   = 0;
 
+    rolPowerUp();
+    
     var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
     powerUp         = powerUps[randomNbr];
 
@@ -423,8 +426,14 @@ function collectMysteryBox ()
     mysteryBox.destroy();
 }
 
+function rolPowerUp(){
+    powerUpRoller.animations.play('power');
+
+    game.time.events.add(Phaser.Timer.SECOND * 4, collectMysteryBox, this);
+}
 function removeMysteryBox ()
 {
+
     timeBoxRemoved  = boxTotal;
     mysteryBox.destroy();
 }
@@ -441,18 +450,22 @@ function updateRocketCounter ()
 
 function activatePowerUp ()
 {
+    powerUpRoller.animations.stop('power');
     switch (powerUp)
     {
         case 'immortal':
             immortalPowerUp();
+            powerUpRoller.frame = 2;
         break;
 
         case 'rocket':
             rocketPowerUp();
+            powerUpRoller.frame = 1;
         break;
 
         case 'banana':
             bananaPowerUp();
+            powerUpRoller.frame = 0;
         break;
     }
 }
