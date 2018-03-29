@@ -7,7 +7,7 @@ var CreditState   = {
 	    names.animations.play('animation');
 	    names.frame = 19;
 
-	    made_by = game.add.sprite(game.world.centerX, game.world.centerY - 150, 'made_by');
+	    made_by = game.add.sprite(game.world.centerX, game.world.centerY - 125, 'made_by');
 	    made_by.animations.add('shine', [0,0,0,0,0,1,2,3,4,5,6,7], 15, true);
 	    made_by.anchor.setTo(0.5);
 	    made_by.animations.play('shine');
