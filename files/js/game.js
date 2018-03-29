@@ -77,9 +77,9 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    "rocket",
-    "immortal",
-    // "banana"
+    // "rocket",
+    // "immortal",
+    "banana"
 ]
 var powerUp;
 
