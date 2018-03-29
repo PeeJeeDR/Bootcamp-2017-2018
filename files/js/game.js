@@ -397,8 +397,8 @@ function addMysteryBox ()
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
-     randomX         = boxXPositions[randomNbr];
-     randomY         = boxYPositions[randomNbr];
+    randomX         = boxXPositions[randomNbr];
+    randomY         = boxYPositions[randomNbr];
     
     clouds = game.add.sprite(randomX, randomY, 'clouds');
     
@@ -416,10 +416,6 @@ function AppearMysteryBox(){
 
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
-
-    
-     
-
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
 }
