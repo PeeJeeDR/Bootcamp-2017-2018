@@ -519,6 +519,7 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
+
     for (var i=0, ilen = boxXPositions.length; i<ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
@@ -539,6 +540,7 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+
 }
 
 function onTap(pointer, graphics)
@@ -554,6 +556,7 @@ function onTap(pointer, graphics)
             }
         }
     }
+    console.log("placed");
 }
 
 function enemyOnBanana (enemy, banana)
