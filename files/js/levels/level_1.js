@@ -4,6 +4,11 @@ var Level_1   = {
         coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
+        if(playMusic){
+            theme = game.add.audio('theme');
+            theme.volume = 0.07;
+            theme.play();
+        }
         currentLevel    = 1;
         this.addMap(currentLevel);
         this.groups();
@@ -12,35 +17,43 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        game.time.events.add(Phaser.Timer.SECOND * 1, addMysteryBox, this);
+        game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
+        game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
 
         fixFallthrough();
+
         coinsArrayLength = coinsArray.length;
     }, 
+
+
 
     update: function ()
     {
         cursorControls(player, false);
 
-        game.physics.arcade.overlap(player, mysteryBox);
-        // Niewe spawnen door lengte van groep te meten.
+        console.log(immortalState);
 
-        if ('length' == "0")
+        if (firstBoxSpawned)
         {
-            "do shizzle";
+            generateBoxes();
         }
 
-        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        if (!immortalState)
         {
-            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
         }
-
-        onWin(currentLevel); //toevoegen aan ieder level
-    },
-
-    test: function () 
-    {
-        console.log('eindelijk');
+        else 
+        {
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
+            }
+            game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
+        }
+        onWin(currentLevel); 
     },
 
     addMap: function (currentLevel)
@@ -82,9 +95,6 @@ var Level_1   = {
         map.objects.coins.forEach(function (obj) {
             coinsArray.push(obj);
             coins.create(obj.x, obj.y, 'coin');
-
-            boxXPositions.push(obj.x);
-            boxYPositions.push(obj.y);
         }, this);
 
         map.objects.start_position.forEach(function (obj) {

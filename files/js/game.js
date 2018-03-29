@@ -2,56 +2,87 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // 800, 576
 
 /* ===== GLOBALS ===== */
+// MOBILE
 var onMobile    = true;
 
+// TEXT & MENU
 var scoreText;
 var lvlText;
-
 var graphicOverlay;
 var restartButton;
 var menuButton;
 
+// MAP & LEVEL
 var currentLevel;
-
 var map;
+var groundLayer;
+var borderLayer;
 
+// ENEMY
 var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
+var enemyHitCounter = 0;
+var enableToHit = false;
 
+// COINS
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
 var coinsArrayLength;
 
+// POINTS
 var point;
 var points;
 var pointArray  = [];
 
+// PLAYER
 var player;
 
+// STARS
 var stars;
 
-var groundLayer;
-var borderLayer;
-
+// HEARTS
 var heart;
 var heartArray  = [];
 var health = 3;
 
-var enemyHitCounter = 0;
-var enableToHit = false;
-
+// ANIMATIONS
 var pacman;
 var mariokart;
 var menuBackground;
+var soundBtn;
 
+
+var coinHit;
+var enemyHit;
+var pressStart;
+var theme;
+var gameMusicOver;
+var playMusic = true;
+
+// MYSTERY BOXES
 var boxXPositions   = [];
 var boxYPositions   = [];
 var mysteryBox;
 var mysteryBoxes;
-var mysteryBoxOnScreen  = false;
-var timeNotTaken        = 0;
+var spawnTimeFirstBox   = 3;
+var firstBoxSpawned     = false;
+var timeFirstBox        = 7;
+var timeForNextBox      = 7;
+var timeBoxRemoved      = 0;
+var boxTotal   = 0;
+
+// POWERUPS
+var powerUps    = [
+    // "rocket",
+    "immortal",
+    // "banana"
+]
+var powerUp;
+
+// IMMORTAL
+var immortalState   = false;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -63,7 +94,10 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
+
 var levelNumber;
+
+
 
 /* ===== FUNCTIONS ===== */
 
@@ -147,6 +181,13 @@ function collectCoin (enemy, coin)
     coin.animations.play('collected');
     game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
 
+    if(playMusic){
+
+    coinHit = game.add.audio('hit');
+    coinHit.volume = 0.012;
+    coinHit.play();
+
+    }
     coin.kill();
         coinsCollected += 1;
         scoreText.text  = coinsCollected
@@ -182,8 +223,23 @@ function killPlayer ()
         game.camera.shake(0.01, 300);
         player.kill();
 
+       
+        
+        if(playMusic){
+            theme.stop();
+            gameMusicOver = game.add.audio('gameOver');
+            gameMusicOver.volume = 0.2;
+            gameMusicOver.play();
+        }
+
         gameOver    = true;
     }
+}
+
+function killEnemy (player, enemy)
+{
+    console.log('test');
+    enemy.kill();
 }
 
 function resetGame () 
@@ -238,16 +294,34 @@ function displayHearts ()
 
 function killHeart(player, enemy)
 {
-    game.camera.shake(0.008, 300);
+
+    game.camera.shake(0.025, 300);
+    game.camera.flash(0xff0000, 100);
     health--;
 
     stars.animations.play('onHit');
+    window.navigator.vibrate([1000,2000,1000]);
 
-    heartArray[health].destroy();
-    
-    if (health  === 0)
+
+    if(playMusic){
+        enemyHit = game.add.audio('enemyHit');
+        enemyHit.volume = 0.1;
+        enemyHit.play();
+    }
+
+    if (!immortalState)
     {
-        killPlayer();
+        game.camera.shake(0.008, 300);
+        health--;
+
+        stars.animations.play('onHit');
+
+        heartArray[health].destroy();
+        
+        if (health  === 0)
+        {
+            killPlayer();
+        }
     }
 }
 
@@ -267,7 +341,7 @@ function checkCoins ()
 
 function addMysteryBox ()
 {
-
+    firstBoxSpawned     = true;
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
@@ -275,25 +349,84 @@ function addMysteryBox ()
     var randomY         = boxYPositions[randomNbr];
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
+}
 
-    game.time.events.loop(Phaser.Timer.SECOND * 1, checkTime, this);
-
-    function checkTime ()
+function generateBoxes ()
+{
+    if (boxTotal >= timeFirstBox + spawnTimeFirstBox)
     {
-        timeNotTaken++;
-
-        if (timeNotTaken > 10)
+        spawnTimeFirstBox   = 0;
+        removeMysteryBox();
+        if (boxTotal == timeFirstBox + timeForNextBox)
         {
-            mysteryBox.kill();
+            boxTotal   = 0;
+            game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
         }
     }
 }
 
-function collectMysteryBox (player, box)
+function collectMysteryBox ()
 {
-    console.log('box collected');
-    box.kill();
+    boxTotal   = 0;
+
+    var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
+    powerUp         = powerUps[randomNbr];
+
+    activatePowerUp();
+
+    mysteryBox.destroy();
 }
+
+function removeMysteryBox ()
+{
+    timeBoxRemoved  = boxTotal;
+    mysteryBox.destroy();
+}
+
+function updateBoxCounter ()
+{
+    boxTotal++;
+}
+
+function activatePowerUp ()
+{
+    switch (powerUp)
+    {
+        case 'immortal':
+            immortalPowerUp();
+        break;
+
+        case 'rocket':
+            rocketPowerUp();
+        break;
+
+        case 'banana':
+            bananaPowerUp();
+        break;
+    }
+}
+
+function immortalPowerUp ()
+{
+    immortalState   = true;
+}
+
+function resetImmortalPowerUp ()
+{
+    immortalState   = false;
+}
+
+function rocketPowerUp ()
+{
+    console.log('rocket');
+}
+
+function bananaPowerUp ()
+{
+    console.log('banana');
+}
+
+
 
 function HandleOrientation (e) 
 {
