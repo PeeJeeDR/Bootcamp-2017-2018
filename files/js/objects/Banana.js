@@ -12,10 +12,17 @@ var Banana  = function (x,y)
         {
             if (game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this))
             {
-                console.log('hoeveel?');
                 counter++;
             }
         }
+
+        if (bananaPlaced)
+        {
+            graphicsGroup.kill();
+            bananaPlaced    = false;
+        }
+
+        console.log(graphicsGroup);
     }
 
     

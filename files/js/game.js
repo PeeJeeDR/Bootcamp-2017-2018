@@ -100,10 +100,9 @@ var bananaPowerActive = false;
 var bananas;
 var graphicsGroup;
 var banana;
-var bananaOnScreen  = false;
+var bananaPlaced  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
-var graphics;
 
 // LEVEL
 var levelNumber;
@@ -520,10 +519,7 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-
-    bananaOnScreen  = true;
-
-    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    for (var i=0, ilen = boxXPositions.length; i<ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
     }
@@ -533,7 +529,7 @@ function bananaPowerUp ()
 
 function square(x, y)
 {
-    graphics = game.make.graphics(x, y);
+    var graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
     // draw a square
@@ -543,40 +539,26 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-
-  /*  if(!bananaOnScreen){
-        graphicsGroup.destroy();
-
-    }*/
 }
 
 function onTap(pointer, graphics)
 {
-    if (bananaOnScreen)
+    if (!bananaPlaced)
     {
-
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
-             if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+            if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
             {
-                     banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                     bananaOnScreen = false;
-             }
-         }
-    }
-    else if (!bananaOnScreen)
-    {
-        for(var i = 0, ilen = graphicsGroup.length; i < ilen; i++)
-        {
-            graphicsGroup[i].destroy();
+                banana          = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+                bananaPlaced    = true;
+            }
         }
-       
     }
 }
 
-function enemyOnBanana (enemie, banana)
+function enemyOnBanana (enemy, banana)
 {
-    enemie.destroy();
+    enemy.destroy();
     banana.destroy();
 }
 
