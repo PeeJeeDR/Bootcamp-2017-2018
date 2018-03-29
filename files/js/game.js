@@ -123,6 +123,7 @@ var enemySettings = {
 var scoreString = "0";
 var firstScoreNbr = "0";
 var secondScoreNbr = "0";
+var puActivated;
 
 /* ===== FUNCTIONS ===== */
 function enemyOnPoint (enemy, point)
@@ -428,16 +429,11 @@ function rolPowerUp()
 {
     powerUpRoller.animations.play('power');
     game.time.events.add(Phaser.Timer.SECOND * 4, activatePowerUp, this);
-    game.time.events.loop(Phaser.Timer.SECOND * 4, playRandomAnimation, this);
-}
-
-function playRandomAnimation ()
-{
-    powerUpRoller.animations.play('power');
 }
 
 function activatePU ()
 {
+    puActivated     = true;
     activatePowerUp();
 }
 
