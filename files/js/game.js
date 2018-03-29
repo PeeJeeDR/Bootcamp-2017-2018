@@ -82,6 +82,8 @@ var powerUps    = [
 var powerUp;
 var bananaPowerActive =false;
 var banaan;
+var banaanCnt=0;
+
 var group;
 var graphics;
 
@@ -432,7 +434,7 @@ function rocketPowerUp ()
 function bananaPowerUp ()
 {
 
-
+    banaanCnt = 0;
     bananaPowerActive =true;
 
      for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
@@ -466,6 +468,7 @@ function square(x , y)
     graphics.input.useHandCursor = true;
     
     group.add(graphics);
+    
 
     
     
@@ -481,20 +484,33 @@ function test ()
 }
 function onTap( pointer)
 {
+    
     console.log('tap registered');
+    while(banaanCnt<2){
+
     console.log(game.input.activePointer.x, game.input.activePointer.y);
 
-    for( var i=0, ilen = 1; i<ilen; i++)
+    banaan   = new Banaan(game.input.activePointer.clientX,game.input.activePointer.clientY );
+    banaanCnt++;
+ 
+    }
+
+      
+      
+    game.physics.arcade.collide( banaan, borderLayer);
+
+    /*for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
      {
          console.log('for test')
-             if ( game.input.activePointer.x == (boxXPositions[i])||game.input.activePointer.y == (boxYPositions[i]))
+             if ( game.input.activePointer.clientX  == boxXPositions[i]||game.input.activePointer.clientY  == boxYPositions[i])
              {
                  console.log("position matched");
                  banaan = new Banaan(boxXPositions[i],game.input.boxYPositions[i]);
                  group.destroy();
                  bananaPowerActive = false;
              }
-     }
+
+}*/
 
 
 }
