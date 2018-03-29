@@ -238,8 +238,6 @@ function killPlayer ()
 
 function killEnemy (player, enemy)
 {
-    pacman_dead.animations.play('onDead');
-
     pacman_dead = game.add.sprite(enemy.x, enemy.y, 'pacman_dead');
     pacman_dead.frame = 0;
     pacman_dead.anchor.setTo(0.5);
