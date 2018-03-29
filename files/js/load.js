@@ -43,6 +43,7 @@ var LoadState   = {
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
         game.load.spritesheet('names','assets/sprites/names.png',600,200);
         game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
+        game.load.spritesheet('clouds','assets/sprites/clouds.png',32,32);
     },
 
     create: function ()
