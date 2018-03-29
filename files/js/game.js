@@ -473,12 +473,16 @@ function square(x, y)
 
 function onTap( pointer)
 {
-    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+    if(bananaOnScreen)
     {
-        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+        for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
-            banaan   = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-        }
+            if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+            {
+                 banaan         = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+                 bananaOnScreen = false
+            }
+         }
     }
 }
 
