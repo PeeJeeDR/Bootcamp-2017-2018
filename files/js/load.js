@@ -1,6 +1,10 @@
 var LoadState   = {
     preload: function ()
     {
+        loading = game.add.sprite(game.world.centerX, game.world.centerY, 'loading');
+	    loading.animations.add('loading', [0,1,2,3,4,5,6,7], 15, true);
+	    loading.anchor.setTo(0.5);
+	    loading.animations.play("loading");
         this.loadTileMaps();
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -18,30 +22,12 @@ var LoadState   = {
         game.load.image('restart_btn', 'assets/sprites/restart_btn.png');
         game.load.spritesheet('coin', 'assets/sprites/coin-sprite.png', 32, 32);
         game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
-
-        continueText   = game.add.text( 
-            game.world.centerX, 
-            game.world.centerY + 100, 
-            "Loading...", 
-            { 
-                font: "28px Arial", 
-                fill: "#fff" 
-            } 
-        );
-
-        continueText.anchor.setTo( 0.5 );
         game.load.spritesheet('game_over', 'assets/sprites/game_over.png', 250, 75);
         game.load.spritesheet('stars', 'assets/sprites/stars.png', 32, 32);
-        game.load.spritesheet('loading', 'assets/sprites/loading.png', 200, 200);
     },
 
     create: function ()
     {
-    	loading = game.add.sprite(game.world.centerX, game.world.centerY, 'loading');
-	    loading.animations.add('loading', [0,1,2,3,4,5,6,7], 12, true);
-	    loading.anchor.setTo(0.5);
-	    loading.animations.play("loading");
-
         game.state.start('menu');
     },
 
