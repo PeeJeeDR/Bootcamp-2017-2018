@@ -165,6 +165,7 @@ var Level_1   = {
 
     pauseGame: function ()
     {
+
         if (game.paused)
         {
             game.paused     = false;
