@@ -2,47 +2,51 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // 800, 576
 
 /* ===== GLOBALS ===== */
+// MOBILE
 var onMobile    = true;
 
+// TEXT & MENU
 var scoreText;
 var lvlText;
-
 var graphicOverlay;
 var restartButton;
 var menuButton;
 
+// MAP & LEVEL
 var currentLevel;
-
 var map;
+var groundLayer;
+var borderLayer;
 
+// ENEMY
 var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
+var enemyHitCounter = 0;
+var enableToHit = false;
 
-var coin;
+// COINS
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
 
-
+// POINTS
 var point;
 var points;
 var pointArray  = [];
 
+// PLAYER
 var player;
 
+// STARS
 var stars;
 
-var groundLayer;
-var borderLayer;
-
+// HEARTS
 var heart;
 var heartArray  = [];
 var health = 3;
 
-var enemyHitCounter = 0;
-var enableToHit = false;
-
+// ANIMATIONS
 var pacman;
 var mariokart;
 var menuBackground;
@@ -56,12 +60,29 @@ var theme;
 var gameMusicOver;
 var playMusic = true;
 
+// MYSTERY BOXES
 var boxXPositions   = [];
 var boxYPositions   = [];
 var mysteryBox;
 var mysteryBoxes;
-var mysteryBoxOnScreen  = false;
-var timeNotTaken        = 0;
+var spawnTimeFirstBox   = 3;
+var firstBoxSpawned     = false;
+var timeFirstBox        = 7;
+var timeForNextBox      = 7;
+var timeBoxRemoved      = 0;
+var boxTotal   = 0;
+
+// POWERUPS
+var powerUps    = [
+    // "rocket",
+    "immortal",
+    // "banana"
+]
+var powerUp;
+
+// IMMORTAL
+var immortalState   = false;
+var immortalTimer   = 0;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -72,7 +93,6 @@ var playerSettings = {
 var enemySettings = {
     moveSpeed: 200,
 }
-
 
 
 /* ===== FUNCTIONS ===== */
@@ -212,6 +232,12 @@ function killPlayer ()
     }
 }
 
+function killEnemy (player, enemy)
+{
+    console.log('test');
+    enemy.kill();
+}
+
 function resetGame () 
 {
     game.state.start('reset');
@@ -264,6 +290,7 @@ function displayHearts ()
 
 function killHeart(player, enemy)
 {
+
     game.camera.shake(0.025, 300);
     game.camera.flash(0xff0000, 100);
     health--;
@@ -278,11 +305,19 @@ function killHeart(player, enemy)
         enemyHit.play();
     }
 
-    heartArray[health].destroy();
-    
-    if (health  === 0)
+    if (!immortalState)
     {
-        killPlayer();
+        game.camera.shake(0.008, 300);
+        health--;
+
+        stars.animations.play('onHit');
+
+        heartArray[health].destroy();
+        
+        if (health  === 0)
+        {
+            killPlayer();
+        }
     }
 }
 
@@ -302,7 +337,7 @@ function checkCoins ()
 
 function addMysteryBox ()
 {
-
+    firstBoxSpawned     = true;
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
@@ -310,25 +345,91 @@ function addMysteryBox ()
     var randomY         = boxYPositions[randomNbr];
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
+}
 
-    game.time.events.loop(Phaser.Timer.SECOND * 1, checkTime, this);
-
-    function checkTime ()
+function generateBoxes ()
+{
+    //console.log(boxTotal);
+    if (boxTotal >= timeFirstBox + spawnTimeFirstBox)
     {
-        timeNotTaken++;
-
-        if (timeNotTaken > 10)
+        spawnTimeFirstBox   = 0;
+        removeMysteryBox();
+        if (boxTotal == timeFirstBox + timeForNextBox)
         {
-            mysteryBox.kill();
+            boxTotal   = 0;
+            game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
         }
     }
 }
 
-function collectMysteryBox (player, box)
+function collectMysteryBox ()
 {
-    console.log('box collected');
-    box.kill();
+    boxTotal   = 0;
+
+    var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
+    powerUp         = powerUps[randomNbr];
+
+    activatePowerUp();
+
+    mysteryBox.destroy();
 }
+
+function removeMysteryBox ()
+{
+    timeBoxRemoved  = boxTotal;
+    mysteryBox.destroy();
+}
+
+function updateBoxCounter ()
+{
+    boxTotal++;
+}
+
+function activatePowerUp ()
+{
+    switch (powerUp)
+    {
+        case 'immortal':
+            immortalPowerUp();
+        break;
+
+        case 'rocket':
+            rocketPowerUp();
+        break;
+
+        case 'banana':
+            bananaPowerUp();
+        break;
+    }
+}
+
+function immortalPowerUp ()
+{
+    console.log('immortal');
+    immortalState   = true;
+}
+
+function setImmortalTime ()
+{
+    
+}
+
+function resetImmortalPowerUp ()
+{
+    immortalState   = false;
+}
+
+function rocketPowerUp ()
+{
+    console.log('rocket');
+}
+
+function bananaPowerUp ()
+{
+    console.log('banana');
+}
+
+
 
 function HandleOrientation (e) 
 {

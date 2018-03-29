@@ -16,7 +16,9 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        game.time.events.add(Phaser.Timer.SECOND * 1, addMysteryBox, this);
+        game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
+        game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
+        game.time.events.loop(Phaser.Timer.SECOND, setImmortalTime, this);
 
         fixFallthrough();
 
@@ -26,34 +28,36 @@ var Level_1   = {
 
        
         
-    }, 
+    },
 
     update: function ()
     {
         cursorControls(player, false);
         
 
-        game.physics.arcade.overlap(player, mysteryBox);
-        // Niewe spawnen door lengte van groep te meten.
+        console.log(health);
 
-        if ('length' == "0")
+        if (firstBoxSpawned)
         {
-            "do shizzle";
+            generateBoxes();
         }
 
-        for (var i = 0, ilen = enemies.length; i < ilen; i++)
+        if (!immortalState)
         {
-            game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+            }
         }
+        else 
+        {
+            for (var i = 0, ilen = enemies.length; i < ilen; i++)
+            {
+                game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
+            }
 
-        
-        
-
-    },
-
-    test: function () 
-    {
-        console.log('eindelijk');
+            game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
+        }
     },
 
     addMap: function (currentLevel)
@@ -91,11 +95,7 @@ var Level_1   = {
 
         map.objects.coins.forEach(function (obj) {
             coinsArray.push(obj);
-            coin = coins.create(obj.x, obj.y, 'coin');
-            coin.animations.add('spin', [0, 1, 2, 3], 10, true);
-
-            boxXPositions.push(obj.x);
-            boxYPositions.push(obj.y);
+            coins.create(obj.x, obj.y, 'coin');
         }, this);
 
         map.objects.start_position.forEach(function (obj) {
