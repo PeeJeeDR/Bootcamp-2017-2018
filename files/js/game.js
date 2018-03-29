@@ -98,11 +98,11 @@ var rocketExploded      = false;
 // BANANA
 var bananaPowerActive = false;
 var bananas;
-var graphicsGroup;
 var banana;
 var bananaPlaced  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
+var graphics;
 
 // LEVEL
 var levelNumber;
@@ -519,11 +519,10 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-    for (var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    for (var i = 0, ilen = boxXPositions.length; i < ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
     }
-
     game.input.onTap.add(onTap, this);
 }
 
@@ -532,7 +531,6 @@ function square(x, y)
     var graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
-    // draw a square
     graphics.lineTo(0, 32);
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);

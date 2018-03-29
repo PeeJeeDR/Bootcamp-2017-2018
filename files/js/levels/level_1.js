@@ -48,6 +48,12 @@ var Level_1   = {
         if (rocketEnableToFLy)  {calculateAirTime();}
         onWin(currentLevel); 
         displayScore();
+
+        if (bananaPlaced)
+        {
+            graphicsGroup.kill();
+            bananaPlaced    = false;
+        }
     },
 
     addMap: function (currentLevel)
