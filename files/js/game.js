@@ -38,6 +38,7 @@ var pointArray  = [];
 
 // PLAYER
 var player;
+var playerFaceDirection;
 
 // STARS
 var stars;
@@ -190,22 +191,21 @@ function collectCoin (enemy, coin)
 {     
     coin.animations.stop('spin');
     coin.animations.play('collected');
-    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+    // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+    killCoin();
 
     if(playMusic){
 
     coinHit = game.add.audio('hit');
     coinHit.volume = 0.012;
     coinHit.play();
-
     }
-    coin.kill();
-        coinsCollected += 1;
-        scoreText.text  = coinsCollected
 
     function killCoin () 
     {
-        
+        coin.kill();
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
     }
 }
 
@@ -249,8 +249,18 @@ function killPlayer ()
 
 function killEnemy (player, enemy)
 {
-    console.log('test');
+    pacman_dead = game.add.sprite(enemy.x, enemy.y, 'pacman_dead');
+    pacman_dead.frame = 0;
+    pacman_dead.anchor.setTo(0.5);
+    pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
+    pacman_dead.animations.play('onDead');
+    game.time.events.add(Phaser.Timer.SECOND * 1, pacmanDead, this);
     enemy.kill();
+}
+
+function pacmanDead () 
+{
+	pacman_dead.destroy();
 }
 
 function resetGame () 

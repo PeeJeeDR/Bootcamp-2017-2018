@@ -10,7 +10,6 @@ var LoadState   = {
         cursors = game.input.keyboard.createCursorKeys();
         game.load.image('mysterybox', 'assets/sprites/mysteryBox.png');
         game.load.spritesheet('enemy', 'assets/sprites/pacman.png', 32, 32);
-        // game.load.image('coin', 'assets/sprites/coin.png');
         game.load.image('menu', 'assets/sprites/menu.png');
 
         game.load.image('heart','assets/sprites/heart.png');
@@ -28,7 +27,7 @@ var LoadState   = {
         game.load.image('menu_btn', 'assets/sprites/menu_btn.png');
         game.load.image('restart_btn', 'assets/sprites/restart_btn.png');
         game.load.spritesheet('coin', 'assets/sprites/coin-sprite.png', 32, 32);
-        game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
+        game.load.spritesheet('car', 'assets/sprites/mario-sprite-immortal.png', 32, 32);
         game.load.spritesheet('game_over', 'assets/sprites/game_over.png', 250, 75);
         game.load.spritesheet('stars', 'assets/sprites/stars.png', 32, 32);
         game.load.image('number0', 'assets/sprites/number0.png');
@@ -49,6 +48,9 @@ var LoadState   = {
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
+        game.load.spritesheet('names','assets/sprites/names.png',600,200);
+        game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
+        game.load.spritesheet('pacman_dead','assets/sprites/pacman_dead.png',32,32);
     },
 
     create: function ()

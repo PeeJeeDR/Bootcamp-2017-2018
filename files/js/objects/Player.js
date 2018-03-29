@@ -6,10 +6,15 @@ var Player  = function (x, y)
     _player.scale.setTo(0.99);
     _player.frame   = 4;
 
+    _player.animations.add('immortal-up-fast', [1, 7], 10, true);
+    _player.animations.add('immortal-down-fast', [4, 10], 10, true);
+    _player.animations.add('immortal-left-fast', [3, 9], 10, true);
+    _player.animations.add('immortal-right-fast', [5, 11], 10, true);
+
     stars = _player.addChild(game.make.sprite(0, 0, 'stars'));
     stars.frame = 0;
     stars.anchor.setTo(0.5,1);
-    stars.animations.add('onHit', [0, 1, 2, 3,0], 12, false);
+    stars.animations.add('onHit', [0, 1, 2, 3, 0], 12, false);
     
     _player.update  = function ()
     {
@@ -22,22 +27,25 @@ var Player  = function (x, y)
             }
         }
 
-        if (_player.body.velocity.x < 0) 
-        {
-            _player.frame   = 3;
-        } 
-        else if (_player.body.velocity.x > 0)
-        {
-            _player.frame   = 5;
-        } 
+        if (_player.body.velocity.x < 0) {playerFaceDirection = "LEFT";}
+        if (_player.body.velocity.x > 0) {playerFaceDirection = "RIGHT";}
+        if (_player.body.velocity.y < 0) {playerFaceDirection = "UP";}
+        if (_player.body.velocity.y > 0) {playerFaceDirection = "DOWN";}
 
-        if (_player.body.velocity.y < 0)
+        if (!immortalState)
         {
-            _player.frame   = 1;
+            _player.animations.stop();
+            if (playerFaceDirection === "LEFT")     {player.frame = 3;}
+            if (playerFaceDirection === "RIGHT")    {player.frame = 5;}
+            if (playerFaceDirection === "UP")       {player.frame = 1;}
+            if (playerFaceDirection === "DOWN")     {player.frame = 4;}
         }
-        else if (_player.body.velocity.y > 0)
+        else 
         {
-            _player.frame   = 4;
+            if (playerFaceDirection === "LEFT")     {_player.animations.play('immortal-left-fast');}            
+            if (playerFaceDirection === "RIGHT")    {_player.animations.play('immortal-right-fast');}            
+            if (playerFaceDirection === "UP")       {_player.animations.play('immortal-up-fast');}            
+            if (playerFaceDirection === "DOWN")     {_player.animations.play('immortal-down-fast');}            
         }
         
         checkCoins();
@@ -49,7 +57,6 @@ var Player  = function (x, y)
         {
             enemyHitCounter++;
         }
-        
     }
 
     return _player;
