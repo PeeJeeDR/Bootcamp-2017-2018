@@ -76,8 +76,8 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    "immortal",
+    "rocket",
+    // "immortal",
     // "banana"
 ]
 var powerUp;
@@ -85,18 +85,23 @@ var powerUp;
 // IMMORTAL
 var immortalState   = false;
 
+// ROCKET
+var rocket;
+var rocketEnableToFLy   = false;
+
+// LEVEL
+var levelNumber;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 15,
     timeToGetHit: 100,
+    timeImmortal: 6 // in seconds
 }
 
 var enemySettings = {
     moveSpeed: 200,
 }
-
-
-var levelNumber;
 
 
 
@@ -149,7 +154,7 @@ function enemyOnPoint (enemy, point)
     }
 }
 
-function cursorControls (sprite, autoMovement)
+function cursorControls (sprite, autoMovement, velocity)
 {
     if (!autoMovement)
     {
@@ -159,20 +164,20 @@ function cursorControls (sprite, autoMovement)
 
     if (cursors.down.isDown)
     {
-        sprite.body.velocity.y   = 200;
+        sprite.body.velocity.y   = velocity;
     }
     else if (cursors.up.isDown)
     {
-        sprite.body.velocity.y   = -200;
+        sprite.body.velocity.y   = -velocity;
     }
 
     if (cursors.left.isDown)
     {
-        sprite.body.velocity.x   = -200;
+        sprite.body.velocity.x   = -velocity;
     } 
     else if (cursors.right.isDown)
     {
-        sprite.body.velocity.x   = 200;
+        sprite.body.velocity.x   = velocity;
     }
 }
 
@@ -417,7 +422,8 @@ function resetImmortalPowerUp ()
 
 function rocketPowerUp ()
 {
-    console.log('rocket');
+    rocket  = new Rocket(player.x, player.y);
+    rocketEnableToFLy   = true;
 }
 
 function bananaPowerUp ()
@@ -429,8 +435,16 @@ function bananaPowerUp ()
 
 function HandleOrientation (e) 
 {
-    player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
-    player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    if (rocketEnableToFLy)
+    {
+        rocket.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        rocket.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    }
+    else 
+    {
+        player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        player.body.velocity.x = e.beta * playerSettings.moveSpeed;
+    }
 }
 
 function onWin (currentLevel)

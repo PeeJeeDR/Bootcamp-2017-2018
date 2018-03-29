@@ -41,6 +41,7 @@ var LoadState   = {
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
+        game.load.spritesheet('rocket', 'assets/sprites/projectile.png', 32, 32);
     },
 
     create: function ()

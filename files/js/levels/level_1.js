@@ -1,8 +1,16 @@
 var Level_1   = {
     create: function ()
     {
-        coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
+
+        currentLevel    = 1;
+        coinsCollected  = 0;
+        this.addMap(currentLevel);
+        this.groups();
+        this.mapObjects();
+        this.addEnemies();
+        displayScore();
+        displayHearts();
 
         if (playMusic)
         {
@@ -10,14 +18,6 @@ var Level_1   = {
             theme.volume = 0.07;
             theme.play();
         }
-        
-        currentLevel    = 1;
-        this.addMap(currentLevel);
-        this.groups();
-        this.mapObjects();
-        this.addEnemies();
-        displayScore();
-        displayHearts();
 
         game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
@@ -29,7 +29,8 @@ var Level_1   = {
 
     update: function ()
     {
-        if (!onMobile)          {cursorControls(player, false);}
+        this.controls();
+
         if (firstBoxSpawned)    {generateBoxes();}
 
         if (!immortalState)
@@ -45,7 +46,7 @@ var Level_1   = {
             {
                 game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
             }
-            game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
+            game.time.events.add(Phaser.Timer.SECOND * playerSettings.timeImmortal, resetImmortalPowerUp, this);
         }
 
         onWin(currentLevel); 
@@ -70,11 +71,6 @@ var Level_1   = {
 
         mysteryBoxes    = game.add.group();
         mysteryBoxes.enableBody     = true;
-
-        coins.forEachAlive(function (singleCoin) {
-            singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
-            // singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
-        }, this);
     },
 
     mapObjects: function ()
@@ -112,6 +108,22 @@ var Level_1   = {
         {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
+        }
+    },
+
+    controls: function ()
+    {
+        if (!onMobile) 
+        {
+            if (rocketEnableToFLy)
+            {
+                cursorControls(rocket, false, 200);
+                cursorControls(player, false, 0);
+            }
+            else 
+            {
+                cursorControls(player, false, 200);
+            }
         }
     },
 }

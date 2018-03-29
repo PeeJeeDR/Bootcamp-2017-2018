@@ -4,7 +4,7 @@ var Player  = function (x, y)
 
     game.physics.arcade.enable(_player);
     _player.anchor.setTo(0.5);
-    _player.scale.setTo(0.90);
+    _player.scale.setTo(0.80);
     _player.frame   = 4;
 
     _player.animations.add('immortal-up-fast', [1, 7], 10, true);
