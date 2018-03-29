@@ -550,9 +550,9 @@ function square(x, y)
     }*/
 }
 
-function onTap(pointer , graphics)
+function onTap(pointer, graphics)
 {
-    if(bananaOnScreen)
+    if (bananaOnScreen)
     {
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
@@ -563,14 +563,12 @@ function onTap(pointer , graphics)
                      bananaOnScreen = false;
              }
          }
-         //graphicsGroup.lineStyle(1, 0xffffff, 1);
     }
-    else if(!bananaOnScreen){
-        
-        for(var i=0, ilen= graphicsGroup.length; i<ilen ; i++)
+    else if (!bananaOnScreen)
+    {
+        for(var i = 0, ilen = graphicsGroup.length; i < ilen; i++)
         {
-            graphicsGroup.remove(graphicsGroup[i]);
-
+            graphicsGroup[i].destroy();
         }
        
     }
