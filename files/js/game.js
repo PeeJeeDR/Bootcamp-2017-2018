@@ -65,12 +65,15 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    "rocket",
+    // "rocket",
     "immortal",
-    "banana"
+    // "banana"
 ]
-
 var powerUp;
+
+// IMMORTAL
+var immortalState   = false;
+var immortalTimer   = 0;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -204,6 +207,12 @@ function killPlayer ()
     }
 }
 
+function killEnemy (player, enemy)
+{
+    console.log('test');
+    enemy.kill();
+}
+
 function resetGame () 
 {
     game.state.start('reset');
@@ -256,16 +265,19 @@ function displayHearts ()
 
 function killHeart(player, enemy)
 {
-    game.camera.shake(0.008, 300);
-    health--;
-
-    stars.animations.play('onHit');
-
-    heartArray[health].destroy();
-    
-    if (health  === 0)
+    if (!immortalState)
     {
-        killPlayer();
+        game.camera.shake(0.008, 300);
+        health--;
+
+        stars.animations.play('onHit');
+
+        heartArray[health].destroy();
+        
+        if (health  === 0)
+        {
+            killPlayer();
+        }
     }
 }
 
@@ -297,7 +309,7 @@ function addMysteryBox ()
 
 function generateBoxes ()
 {
-    console.log(boxTotal);
+    //console.log(boxTotal);
     if (boxTotal >= timeFirstBox + spawnTimeFirstBox)
     {
         spawnTimeFirstBox   = 0;
@@ -353,17 +365,28 @@ function activatePowerUp ()
 
 function immortalPowerUp ()
 {
+    console.log('immortal');
+    immortalState   = true;
+}
 
+function setImmortalTime ()
+{
+    
+}
+
+function resetImmortalPowerUp ()
+{
+    immortalState   = false;
 }
 
 function rocketPowerUp ()
 {
-
+    console.log('rocket');
 }
 
 function bananaPowerUp ()
 {
-
+    console.log('banana');
 }
 
 
