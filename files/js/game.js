@@ -29,6 +29,7 @@ var enableToHit = false;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
+var coinsArrayLength;
 
 // POINTS
 var point;
@@ -59,7 +60,10 @@ var pressStart;
 var theme;
 var gameMusicOver;
 var playMusic = true;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 // MYSTERY BOXES
 var boxXPositions   = [];
@@ -85,6 +89,9 @@ var banaan;
 // IMMORTAL
 var immortalState   = false;
 
+// IMMORTAL
+var immortalState   = false;
+
 /* ===== SETTINGS ===== */
 var playerSettings = {
     moveSpeed: 15,
@@ -94,6 +101,10 @@ var playerSettings = {
 var enemySettings = {
     moveSpeed: 200,
 }
+
+
+var levelNumber;
+
 
 
 /* ===== FUNCTIONS ===== */
@@ -294,7 +305,6 @@ function killHeart(player, enemy)
 
     game.camera.shake(0.025, 300);
     game.camera.flash(0xff0000, 100);
-    health--;
 
     stars.animations.play('onHit');
     window.navigator.vibrate([1000,2000,1000]);
@@ -466,6 +476,16 @@ function HandleOrientation (e)
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
 }
+
+function onWin (currentLevel)
+{
+	if(coinsCollected == coinsArrayLength)
+    {	
+    	levelNumber = currentLevel;
+        game.state.start('win');
+    }
+}
+
 /* ===== STATES ===== */
 
 // CORE STATES
@@ -476,6 +496,7 @@ game.state.add('reset', ResetState);
 game.state.add('instructions', InstructionState);
 game.state.add('credits', CreditState);
 game.state.add('loading-animation', LoadingAnimationState);
+game.state.add('win', WinState);
 
 // LEVELS
 game.state.add('level_1', Level_1);

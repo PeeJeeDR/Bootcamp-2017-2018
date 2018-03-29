@@ -1,6 +1,8 @@
 var Level_3   = {
     create: function ()
     {
+        coinsCollected = 0;
+        
         currentLevel    = 3;
         gameOver        = false;
         this.addMap();
@@ -50,6 +52,8 @@ var Level_3   = {
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
+
+        onWin(currentLevel);
     },
 
     addMap: function ()

@@ -1,6 +1,7 @@
 var Level_1   = {
     create: function ()
     {
+        coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
         if(playMusic){
@@ -20,14 +21,16 @@ var Level_1   = {
         game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
 
         fixFallthrough();
-
-       
-        
-    },
+    
+        coinsArrayLength = coinsArray.length;
+    }, 
 
     update: function ()
     {
-        cursorControls(player, false);
+        if (!onMobile)
+        {
+            cursorControls(player, false);
+        }
 
         console.log(immortalState);
 
@@ -49,9 +52,9 @@ var Level_1   = {
             {
                 game.physics.arcade.overlap(player, enemies[i], killEnemy, null, this);
             }
-
             game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
         }
+        onWin(currentLevel); 
     },
 
     addMap: function (currentLevel)
