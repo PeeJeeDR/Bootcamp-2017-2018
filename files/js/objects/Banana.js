@@ -15,13 +15,13 @@ var Banana  = function (x,y)
                 counter++;
             }
         }
-
-        if (bananaPlaced)
+        
+        if(bananaOnScreen)
         {
             graphicsGroup.kill();
-            bananaPlaced    = false;
-        }
+          
 
+        }
     }
 
     

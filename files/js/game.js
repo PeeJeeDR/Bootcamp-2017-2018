@@ -543,17 +543,26 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+    console.log(graphicsGroup);
 
 }
 
 function onTap(pointer, graphics)
 {
-    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+
+
+    if(!bananaOnScreen)
     {
-        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+
+        for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
-                banana  = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-        }
+             if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+            {
+                     banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+                     bananaOnScreen = true;
+             }
+         }
+         //graphicsGroup.lineStyle(1, 0xffffff, 1);
     }
 }
 
