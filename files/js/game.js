@@ -49,8 +49,17 @@ var boxXPositions   = [];
 var boxYPositions   = [];
 var mysteryBox;
 var mysteryBoxes;
-var mysteryBoxOnScreen  = false;
-var timeNotTaken        = 0;
+
+
+
+var timer;
+var total   = 0;
+
+var powerUps    = [
+    "rocket",
+    "immortal",
+    "banana"
+]
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -60,6 +69,11 @@ var playerSettings = {
 
 var enemySettings = {
     moveSpeed: 200,
+}
+
+var mysteryBoxSettings      = {
+    timeFirstBox: 7,
+    timeBetweenBoxes: 10
 }
 
 
@@ -266,7 +280,6 @@ function checkCoins ()
 
 function addMysteryBox ()
 {
-
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
@@ -274,25 +287,14 @@ function addMysteryBox ()
     var randomY         = boxYPositions[randomNbr];
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
-
-    game.time.events.loop(Phaser.Timer.SECOND * 1, checkTime, this);
-
-    function checkTime ()
-    {
-        timeNotTaken++;
-
-        if (timeNotTaken > 10)
-        {
-            mysteryBox.kill();
-        }
-    }
 }
 
-function collectMysteryBox (player, box)
+function removeMysteryBox ()
 {
-    console.log('box collected');
-    box.kill();
+    mysteryBox.destroy();
 }
+
+
 
 function HandleOrientation (e) 
 {

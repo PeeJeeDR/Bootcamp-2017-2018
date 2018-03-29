@@ -11,33 +11,22 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        game.time.events.add(Phaser.Timer.SECOND * 1, addMysteryBox, this);
+        game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
+        game.time.events.loop(Phaser.Timer.SECOND, this.updateBoxCounter, this);
 
         fixFallthrough();
         
-    }, 
+    },
 
     update: function ()
     {
         cursorControls(player, false);
-
-        game.physics.arcade.overlap(player, mysteryBox);
-        // Niewe spawnen door lengte van groep te meten.
-
-        if ('length' == "0")
-        {
-            "do shizzle";
-        }
+        this.generateBoxes();
 
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
-    },
-
-    test: function () 
-    {
-        console.log('eindelijk');
     },
 
     addMap: function (currentLevel)
@@ -79,9 +68,6 @@ var Level_1   = {
         map.objects.coins.forEach(function (obj) {
             coinsArray.push(obj);
             coins.create(obj.x, obj.y, 'coin');
-
-            boxXPositions.push(obj.x);
-            boxYPositions.push(obj.y);
         }, this);
 
         map.objects.start_position.forEach(function (obj) {
@@ -106,4 +92,24 @@ var Level_1   = {
             enemies.push(enemy);
         }
     },
+
+    updateBoxCounter: function ()
+    {
+        total++;
+    },
+
+    generateBoxes: function ()
+    {
+        console.log(total);
+        if (total >= 7)
+        {
+            removeMysteryBox();
+
+            if (total >= 10)
+            {
+                total   = 0;
+                game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
+            }
+        }
+    }
 }
