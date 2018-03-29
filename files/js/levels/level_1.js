@@ -1,6 +1,7 @@
 var Level_1   = {
     create: function ()
     {
+        coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
         currentLevel    = 1;
@@ -34,7 +35,7 @@ var Level_1   = {
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
         }
 
-        onWin(currentLevel);
+        onWin(currentLevel); //toevoegen aan ieder level
     },
 
     test: function () 

@@ -1,13 +1,21 @@
 var WinState   = {
-	preload: function ()
-	{
-
-	},
-
     create: function ()
     {
-    	menuButton   = game.add.button(game.world.centerX + 150, game.world.centerY, 'menu_btn', backToMenu, this);
-        menuButton.anchor.setTo(0.5);
-        console.log(levelNumber);
+    	var numberImage = 'number' + levelNumber + '';
+    	completed = game.add.sprite(game.world.centerX, game.world.centerY - 100, 'completed');
+	    completed.anchor.setTo(0.5);
+
+	    number = game.add.sprite(completed.x + 75, completed.y + 25, numberImage);
+    	number.anchor.setTo(0.5);
+
+    	nextlvlBtn   = game.add.button(game.world.centerX, game.world.centerY + 100, 'nextlvl', this.nextLevel, this);
+        nextlvlBtn.anchor.setTo(0.5);
+    },
+
+    nextLevel: function ()
+    {
+    	newLevelNumber = levelNumber + 1;
+    	nextLevelName = "level_" + newLevelNumber + '';
+    	game.state.start(nextLevelName);
     },
 }
