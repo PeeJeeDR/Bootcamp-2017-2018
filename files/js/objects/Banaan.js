@@ -1,7 +1,7 @@
-var Banaan  = function ()
+var Banaan  = function (x,y)
 {
-    var rndTrap     = Math.floor(Math.random()*trapArr.length);
-    var _banaan     =  game.add.image(trapArr[rndTrap].x , trapArr[rndTrap].y, 'banana');
+    //var rndTrap     = Math.floor(Math.random()*trapArr.length);
+    var _banaan     =  game.add.image(x , y, 'banana');
     game.physics.arcade.enable(_banaan);
     
     
