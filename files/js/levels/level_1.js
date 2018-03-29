@@ -11,17 +11,14 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-<<<<<<< HEAD
         theme = game.add.audio('theme');
         theme.volume = 0.05;
         theme.play();
-=======
         game.time.events.add(Phaser.Timer.SECOND * 1, addMysteryBox, this);
 
         fixFallthrough();
         
     }, 
->>>>>>> master
 
     update: function ()
     {
@@ -98,17 +95,11 @@ var Level_1   = {
             boxYPositions.push(obj.y);
         }, this);
 
-<<<<<<< HEAD
-        fixFallthrough();
-        window.addEventListener("deviceorientation", handleOrientation, true);
-    }, 
-=======
         map.objects.mystery_boxes.forEach(function (obj) {
             boxXPositions.push(obj.x);
             boxYPositions.push(obj.y);
         })
     },
->>>>>>> master
 
     addEnemies: function ()
     {

@@ -42,21 +42,19 @@ var pacman;
 var mariokart;
 var menuBackground;
 
-<<<<<<< HEAD
 //sounds
 var coinHit;
 var enemyHit;
 var pressStart;
 var theme;
 var gameMusicOver;
-=======
+
 var boxXPositions   = [];
 var boxYPositions   = [];
 var mysteryBox;
 var mysteryBoxes;
 var mysteryBoxOnScreen  = false;
 var timeNotTaken        = 0;
->>>>>>> master
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -71,35 +69,6 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-<<<<<<< HEAD
-function moveEnemy (enemy)
-{
-    if (enemy.body.blocked.up || enemy.body.blocked.down)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-        }
-    }
-
-    else if (enemy.body.blocked.left || enemy.body.blocked.right)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.y  = 200;
-        } 
-        else 
-        {
-            enemy.body.velocity.y  = -200;
-        }
-    }
-}
-=======
->>>>>>> master
 
 function enemyOnPoint (enemy, point)
 {
@@ -182,13 +151,13 @@ function collectCoin (enemy, coin)
     game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
 
     coin.kill();
-<<<<<<< HEAD
     coinsCollected += 1;
     scoreText.text  = coinsCollected
+    
     coinHit = game.add.audio('hit');
     coinHit.volume = 0.012;
     coinHit.play();
-=======
+
         coinsCollected += 1;
         scoreText.text  = coinsCollected
 
@@ -196,7 +165,6 @@ function collectCoin (enemy, coin)
     {
         
     }
->>>>>>> master
 }
 
 function killPlayer ()
@@ -314,14 +282,6 @@ function checkCoins ()
     }
 }
 
-<<<<<<< HEAD
-function openNextLevel()
-{
-    
-}
-
-function handleOrientation (e)
-=======
 function addMysteryBox ()
 {
 
@@ -353,7 +313,6 @@ function collectMysteryBox (player, box)
 }
 
 function HandleOrientation (e) 
->>>>>>> master
 {
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;

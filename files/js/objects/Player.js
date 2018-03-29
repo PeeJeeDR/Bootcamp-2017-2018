@@ -7,19 +7,6 @@ var Player  = function (x, y)
     _player.scale.setTo(0.90);
     _player.frame   = 4;
 
-<<<<<<< HEAD
-   
-    // Enable da terug als de shit morgen nie meer werkt :p
-    // window.addEventListener("deviceorientation", handleOrientation, true);
-    fixFallthrough();
-    
-    _player.update  = function ()
-    {
-        if(enemyHitCounter > playerSettings.timeToGetHit || !enableToHit){
-            
-            if(game.physics.arcade.overlap(player, enemies, killHeart, null, this)){
-                
-=======
     stars = _player.addChild(game.make.sprite(0, 0, 'stars'));
     stars.frame = 0;
     stars.anchor.setTo(0.5,1);
@@ -31,7 +18,6 @@ var Player  = function (x, y)
         {
             if(game.physics.arcade.overlap(player, enemies, killHeart, null, this))
             {
->>>>>>> master
                 enableToHit = true;
                 enemyHitCounter = 0;
             }
