@@ -9,6 +9,7 @@ var Level_1   = {
         this.groups();
         this.mapObjects();
         this.addEnemies();
+        this.addPauseBtn();
         displayScore();
         displayHearts();
 
@@ -151,4 +152,30 @@ var Level_1   = {
             game.time.events.add(Phaser.Timer.SECOND * playerSettings.timeImmortal, resetImmortalPowerUp, this);
         }
     },
+
+    addPauseBtn: function ()
+    {
+        pauseBtn    = game.add.sprite(game.world.width - 64, game.world.height - 64, 'pauseAndPlay');
+        pauseBtn.anchor.setTo(0.5);
+        pauseBtn.scale.setTo(1.3);
+
+        pauseBtn.inputEnabled   = true;
+        pauseBtn.events.onInputDown.add(this.pauseGame, this);
+    },
+
+    pauseGame: function ()
+    {
+
+        if (game.paused)
+        {
+            game.paused     = false;
+            pauseBtn.frame  = 0;
+        }
+        else 
+        {
+            game.paused     = true;
+            pauseBtn.frame  = 1;
+            pauseBtn.scale.setTo(-1.3);
+        }
+    }
 }

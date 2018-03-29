@@ -5,6 +5,8 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // MOBILE
 var onMobile    = false;
 
+var pauseBtn;
+
 // TEXT & MENU
 var scoreText;
 var lvlText;
@@ -120,7 +122,6 @@ var enemySettings = {
 
 
 /* ===== FUNCTIONS ===== */
-
 function enemyOnPoint (enemy, point)
 {
     margeXTop       = point.x + 1;
