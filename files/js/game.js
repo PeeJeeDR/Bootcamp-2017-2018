@@ -107,7 +107,9 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
-
+var scoreString = "0";
+var firstScoreNbr = "0";
+var secondScoreNbr = "0";
 
 /* ===== FUNCTIONS ===== */
 
@@ -203,7 +205,8 @@ function collectCoin (enemy, coin)
     {
         coin.kill();
         coinsCollected += 1;
-        scoreText.text  = coinsCollected
+        //scoreText.text  = coinsCollected
+        scoreString = coinsCollected.toString();
     }
 }
 
@@ -272,18 +275,32 @@ function backToMenu ()
 }
 
 function displayScore ()
-{
-    scoreText    = game.add.text( 
-        592, 
-        115, 
-        coinsCollected, 
-        { 
-            font: "32px Arial", 
-            fill: "#fff" 
-        } 
-    );
+{	
+    if(scoreString.length > 1)
+    {
+    	firstScoreNbr = scoreString.slice(0,1);
+    	secondScoreNbr = scoreString.slice(1,2);
+    }
+    else
+    {
+    	firstScoreNbr = '0'
+    	secondScoreNbr = scoreString;
+    }
 
-    scoreText.anchor.setTo( 0.5 );
+    if(scoreString != '0')
+    {
+    	destroyPreviousScore();
+    	scoreImage1 = game.add.sprite(576, 110, 'number' + firstScoreNbr + '');
+        scoreImage2 = game.add.sprite(608, 110, 'number' + secondScoreNbr + '');
+        scoreImage1.anchor.setTo(0.5);
+        scoreImage2.anchor.setTo(0.5);
+    }
+}
+
+function destroyPreviousScore () 
+{
+	scoreImage1.destroy();
+    scoreImage2.destroy();
 }
 
 function displayLevel ()
