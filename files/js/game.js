@@ -245,10 +245,13 @@ function killEnemy (player, enemy)
     pacman_dead.anchor.setTo(0.5);
     pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
     pacman_dead.animations.play('onDead');
+    game.time.events.add(Phaser.Timer.SECOND * 1, pacmanDead, this);
     enemy.kill();
 }
 
+function pacmanDead () 
 {
+	pacman_dead.destroy();
 }
 
 function resetGame () 
