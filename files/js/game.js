@@ -308,6 +308,7 @@ game.state.add('menu', MenuState);
 game.state.add('reset', ResetState);
 game.state.add('instructions', InstructionState);
 game.state.add('credits', CreditState);
+game.state.add('loading-animation', LoadingAnimationState);
 
 // LEVELS
 game.state.add('level_1', Level_1);
