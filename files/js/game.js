@@ -5,6 +5,8 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // MOBILE
 var onMobile    = false;
 
+var pauseBtn;
+
 // TEXT & MENU
 var scoreText;
 var lvlText;
@@ -77,9 +79,9 @@ var boxTotal   = 0;
 
 // POWERUPS
 var powerUps    = [
-    "rocket",
-    "immortal",
-    // "banana"
+    // "rocket",
+    // "immortal",
+    "banana"
 ]
 var powerUp;
 
@@ -92,6 +94,16 @@ var rocketEnableToFLy   = false;
 var rocketTimeInAir     = 0;
 var rocketKilledEnemy   = false;
 var rocketExploded      = false;
+
+// BANANA
+var bananaPowerActive = false;
+var bananas;
+var graphicsGroup;
+var banana;
+var bananaOnScreen  = false;
+var bananaXPos  = [];
+var bananaYPos  = [];
+var graphics;
 
 // LEVEL
 var levelNumber;
@@ -112,7 +124,6 @@ var firstScoreNbr = "0";
 var secondScoreNbr = "0";
 
 /* ===== FUNCTIONS ===== */
-
 function enemyOnPoint (enemy, point)
 {
     margeXTop       = point.x + 1;
@@ -509,7 +520,46 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-    console.log('banana');
+
+    bananaOnScreen  = true;
+
+    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    {
+        square(bananaXPos[i], bananaYPos[i]);
+    }
+
+    game.input.onTap.add(onTap, this);
+}
+
+function square(x, y)
+{
+    graphics = game.make.graphics(x, y);
+    graphics.lineStyle(1, 0x408046, 1);
+    
+    // draw a square
+    graphics.lineTo(0, 32);
+    graphics.lineTo(32, 32);
+    graphics.lineTo(32, 0);
+    graphics.lineTo(0, 0)
+    
+    graphicsGroup.add(graphics);
+}
+
+function onTap(pointer)
+{
+    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+    {
+        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+        {
+            banana   = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+        }
+    }
+}
+
+function enemyOnBanana (enemie, banana)
+{
+    enemie.destroy();
+    banana.destroy();
 }
 
 function HandleOrientation (e) 

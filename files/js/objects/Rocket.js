@@ -25,5 +25,10 @@ var Rocket  = function (x, y)
         if (_rocket.body.velocity.y < 0) {_rocket.animations.play('up');}
     }
 
+    _rocket.getPos  = function ()
+    {
+        
+    }
+
     return _rocket;
 }
