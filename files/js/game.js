@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = false;
+var onMobile    = true;
 
 // TEXT & MENU
 var scoreText;
