@@ -5,6 +5,7 @@ var Rocket  = function (x, y)
     _rocket.anchor.setTo(0.5);
     _rocket.scale.setTo(0.99);
     
+    
 
   
     // window.addEventListener("deviceorientation", handleOrientation, true);

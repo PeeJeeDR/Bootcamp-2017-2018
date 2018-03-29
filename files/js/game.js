@@ -1,4 +1,5 @@
 var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
+// 800, 576
 
 /* ===== GLOBALS ===== */
 var onMobile    = true;
@@ -9,7 +10,6 @@ var lvlText;
 var graphicOverlay;
 var restartButton;
 var menuButton;
-var gameOver        = false;
 
 var currentLevel;
 
@@ -19,7 +19,6 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 
-var coin;
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
@@ -30,19 +29,49 @@ var pointArray  = [];
 
 var player;
 
+var stars;
+
 var groundLayer;
 var borderLayer;
 
+<<<<<<< HEAD
 var hearts;
+=======
+>>>>>>> master
 var heart;
-var heartArray= [];
+var heartArray  = [];
 var health = 3;
 
 var enemyHitCounter = 0;
 var enableToHit = false;
+<<<<<<< HEAD
+=======
+
+var pacman;
+var mariokart;
+var menuBackground;
+
+var boxXPositions   = [];
+var boxYPositions   = [];
+var mysteryBox;
+var mysteryBoxes;
+
+
+
+var timer;
+var total   = 0;
+
+var powerUps    = [
+    "rocket",
+    "immortal",
+    "banana"
+]
+
+>>>>>>> master
 /* ===== SETTINGS ===== */
 var playerSettings = {
-    moveSpeed: 20,
+    moveSpeed: 15,
+    timeToGetHit: 100,
 }
 
 var rocketSettings = {
@@ -53,6 +82,7 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
+<<<<<<< HEAD
 var pacman;
 var mariokart;
 var menuBackground;
@@ -73,6 +103,7 @@ var rndMysteryBox;
 
 var banaan;
 
+<<<<<<< HEAD
 var banaanObj;
 var nbrOfBanana =0;
 var banaanArr   =[];
@@ -85,34 +116,18 @@ var explosion;
 
 var rndX;
 var rndY;
+=======
+=======
+var mysteryBoxSettings      = {
+    timeFirstBox: 7,
+    timeBetweenBoxes: 10
+}
+>>>>>>> master
+>>>>>>> 2d1d07a1fdec85237b82958899d8276fe6b7e4b6
+
+
 
 /* ===== FUNCTIONS ===== */
-function moveEnemy (enemy)
-{
-    if (enemy.body.blocked.up || enemy.body.blocked.down)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.x  = -200;
-        } 
-        else 
-        {
-            enemy.body.velocity.x  = 200;
-        }
-    }
-
-    else if (enemy.body.blocked.left || enemy.body.blocked.right)
-    {
-        if (Math.random() >= 0.5)
-        {
-            enemy.body.velocity.y  = 200;
-        } 
-        else 
-        {
-            enemy.body.velocity.y  = -200;
-        }
-    }
-}
 
 function enemyOnPoint (enemy, point)
 {
@@ -128,18 +143,34 @@ function enemyOnPoint (enemy, point)
         {
             case 1:
                 enemy.body.velocity.x   = 200;
+                enemy.animations.play('right');
+                enemy.animations.stop('left');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 2:
                 enemy.body.velocity.x   = -200;
+                enemy.animations.play('left');
+                enemy.animations.stop('right');
+                enemy.animations.stop('up');
+                enemy.animations.stop('down');
             break;
 
             case 3:
                 enemy.body.velocity.y   = 200;
+                enemy.animations.play('down');
+                enemy.animations.stop('up');
+                enemy.animations.stop('left');
+                enemy.animations.stop('right');
             break;
 
             case 4:
                 enemy.body.velocity.y   = -200;
+                enemy.animations.play('up');
+                enemy.animations.stop('down');
+                enemy.animations.stop('lerft');
+                enemy.animations.stop('right');
             break;
         }
     }
@@ -173,30 +204,40 @@ function cursorControls (sprite, autoMovement)
 }
 
 function collectCoin (enemy, coin)
+<<<<<<< HEAD
 {   
     
     coin.kill();
     coinsCollected += 1;
     scoreText.text  = coinsCollected
 }
+=======
+{     
+    coin.animations.stop('spin');
+    coin.animations.play('collected');
+    game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
+>>>>>>> 2d1d07a1fdec85237b82958899d8276fe6b7e4b6
 
+<<<<<<< HEAD
 function killHeart(player,enemy)
 {
     
     
     console.log('test');
     health--;    
+=======
+    coin.kill();
+        coinsCollected += 1;
+        scoreText.text  = coinsCollected
+>>>>>>> master
 
-    for(i=0;i<heartArray.length;i++){
-        if(heartArray[i] === health){
-            heart.kill();
-            
-        }
+    function killCoin () 
+    {
+        
     }
-    
 }
 
-function killPlayer (player, enemy)
+function killPlayer ()
 {
     if(health == 0){
 
@@ -206,11 +247,16 @@ function killPlayer (player, enemy)
         graphicOverlay.endFill();
         this.overlay = this.game.add.image(-10,-10,graphicOverlay.generateTexture());
         this.overlay.inputEnabled = true;
+        
+        game_over = game.add.sprite(game.world.centerX , game.world.centerY - 150, 'game_over');
+        game_over.anchor.setTo(0.5);
+        game_over.animations.add('game_over', [0,1,2,3,4,5,4,5,6,7,8,9], 5, true);
+	    game_over.animations.play("game_over");
 
-        restartButton   = game.add.button(game.world.centerX - 100, game.world.centerY, 'asset', resetGame, this);
+        restartButton   = game.add.button(game.world.centerX - 150, game.world.centerY, 'restart_btn', resetGame, this);
         restartButton.anchor.setTo(0.5);
 
-        menuButton   = game.add.button(game.world.centerX + 100, game.world.centerY, 'asset', backToMenu, this);
+        menuButton   = game.add.button(game.world.centerX + 150, game.world.centerY, 'menu_btn', backToMenu, this);
         menuButton.anchor.setTo(0.5);
 
         game.camera.shake(0.01, 300);
@@ -233,7 +279,7 @@ function backToMenu ()
 function displayScore ()
 {
     scoreText    = game.add.text( 
-        208, 
+        592, 
         115, 
         coinsCollected, 
         { 
@@ -262,19 +308,72 @@ function displayLevel ()
     lvlText.text    = currentLevel;
 }
 
+<<<<<<< HEAD
+=======
+function displayHearts ()
+{
+    map.objects.health.forEach(function (hp) {
+        heart      = game.add.image(hp.x, hp.y, 'heart');
+        heartArray.push(heart);
+    }, this);
+}
+
+function killHeart(player, enemy)
+{
+    game.camera.shake(0.008, 300);
+    health--;
+
+    stars.animations.play('onHit');
+
+    heartArray[health].destroy();
+    
+    if (health  === 0)
+    {
+        killPlayer();
+    }
+}
+
+>>>>>>> master
 function fixFallthrough() 
 {
     game.physics.arcade.TILE_BIAS = 40;
 }
 
+<<<<<<< HEAD
 function handleOrientation (e)
+=======
+function checkCoins ()
+{
+    // coinsArray.length
+    if (coinsCollected === 10)
+    {
+        // Wat doen als alle levels gecleared zijn?
+    }
+}
+
+function addMysteryBox ()
+{
+    var maxNbr          = boxXPositions.length;
+    var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
+
+    var randomX         = boxXPositions[randomNbr];
+    var randomY         = boxYPositions[randomNbr];
+
+    mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
+}
+
+function removeMysteryBox ()
+>>>>>>> master
+{
+    mysteryBox.destroy();
+}
+
+
+
+function HandleOrientation (e) 
 {
     player.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
     player.body.velocity.x = e.beta * playerSettings.moveSpeed;
-}
-
-function delayKill(){
-    console.log(enemyHitCounter);
 }
 
 /*function checkOverlap(player, mysteryBox) {
@@ -417,6 +516,9 @@ game.state.add('boot', BootState);
 game.state.add('load', LoadState);
 game.state.add('menu', MenuState);
 game.state.add('reset', ResetState);
+game.state.add('instructions', InstructionState);
+game.state.add('credits', CreditState);
+game.state.add('loading-animation', LoadingAnimationState);
 
 // LEVELS
 game.state.add('level_1', Level_1);

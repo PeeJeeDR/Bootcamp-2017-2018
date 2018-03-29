@@ -9,7 +9,8 @@ var BootState   = {
         }
 
         game.physics.startSystem( Phaser.Physics.ARCADE );
-        game.state.start('load');
+        game.stage.backgroundColor = "#000";
+        game.state.start('loading-animation');
     },
 
     fitScreen: function ()
