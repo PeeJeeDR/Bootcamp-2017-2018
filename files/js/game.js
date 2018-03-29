@@ -81,11 +81,14 @@ var powerUps    = [
      "banana"
 ]
 var powerUp;
-var bananaPowerActive =false;
-var banaan;
-var banaanCnt=0;
 
-var group;
+var bananaPowerActive = false;
+var bananas;
+var graphicsGroup;
+var banana;
+var bananaOnScreen  = false;
+var bananaXPos  = [];
+var bananaYPos  = [];
 var graphics;
 
 // IMMORTAL
@@ -444,28 +447,18 @@ function rocketPowerUp ()
 function bananaPowerUp ()
 {
 
-    banaanCnt = 0;
-    bananaPowerActive =true;
+    bananaOnScreen  = true;
 
-     for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
-     {
-
-              square(boxXPositions[i], boxYPositions[i]);
-
-     }
+    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    {
+        square(bananaXPos[i], bananaYPos[i]);
+    }
 
     game.input.onTap.add(onTap, this);
-   // graphics.events.onInputDown.add(test, this);
-    
-
-    console.log('banana');
 }
 
-function square(x , y)
+function square(x, y)
 {
-     
-    group = game.add.group();
-
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
@@ -474,61 +467,26 @@ function square(x , y)
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);
     graphics.lineTo(0, 0)
-    graphics.inputEnabled =true;
-    graphics.input.useHandCursor = true;
     
-    group.add(graphics);
-    
-
-    
-    
-
-    //game.physics.arcade.enable(group);
-
+    graphicsGroup.add(graphics);
 }
 
-function test ()
-{
-
-    console.log('test graphics');
-}
 function onTap( pointer)
 {
-    
-    console.log('tap registered');
-    while(banaanCnt<2){
-
-    console.log(game.input.activePointer.x, game.input.activePointer.y);
-
-    banaan   = new Banaan(game.input.activePointer.clientX,game.input.activePointer.clientY );
-    banaanCnt++;
-  
- 
+    for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
+    {
+        if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
+        {
+            banaan   = new Banaan((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
+        }
     }
-
-    
-
-      
-      
-    game.physics.arcade.collide( banaan, borderLayer);
-
-    /*for( var i=0, ilen = boxXPositions.length; i<ilen; i++)
-     {
-         console.log('for test')
-             if ( game.input.activePointer.clientX  == boxXPositions[i]||game.input.activePointer.clientY  == boxYPositions[i])
-             {
-                 console.log("position matched");
-                 banaan = new Banaan(boxXPositions[i],game.input.boxYPositions[i]);
-                 group.destroy();
-                 bananaPowerActive = false;
-             }
-
-}*/
-
-
 }
 
-
+function enemyOnBanana (enemie, banana)
+{
+    enemie.destroy();
+    banana.destroy();
+}
 
 function HandleOrientation (e) 
 {
