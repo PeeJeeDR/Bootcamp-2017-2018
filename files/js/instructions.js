@@ -9,8 +9,8 @@ var InstructionState   = {
         instructions_image.animations.play("tilt");
 
         instructionText1 = game.add.text(250,20, "Move Mario by tilting your phone.",{font:"32px Arial", fill:"#fff", align:"center"});
-        instructionText2 = game.add.text(250,60, "Collect coins to level up...",{font:"32px Arial", fill:"#fff", align:"center"});
-        instructionText3 = game.add.text(250,110, "...or get eaten by pacman!",{font:"32px Arial", fill:"#fff", align:"center"});
+        instructionText2 = game.add.text(250,60, "Collect coins and power ups ...",{font:"32px Arial", fill:"#fff", align:"center"});
+        instructionText3 = game.add.text(250,110, "... or get eaten by pacman!",{font:"32px Arial", fill:"#fff", align:"center"});
     },
 
     back: function ()
