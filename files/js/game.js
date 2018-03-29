@@ -537,6 +537,7 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
+
 }
 
 function onTap(pointer, graphics)
@@ -552,6 +553,7 @@ function onTap(pointer, graphics)
             }
         }
     }
+    console.log("placed");
 }
 
 function enemyOnBanana (enemy, banana)

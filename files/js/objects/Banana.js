@@ -8,7 +8,21 @@ var Banana  = function (x,y)
 
     _banana.update  = function ()
     {
-        game.physics.arcade.collide(bananas, enemies, enemyOnBanana, null, this)
+        if (counter === 0)
+        {
+            if (game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this))
+            {
+                counter++;
+            }
+        }
+
+        if (bananaPlaced)
+        {
+            
+            graphicsGroup.kill();
+            bananaPlaced    = false;
+        }
+
     }
 
     
