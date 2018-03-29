@@ -12,6 +12,8 @@ var Level_1   = {
             enemy  = new Enemy(48 + (i * 32), 48 + (i * 32));
             enemies.push(enemy);
         }
+
+       
     
         points  = game.add.group();
         points.enableBody   = true;
@@ -42,6 +44,10 @@ var Level_1   = {
         map.objects.mystery_boxes.forEach(function (singleBox) {
             boxPointArr.push(singleBox);
         }, this);
+
+        map.objects.trap_points.forEach(function (trap) {
+            trapArr.push(trap);
+        }, this);
             
 
         displayScore();
@@ -55,9 +61,29 @@ var Level_1   = {
         {   
             
             game.physics.arcade.overlap(player, enemies[i], killPlayer, null, this);
+
+        
+
         }
 
         game.physics.arcade.collide(player, mysteryBox, collectMysteryBox, null, this);
+
+     
+
+
+        for (var i = 0, ilen = banaanArr.length; i < ilen; i++)
+        {   
+            
+           if( game.physics.arcade.overlap(enemies, banaanArr[i])){
+                banaanArr[i].destroy();
+                enemy.destroy();
+                nbrOfBanana--;
+            
+           };
+
+        
+
+        }
     },
 
     render: function ()

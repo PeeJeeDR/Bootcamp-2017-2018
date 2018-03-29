@@ -9,7 +9,11 @@ var LoadState   = {
         game.load.image('coin', 'assets/sprites/coin.png');
         game.load.spritesheet('car', 'assets/sprites/mario-sprite.png', 32, 32);
         game.load.image('menu', 'assets/sprites/menu.png');
-        game.load.image('heart','assets/sprites/health.png')
+        game.load.image('heart','assets/sprites/health.png');
+        game.load.image('rocket', 'assets/sprites/projectile.png');
+        game.load.spritesheet('explosion', 'assets/sprites/explosie.png', 32, 32, 4);
+        game.load.image('banana', 'assets/sprites/banaan.png');
+
     },
 
     create: function ()
