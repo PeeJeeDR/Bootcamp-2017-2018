@@ -4,11 +4,13 @@ var Level_1   = {
         coinsCollected = 0;
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
-        if(playMusic){
+        if (playMusic)
+        {
             theme = game.add.audio('theme');
             theme.volume = 0.07;
             theme.play();
         }
+        
         currentLevel    = 1;
         this.addMap(currentLevel);
         this.groups();
@@ -45,6 +47,7 @@ var Level_1   = {
             }
             game.time.events.add(Phaser.Timer.SECOND * 6, resetImmortalPowerUp, this);
         }
+
         onWin(currentLevel); 
     },
 
@@ -70,8 +73,8 @@ var Level_1   = {
 
         coins.forEachAlive(function (singleCoin) {
             singleCoin.animations.add('spin', [0, 1, 2, 3], 10, true);
-            singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
-        }, this)
+            // singleCoin.animations.add('collected', [4, 5, 6, 7], 10, true);
+        }, this);
     },
 
     mapObjects: function ()

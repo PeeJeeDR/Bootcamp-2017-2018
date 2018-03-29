@@ -183,11 +183,11 @@ function collectCoin (enemy, coin)
     // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
     killCoin();
 
-    if(playMusic){
-
-    coinHit = game.add.audio('hit');
-    coinHit.volume = 0.012;
-    coinHit.play();
+    if(playMusic)
+    {
+        coinHit = game.add.audio('hit');
+        coinHit.volume = 0.012;
+        coinHit.play();
     }
 
     function killCoin () 
