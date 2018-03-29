@@ -11,8 +11,8 @@ var Level_1   = {
         displayScore();
         displayHearts();
 
-        game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
-        game.time.events.loop(Phaser.Timer.SECOND, this.updateBoxCounter, this);
+        game.time.events.add(Phaser.Timer.SECOND * spawnTimeFirstBox, addMysteryBox, this);
+        game.time.events.loop(Phaser.Timer.SECOND, updateBoxCounter, this);
 
         fixFallthrough();
         
@@ -21,7 +21,11 @@ var Level_1   = {
     update: function ()
     {
         cursorControls(player, false);
-        this.generateBoxes();
+
+        if (firstBoxSpawned)
+        {
+            generateBoxes();
+        }
 
         for (var i = 0, ilen = enemies.length; i < ilen; i++)
         {
@@ -92,24 +96,4 @@ var Level_1   = {
             enemies.push(enemy);
         }
     },
-
-    updateBoxCounter: function ()
-    {
-        total++;
-    },
-
-    generateBoxes: function ()
-    {
-        console.log(total);
-        if (total >= 7)
-        {
-            removeMysteryBox();
-
-            if (total >= 10)
-            {
-                total   = 0;
-                game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
-            }
-        }
-    }
 }
