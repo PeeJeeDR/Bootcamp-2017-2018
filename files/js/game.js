@@ -83,6 +83,7 @@ var powerUp;
 
 var bananaPowerActive = false;
 var bananas;
+var graphicsGroup;
 var banana;
 var bananaOnScreen  = false;
 var bananaXPos  = [];
@@ -446,11 +447,8 @@ function bananaPowerUp ()
     game.input.onTap.add(onTap, this);
 }
 
-function square(x , y)
+function square(x, y)
 {
-     
-    group = game.add.group();
-
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
@@ -459,10 +457,8 @@ function square(x , y)
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);
     graphics.lineTo(0, 0)
-    graphics.inputEnabled =true;
-    graphics.input.useHandCursor = true;
     
-    group.add(graphics);
+    graphicsGroup.add(graphics);
 }
 
 function onTap( pointer)
@@ -476,7 +472,11 @@ function onTap( pointer)
     }
 }
 
-
+function enemyOnBanana (enemie, banana)
+{
+    enemie.destroy();
+    banana.destroy();
+}
 
 function HandleOrientation (e) 
 {
