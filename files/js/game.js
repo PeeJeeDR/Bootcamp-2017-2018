@@ -3,7 +3,7 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 
 /* ===== GLOBALS ===== */
 // MOBILE
-var onMobile    = true;
+var onMobile    = false;
 
 // TEXT & MENU
 var scoreText;
@@ -440,6 +440,7 @@ function rocketPowerUp ()
 
 function calculateAirTime ()
 {
+    game.camera.shake(0.0025, 300);
     if (rocketTimeInAir > 4)
     {
         rocket.body.velocity.x  = 0;
@@ -487,8 +488,11 @@ function HandleOrientation (e)
 {
     if (rocketEnableToFLy)
     {
-        rocket.angularVelocity = -e.gamma * playerSettings.moveSpeed;
-        rocket.angularVelocity = e.beta * playerSettings.moveSpeed;
+        rocket.body.velocity.y = -e.gamma * playerSettings.moveSpeed;
+        rocket.body.velocity.x = e.beta * playerSettings.moveSpeed;
+
+        player.body.velocity.y = 0;
+        player.body.velocity.x = 0;
     }
     else 
     {

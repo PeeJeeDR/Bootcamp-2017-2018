@@ -27,6 +27,7 @@ var Player  = function (x, y)
                 enemyHitCounter = 0;
             }
         }
+        
 
         if (_player.body.velocity.x < 0) {playerFaceDirection = "LEFT";}
         if (_player.body.velocity.x > 0) {playerFaceDirection = "RIGHT";}
