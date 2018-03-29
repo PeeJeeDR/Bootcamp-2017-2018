@@ -454,7 +454,7 @@ function bananaPowerUp ()
 function square(x , y)
 {
      
-     group = game.add.group();
+    group = game.add.group();
 
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
@@ -492,8 +492,11 @@ function onTap( pointer)
 
     banaan   = new Banaan(game.input.activePointer.clientX,game.input.activePointer.clientY );
     banaanCnt++;
+  
  
     }
+
+    
 
       
       
