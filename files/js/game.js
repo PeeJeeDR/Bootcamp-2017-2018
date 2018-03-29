@@ -2,35 +2,46 @@ var game    = new Phaser.Game( 800, 576, Phaser.AUTO, 'gameDiv' );
 // 800, 576
 
 /* ===== GLOBALS ===== */
+// MOBILE
 var onMobile    = true;
 
+// TEXT & MENU
 var scoreText;
 var lvlText;
-
 var graphicOverlay;
 var restartButton;
 var menuButton;
 
+// MAP & LEVEL
 var currentLevel;
-
 var map;
+var groundLayer;
+var borderLayer;
 
+// ENEMY
 var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
+var enemyHitCounter = 0;
+var enableToHit = false;
 
+// COINS
 var coins;
 var coinsArray      = [];
 var coinsCollected  = 0;
 
+// POINTS
 var point;
 var points;
 var pointArray  = [];
 
+// PLAYER
 var player;
 
+// STARS
 var stars;
 
+<<<<<<< HEAD
 var groundLayer;
 var borderLayer;
 
@@ -38,34 +49,49 @@ var borderLayer;
 var hearts;
 =======
 >>>>>>> master
+=======
+// HEARTS
+>>>>>>> master
 var heart;
 var heartArray  = [];
 var health = 3;
 
+<<<<<<< HEAD
 var enemyHitCounter = 0;
 var enableToHit = false;
 <<<<<<< HEAD
 =======
 
+=======
+// ANIMATIONS
+>>>>>>> master
 var pacman;
 var mariokart;
 var menuBackground;
 
+// MYSTERY BOXES
 var boxXPositions   = [];
 var boxYPositions   = [];
 var mysteryBox;
 var mysteryBoxes;
+var spawnTimeFirstBox   = 3;
+var firstBoxSpawned     = false;
+var timeFirstBox        = 7;
+var timeForNextBox      = 7;
+var timeBoxRemoved      = 0;
+var boxTotal   = 0;
 
-
-
-var timer;
-var total   = 0;
-
+// POWERUPS
 var powerUps    = [
     "rocket",
     "immortal",
     "banana"
 ]
+
+<<<<<<< HEAD
+>>>>>>> master
+=======
+var powerUp;
 
 >>>>>>> master
 /* ===== SETTINGS ===== */
@@ -82,6 +108,7 @@ var enemySettings = {
     moveSpeed: 200,
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 var pacman;
 var mariokart;
@@ -126,6 +153,8 @@ var mysteryBoxSettings      = {
 >>>>>>> 2d1d07a1fdec85237b82958899d8276fe6b7e4b6
 
 
+=======
+>>>>>>> master
 
 /* ===== FUNCTIONS ===== */
 
@@ -353,6 +382,7 @@ function checkCoins ()
 
 function addMysteryBox ()
 {
+    firstBoxSpawned     = true;
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
@@ -362,10 +392,76 @@ function addMysteryBox ()
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
 }
 
+function generateBoxes ()
+{
+    console.log(boxTotal);
+    if (boxTotal >= timeFirstBox + spawnTimeFirstBox)
+    {
+        spawnTimeFirstBox   = 0;
+        removeMysteryBox();
+        if (boxTotal == timeFirstBox + timeForNextBox)
+        {
+            boxTotal   = 0;
+            game.time.events.add(Phaser.Timer.SECOND, addMysteryBox, this);
+        }
+    }
+}
+
+function collectMysteryBox ()
+{
+    boxTotal   = 0;
+
+    var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
+    powerUp         = powerUps[randomNbr];
+
+    activatePowerUp();
+
+    mysteryBox.destroy();
+}
+
 function removeMysteryBox ()
 >>>>>>> master
 {
+    timeBoxRemoved  = boxTotal;
     mysteryBox.destroy();
+}
+
+function updateBoxCounter ()
+{
+    boxTotal++;
+}
+
+function activatePowerUp ()
+{
+    switch (powerUp)
+    {
+        case 'immortal':
+            immortalPowerUp();
+        break;
+
+        case 'rocket':
+            rocketPowerUp();
+        break;
+
+        case 'banana':
+            bananaPowerUp();
+        break;
+    }
+}
+
+function immortalPowerUp ()
+{
+
+}
+
+function rocketPowerUp ()
+{
+
+}
+
+function bananaPowerUp ()
+{
+
 }
 
 
