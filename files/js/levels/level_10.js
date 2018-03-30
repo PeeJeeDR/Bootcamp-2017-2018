@@ -132,6 +132,7 @@ var Level_10   = {
 
     addEnemy: function ()
     {
+        game.camera.shake(0.03, 300);
         var randomNbr   = Math.floor(Math.random() * (bananaXPos.length - 0) + 0);
         var x   = boxXPositions[randomNbr];
         var y   = boxYPositions[randomNbr];

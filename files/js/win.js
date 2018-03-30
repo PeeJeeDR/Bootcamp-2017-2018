@@ -16,7 +16,7 @@ var WinState   = {
     {
     	newLevelNumber 	= currentLevel + 1;
     	// nextLevelName 	= "level_" + newLevelNumber;
-    	if(newLevelNumber === 10)
+    	if(newLevelNumber === 9)
     	{
     		game.state.start('menu');
     	}
