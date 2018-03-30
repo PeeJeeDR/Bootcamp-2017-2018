@@ -6,6 +6,9 @@ var ResetState   = {
         health          = 3;
         enableToHit     = false;
         heartArray      = []
+
+        boxXPositions   = [];
+        boxYPositions   = [];
     },
 
     update: function ()

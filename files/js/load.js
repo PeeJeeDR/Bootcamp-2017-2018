@@ -65,6 +65,11 @@ var LoadState   = {
         game.load.tilemap('level_3', 'assets/maps/level_3.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_4', 'assets/maps/level_4.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_5', 'assets/maps/level_5.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_6', 'assets/maps/level_6.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_7', 'assets/maps/level_7.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_8', 'assets/maps/level_8.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_9', 'assets/maps/level_9.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_10', 'assets/maps/level_10.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }

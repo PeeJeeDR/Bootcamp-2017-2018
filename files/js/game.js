@@ -660,6 +660,11 @@ game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
 game.state.add('level_4', Level_4);
 game.state.add('level_5', Level_5);
+game.state.add('level_6', Level_6);
+game.state.add('level_7', Level_7);
+game.state.add('level_8', Level_8);
+game.state.add('level_9', Level_9);
+game.state.add('level_10', Level_10);
 
 // INTROS
 

@@ -2589,7 +2589,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/pacman_tileset.png",
+         "image":"..\/sprites\/pacman_tileset.png",
          "imageheight":96,
          "imagewidth":320,
          "margin":0,

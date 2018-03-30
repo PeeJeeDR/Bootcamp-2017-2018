@@ -2455,7 +2455,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2490,7 +2490,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/pacman_tileset.png",
+         "image":"..\/sprites\/pacman_tileset.png",
          "imageheight":96,
          "imagewidth":320,
          "margin":0,
