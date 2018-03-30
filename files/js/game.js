@@ -390,7 +390,7 @@ function fixFallthrough()
 function checkCoins ()
 {
     // coinsArray.length
-    if (coinsCollected === 5/* coinsArray.length */)
+    if (coinsCollected === coinsArray.length)
     {
         onWin();
     }
