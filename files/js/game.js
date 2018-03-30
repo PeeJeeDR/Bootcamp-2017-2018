@@ -112,6 +112,7 @@ var bananaPlaced  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
 var graphics;
+var bananaCnt = 0;
 
 // LEVEL
 var levelNumber;
@@ -519,6 +520,7 @@ function immortalPowerUp ()
 function resetImmortalPowerUp ()
 {
     immortalState   = false;
+    powerUpRoller.frame = 3;
 }
 /* ===== */
 
@@ -562,6 +564,7 @@ function rocketKill (rocket, enemy)
     rocketEnableToFLy   = false;
     game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
     enemy.destroy();
+    powerUpRoller.frame = 3;
 }
 
 function destroyRocket ()
@@ -573,6 +576,9 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
+    bananaOnScreen = false;
+    game.input.onTap.add(onTap, this);
+
     for (var i = 0, ilen = boxXPositions.length; i < ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
@@ -585,7 +591,7 @@ function bananaPowerUp ()
     }
 }
 
-function square(x, y)
+/*function square(x, y)
 {
     console.log('test');
     graphics = game.make.graphics(x, y);
@@ -597,12 +603,17 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-}
+}*/
 
 function onTap(pointer, graphics)
 {
     if(!bananaOnScreen)
     {
+        console.log(bananas.length);
+        if(bananas.length> 0){
+
+            banana.destroy();
+        }
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
@@ -612,14 +623,20 @@ function onTap(pointer, graphics)
                      bananaOnScreen = true;
              }
          }
-         //graphicsGroup.lineStyle(1, 0xffffff, 1);
     }
 }
 
 function enemyOnBanana (enemy, banana)
 {
+    pacman_dead = game.add.sprite(enemie.x, enemie.y, 'pacman_dead');
+    pacman_dead.frame = 0;
+    pacman_dead.anchor.setTo(0.5);
+    pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
+    pacman_dead.animations.play('onDead');
+    enemie.destroy();
     enemy.destroy();
     banana.destroy();
+   
 }
 
 function HandleOrientation (e) 
