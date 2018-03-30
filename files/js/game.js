@@ -89,7 +89,7 @@ var randomY;
 var powerUps    = [
     "rocket",
     "immortal",
-    //"banana"
+    "banana"
 ]
 var powerUp;
 var powerUpRoller;
