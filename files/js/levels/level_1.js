@@ -59,6 +59,14 @@ var Level_1   = {
         if (firstBoxSpawned)    {generateBoxes();}
         if (rocketEnableToFLy)  {calculateAirTime();}
         displayScore();
+
+        console.log(bananaPlaced);
+
+        if (bananaPlaced)
+        {
+            graphicsGroup.kill();
+            bananaPlaced    = false;
+        }
     },
 
     updateEnemyCounter: function ()
