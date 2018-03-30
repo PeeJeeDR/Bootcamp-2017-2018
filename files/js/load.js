@@ -42,11 +42,15 @@ var LoadState   = {
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
+        game.load.audio('theme2','assets/sounds/stuff-voor-mario.mp3')
         game.load.spritesheet('rocket', 'assets/sprites/projectile.png', 32, 32);
         game.load.spritesheet('explosion', 'assets/sprites/explosion.png', 32, 32);
         game.load.spritesheet('names','assets/sprites/names.png',600,200);
         game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
         game.load.spritesheet('pacman_dead','assets/sprites/pacman_dead.png',32,32);
+        game.load.spritesheet('pauseAndPlay', 'assets/sprites/pause_play.png', 48, 48);
+        game.load.spritesheet('powerUpRoller','assets/sprites/powerup_roller.png',32,32);
+        game.load.spritesheet('clouds', 'assets/sprites/clouds.png', 32, 32);
     },
 
     create: function ()

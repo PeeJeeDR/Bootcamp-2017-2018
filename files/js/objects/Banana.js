@@ -8,18 +8,7 @@ var Banana  = function (x,y)
 
     _banana.update  = function ()
     {
-        if (counter === 0)
-        {
-            if (game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this))
-            {
-                console.log('hoeveel?');
-                counter++;
-            }
-        }
-        
-   
-        
-        
+        game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this);
     }
 
     

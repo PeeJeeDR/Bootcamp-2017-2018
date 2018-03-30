@@ -1,6 +1,13 @@
 var MenuState   = {
     create: function ()
     {
+
+		if(playMusic){
+			pressStart = game.add.audio('pressStart');
+			pressStart.volume = 0.08;
+			pressStart.play();
+		  } 
+		
         menuBackground = game.add.sprite(0,0,"menu");
 
     	game.physics.setBoundsToWorld();
@@ -51,11 +58,7 @@ var MenuState   = {
 
 
 		
-      if(playMusic){
-        pressStart = game.add.audio('pressStart');
-        pressStart.volume = 0.08;
-        pressStart.play();
-      } 
+      
     },
 
     update: function () 

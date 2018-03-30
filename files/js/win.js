@@ -14,7 +14,7 @@ var WinState   = {
 
     nextLevel: function ()
     {
-    	newLevelNumber = levelNumber + 1;
+    	newLevelNumber = currentLevel + 1;
     	nextLevelName = "level_" + newLevelNumber + '';
     	if(newLevelNumber == 6)
     	{
