@@ -4,7 +4,6 @@ var Level_1   = {
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
         currentLevel    = 1;
-        coinsCollected  = 0;
         this.addMap(currentLevel);
         this.groups();
         this.mapObjects();

@@ -1,9 +1,9 @@
-var Level_2   = {
+var Level_7   = {
     create: function ()
     {
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
-        currentLevel    = 2;
+        currentLevel    = 7;
         this.addMap(currentLevel);
         this.groups();
         this.mapObjects();

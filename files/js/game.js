@@ -115,6 +115,7 @@ var graphics;
 
 // LEVEL
 var levelNumber;
+var newLevelNumber  = 1;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -388,7 +389,7 @@ function fixFallthrough()
 function checkCoins ()
 {
     // coinsArray.length
-    if (coinsCollected === 50/* coinsArray.length */)
+    if (coinsCollected === 5/* coinsArray.length */)
     {
         onWin();
     }
