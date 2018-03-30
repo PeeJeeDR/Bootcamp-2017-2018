@@ -107,9 +107,8 @@ var rocketExploded      = false;
 // BANANA
 var bananaPowerActive = false;
 var bananas;
-var graphicsGroup;
 var banana;
-var bananaOnScreen  = false;
+var bananaPlaced  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
 var graphics;
@@ -574,23 +573,24 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-
-    bananaOnScreen  = true;
-
-    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    for (var i = 0, ilen = boxXPositions.length; i < ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
     }
 
-    game.input.onTap.add(onTap, this);
+    if (!bananaPlaced)
+    {
+        bananaPlaced    = true;
+        game.input.onTap.add(onTap, this);
+    }
 }
 
 function square(x, y)
 {
+    console.log('test');
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
-    // draw a square
     graphics.lineTo(0, 32);
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);
@@ -601,7 +601,9 @@ function square(x, y)
 
 function onTap(pointer, graphics)
 {
-    if (bananaOnScreen)
+
+
+    if(!bananaOnScreen)
     {
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
@@ -609,23 +611,16 @@ function onTap(pointer, graphics)
              if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
             {
                      banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                     bananaOnScreen = false;
+                     bananaOnScreen = true;
              }
          }
-    }
-    else if (!bananaOnScreen)
-    {
-        for(var i = 0, ilen = graphicsGroup.length; i < ilen; i++)
-        {
-            graphicsGroup[i].destroy();
-        }
-       
+         //graphicsGroup.lineStyle(1, 0xffffff, 1);
     }
 }
 
-function enemyOnBanana (enemie, banana)
+function enemyOnBanana (enemy, banana)
 {
-    enemie.destroy();
+    enemy.destroy();
     banana.destroy();
 }
 
