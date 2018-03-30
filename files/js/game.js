@@ -68,6 +68,7 @@ var enemyHit;
 var pressStart;
 var theme;
 var gameMusicOver;
+var powerUpSound;
 var playMusic = true;
 
 // MYSTERY BOXES
@@ -397,7 +398,6 @@ function checkCoins ()
 function addMysteryBox ()
 {
     firstBoxSpawned     = true;
-    game.camera.flash(0xFFD700, 300);
 
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
@@ -411,12 +411,14 @@ function addMysteryBox ()
     clouds.anchor.setTo(0,0);
     clouds.animations.add('boxAppear', [0, 1, 2, 3], 1, false);
     clouds.animations.play('boxAppear');
+    
     game.time.events.add(Phaser.Timer.SECOND * 0.9,AppearMysteryBox,this);
     
 }
 
 function AppearMysteryBox(){
 
+    game.camera.flash(0xFFD700, 300);
     clouds.destroy();
 
     var maxNbr          = boxXPositions.length;
@@ -441,6 +443,8 @@ function generateBoxes ()
 
 function collectMysteryBox ()
 {
+    
+    
     boxTotal   = 0;
 
     rolPowerUp();
@@ -485,6 +489,11 @@ function activatePowerUp ()
     switch (powerUp)
     {
         case 'immortal':
+        if(playMusic){
+            powerUpSound = game.add.audio('powerUpSound');
+            powerUpSound.volume = 0.4;
+            powerUpSound.play();
+          } 
             immortalPowerUp();
             powerUpRoller.frame = 2;
         break;
