@@ -397,6 +397,7 @@ function checkCoins ()
 function addMysteryBox ()
 {
     firstBoxSpawned     = true;
+    game.camera.flash(0xFFD700, 300);
 
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
@@ -408,9 +409,9 @@ function addMysteryBox ()
     
     clouds.frame = 0;
     clouds.anchor.setTo(0,0);
-    clouds.animations.add('boxAppear', [0, 1, 2, 3], 5, false);
+    clouds.animations.add('boxAppear', [0, 1, 2, 3], 1, false);
     clouds.animations.play('boxAppear');
-    game.time.events.add(Phaser.Timer.SECOND * 0.5,AppearMysteryBox,this);
+    game.time.events.add(Phaser.Timer.SECOND * 0.9,AppearMysteryBox,this);
     
 }
 
