@@ -590,7 +590,7 @@ function onTap(pointer, graphics)
 
     if(!bananaOnScreen)
     {
-       // banana.destroy();
+       
         console.log(bananas.length);
         if(bananas.length> 0){
 
