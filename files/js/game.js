@@ -87,8 +87,8 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    "rocket",
-    "immortal",
+    // "rocket",
+    // "immortal",
     "banana"
 ]
 var powerUp;
@@ -601,8 +601,6 @@ function square(x, y)
 
 function onTap(pointer, graphics)
 {
-
-
     if(!bananaOnScreen)
     {
 
