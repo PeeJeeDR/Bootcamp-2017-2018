@@ -51,6 +51,7 @@ var LoadState   = {
         game.load.spritesheet('pauseAndPlay', 'assets/sprites/pause_play.png', 48, 48);
         game.load.spritesheet('powerUpRoller','assets/sprites/powerup_roller.png',32,32);
         game.load.spritesheet('clouds', 'assets/sprites/clouds.png', 32, 32);
+        game.load.audio('powerUpSound','assets/sounds/powerup.mp3');
     },
 
     create: function ()
@@ -65,6 +66,11 @@ var LoadState   = {
         game.load.tilemap('level_3', 'assets/maps/level_3.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_4', 'assets/maps/level_4.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_5', 'assets/maps/level_5.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_6', 'assets/maps/level_6.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_7', 'assets/maps/level_7.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_8', 'assets/maps/level_8.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_9', 'assets/maps/level_9.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_10', 'assets/maps/level_10.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }

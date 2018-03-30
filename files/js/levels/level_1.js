@@ -4,7 +4,6 @@ var Level_1   = {
         window.addEventListener("deviceorientation", HandleOrientation, true);
 
         currentLevel    = 1;
-        coinsCollected  = 0;
         this.addMap(currentLevel);
         this.groups();
         this.mapObjects();
@@ -51,8 +50,6 @@ var Level_1   = {
         this.immortalState();
         rocketCollision();
 
-        console.log(enemyCounter);
-
         if (enemyCounter > (10 + Math.floor(Math.random() * (5 - 0) + 0)))
         {
             enemyCounter    = 0;
@@ -62,6 +59,14 @@ var Level_1   = {
         if (firstBoxSpawned)    {generateBoxes();}
         if (rocketEnableToFLy)  {calculateAirTime();}
         displayScore();
+
+        console.log(bananaPlaced);
+
+        if (bananaPlaced)
+        {
+            graphicsGroup.kill();
+            bananaPlaced    = false;
+        }
     },
 
     updateEnemyCounter: function ()
@@ -133,6 +138,7 @@ var Level_1   = {
 
     addEnemy: function ()
     {
+        game.camera.shake(0.03, 300);
         var randomNbr   = Math.floor(Math.random() * (bananaXPos.length - 0) + 0);
         var x   = boxXPositions[randomNbr];
         var y   = boxYPositions[randomNbr];

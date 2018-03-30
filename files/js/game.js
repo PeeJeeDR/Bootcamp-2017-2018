@@ -68,6 +68,7 @@ var enemyHit;
 var pressStart;
 var theme;
 var gameMusicOver;
+var powerUpSound;
 var playMusic = true;
 
 // MYSTERY BOXES
@@ -86,8 +87,8 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    "rocket",
-    "immortal",
+    // "rocket",
+    // "immortal",
     "banana"
 ]
 var powerUp;
@@ -106,9 +107,8 @@ var rocketExploded      = false;
 // BANANA
 var bananaPowerActive = false;
 var bananas;
-var graphicsGroup;
 var banana;
-var bananaOnScreen  = false;
+var bananaPlaced  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
 var graphics;
@@ -116,6 +116,7 @@ var bananaCnt = 0;
 
 // LEVEL
 var levelNumber;
+var newLevelNumber  = 1;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -389,7 +390,7 @@ function fixFallthrough()
 function checkCoins ()
 {
     // coinsArray.length
-    if (coinsCollected === 50/* coinsArray.length */)
+    if (coinsCollected === coinsArray.length)
     {
         onWin();
     }
@@ -409,14 +410,16 @@ function addMysteryBox ()
     
     clouds.frame = 0;
     clouds.anchor.setTo(0,0);
-    clouds.animations.add('boxAppear', [0, 1, 2, 3], 5, false);
+    clouds.animations.add('boxAppear', [0, 1, 2, 3], 1, false);
     clouds.animations.play('boxAppear');
-    game.time.events.add(Phaser.Timer.SECOND * 0.5,AppearMysteryBox,this);
+    
+    game.time.events.add(Phaser.Timer.SECOND * 0.9,AppearMysteryBox,this);
     
 }
 
 function AppearMysteryBox(){
 
+    game.camera.flash(0xFFD700, 300);
     clouds.destroy();
 
     var maxNbr          = boxXPositions.length;
@@ -441,6 +444,8 @@ function generateBoxes ()
 
 function collectMysteryBox ()
 {
+    
+    
     boxTotal   = 0;
 
     rolPowerUp();
@@ -485,6 +490,11 @@ function activatePowerUp ()
     switch (powerUp)
     {
         case 'immortal':
+        if(playMusic){
+            powerUpSound = game.add.audio('powerUpSound');
+            powerUpSound.volume = 0.4;
+            powerUpSound.play();
+          } 
             immortalPowerUp();
             powerUpRoller.frame = 2;
         break;
@@ -568,14 +578,25 @@ function bananaPowerUp ()
 {
     bananaOnScreen = false;
     game.input.onTap.add(onTap, this);
+
+    for (var i = 0, ilen = boxXPositions.length; i < ilen; i++)
+    {
+        square(bananaXPos[i], bananaYPos[i]);
+    }
+
+    if (!bananaPlaced)
+    {
+        bananaPlaced    = true;
+        game.input.onTap.add(onTap, this);
+    }
 }
 
 /*function square(x, y)
 {
+    console.log('test');
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
     
-    // draw a square
     graphics.lineTo(0, 32);
     graphics.lineTo(32, 32);
     graphics.lineTo(32, 0);
@@ -586,11 +607,8 @@ function bananaPowerUp ()
 
 function onTap(pointer, graphics)
 {
-    
-
     if(!bananaOnScreen)
     {
-       
         console.log(bananas.length);
         if(bananas.length> 0){
 
@@ -602,14 +620,13 @@ function onTap(pointer, graphics)
              if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
             {
                      banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                     bananaOnScreen= true;
+                     bananaOnScreen = true;
              }
          }
-        
     }
 }
 
-function enemyOnBanana (enemie, banana)
+function enemyOnBanana (enemy, banana)
 {
     pacman_dead = game.add.sprite(enemie.x, enemie.y, 'pacman_dead');
     pacman_dead.frame = 0;
@@ -617,6 +634,7 @@ function enemyOnBanana (enemie, banana)
     pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
     pacman_dead.animations.play('onDead');
     enemie.destroy();
+    enemy.destroy();
     banana.destroy();
    
 }
@@ -662,6 +680,11 @@ game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
 game.state.add('level_4', Level_4);
 game.state.add('level_5', Level_5);
+game.state.add('level_6', Level_6);
+game.state.add('level_7', Level_7);
+game.state.add('level_8', Level_8);
+game.state.add('level_9', Level_9);
+game.state.add('level_10', Level_10);
 
 // INTROS
 
