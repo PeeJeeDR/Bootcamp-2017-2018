@@ -8,6 +8,7 @@ var Banana  = function (x,y)
 
     _banana.update  = function ()
     {
+<<<<<<< HEAD
         if (counter === 0)
         {
             if (game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this))
@@ -22,6 +23,9 @@ var Banana  = function (x,y)
           
 
         }
+=======
+        game.physics.arcade.overlap(bananas, enemies, enemyOnBanana, null, this);
+>>>>>>> master
     }
 
     

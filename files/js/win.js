@@ -14,12 +14,12 @@ var WinState   = {
 
     nextLevel: function ()
     {
-    	newLevelNumber = levelNumber + 1;
-    	nextLevelName = "level_" + newLevelNumber + '';
-    	if(newLevelNumber == 6)
+    	newLevelNumber 	= currentLevel + 1;
+    	// nextLevelName 	= "level_" + newLevelNumber;
+    	if(newLevelNumber === 9)
     	{
     		game.state.start('menu');
     	}
-    	game.state.start(nextLevelName);
+    	game.state.start('reset');
     },
 }

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1082">
+ <tileset firstgid="1" name="pacman_tileset" tilewidth="32" tileheight="32" tilecount="30" columns="10">
+  <image source="../assets/sprites/pacman_tileset.png" width="320" height="96"/>
+ </tileset>
+ <layer name="background" width="25" height="18">
+  <data encoding="csv">
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
+</data>
+ </layer>
+ <layer name="ground" width="25" height="18">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,12,12,12,12,12,12,12,12,12,0,12,12,12,0,12,12,12,12,12,12,12,12,12,0,
+0,12,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,12,0,
+0,12,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,12,0,
+0,12,12,12,0,0,0,0,0,12,12,12,12,12,12,12,0,0,0,0,0,12,12,12,0,
+0,12,0,0,0,0,12,12,0,12,0,0,0,0,0,12,0,12,12,0,0,0,0,12,0,
+0,12,12,12,12,0,0,12,0,12,12,12,12,12,12,12,0,12,0,0,12,12,12,12,0,
+0,0,0,0,12,0,12,12,12,12,12,0,0,0,12,12,12,12,12,0,12,0,0,0,0,
+0,12,12,12,12,12,12,0,12,0,12,12,12,12,12,0,12,0,12,12,12,12,12,12,0,
+0,12,0,0,0,12,0,0,0,0,0,12,0,12,0,0,0,0,0,12,0,0,0,12,0,
+0,12,0,12,12,12,12,12,12,12,0,12,12,12,0,12,12,12,12,12,12,12,0,12,0,
+0,12,0,12,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,12,0,12,0,
+0,12,0,12,0,0,12,12,0,12,0,12,12,12,0,12,0,12,12,0,0,12,0,12,0,
+0,12,0,12,12,0,0,12,0,12,0,12,0,12,0,12,0,12,0,0,12,12,0,12,0,
+0,0,0,0,12,12,12,12,0,12,0,12,12,12,0,12,0,12,12,12,12,0,0,0,0,
+0,0,0,0,0,0,0,0,0,12,0,12,0,12,0,12,0,0,0,0,0,0,0,0,0,
+0,0,0,0,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="borders" width="25" height="18">
+  <data encoding="csv">
+2147483654,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,9,9,9,9,9,9,9,9,9,9,9,9,6,
+2147483665,0,0,0,0,0,0,0,0,0,2147483665,0,0,0,17,0,0,0,0,0,0,0,0,0,17,
+2147483665,0,2147483655,0,4,2147483657,2147483657,2147483657,2147483652,0,2147483665,0,7,0,17,0,4,9,9,9,2147483652,0,7,0,17,
+2147483665,0,2147483675,0,17,0,0,0,2147483665,0,2147483675,0,27,0,27,0,17,0,0,0,2147483665,0,27,0,17,
+2147483665,0,0,0,2147483664,2147483653,2147483657,2147483657,2147483662,0,0,0,0,0,0,0,14,9,9,5,16,0,0,0,17,
+2147483665,0,2147483658,2147483657,2147483673,2147483662,0,0,2147483665,0,2147483658,2147483657,9,9,10,0,17,0,0,14,25,9,10,0,17,
+2147483665,0,0,0,0,2147483664,2147483656,0,2147483675,0,0,0,0,0,0,0,27,0,8,16,0,0,0,0,17,
+2147483664,2147483657,2147483657,2147483656,0,2147483675,0,0,0,0,0,2147483658,9,10,0,0,0,0,0,27,0,8,9,9,16,
+2147483665,0,0,0,0,0,0,2147483655,0,2147483655,0,0,0,0,0,7,0,7,0,0,0,0,0,0,17,
+2147483665,0,4,9,10,0,2147483658,2147483673,2147483657,2147483673,2147483652,0,18,0,4,25,9,25,10,0,2147483658,2147483657,2147483652,0,17,
+2147483665,0,17,0,0,0,0,0,0,0,2147483665,0,0,0,17,0,0,0,0,0,0,0,2147483665,0,17,
+2147483665,0,17,0,4,2147483653,9,9,6,0,2147483665,0,18,0,17,0,2147483654,2147483657,2147483657,5,2147483652,0,2147483665,0,17,
+2147483665,0,17,0,2147483674,2147483662,0,0,17,0,2147483665,0,0,0,17,0,2147483665,0,0,14,26,0,2147483665,0,17,
+2147483665,0,17,0,0,2147483674,10,0,17,0,2147483665,0,18,0,17,0,2147483665,0,2147483658,26,0,0,2147483665,0,17,
+2147483664,2147483657,2147483673,2147483652,0,0,0,0,17,0,2147483665,0,0,0,17,0,2147483665,0,0,0,0,4,25,9,16,
+2147483665,0,0,2147483664,9,9,9,9,26,0,2147483675,0,18,0,27,0,2147483674,2147483657,2147483657,2147483657,2147483657,16,0,0,17,
+2147483665,0,0,2147483665,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,17,
+2147483674,2147483657,2147483657,2147483673,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,2147483657,9,9,9,9,9,9,9,9,9,25,9,9,26
+</data>
+ </layer>
+ <objectgroup name="coins">
+  <object id="896" x="576" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="897" x="512" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="898" x="256" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="899" x="192" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="900" x="224" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="901" x="544" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="902" x="576" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="903" x="384" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="904" x="352" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="905" x="416" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="906" x="416" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="907" x="352" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="908" x="352" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="909" x="416" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="911" x="384" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="912" x="384" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="913" x="384" y="448" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="914" x="736" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="915" x="736" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="916" x="736" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="917" x="736" y="128" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="918" x="736" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="919" x="736" y="192" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="920" x="32" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="921" x="32" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="922" x="32" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="923" x="32" y="128" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="924" x="32" y="160" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="925" x="32" y="192" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="926" x="64" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="927" x="704" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="928" x="576" y="224" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="929" x="192" y="224" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="931" x="128" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="932" x="160" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="933" x="192" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="934" x="576" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="935" x="608" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="936" x="640" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="939" x="544" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="940" x="224" y="512" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="942" x="32" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="943" x="736" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="955" x="192" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="956" x="224" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="957" x="544" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="958" x="736" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="959" x="736" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="960" x="736" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="961" x="32" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="962" x="32" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="963" x="32" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="964" x="128" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="965" x="640" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="966" x="288" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="967" x="480" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="968" x="480" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="969" x="288" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="971" x="256" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="972" x="512" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="973" x="544" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="974" x="224" y="32" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="975" x="32" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="976" x="736" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="977" x="704" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="978" x="64" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="982" x="672" y="128" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="983" x="672" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="984" x="672" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="985" x="96" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="986" x="96" y="128" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="987" x="96" y="64" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="988" x="192" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="989" x="576" y="256" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="990" x="544" y="192" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="991" x="224" y="192" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="992" x="288" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="993" x="288" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="994" x="288" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="995" x="288" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="998" x="480" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="999" x="480" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1000" x="480" y="384" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1001" x="480" y="416" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1002" x="672" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1003" x="640" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1004" x="96" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1005" x="128" y="320" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1006" x="96" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="1007" x="672" y="352" width="32" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mystery_boxes">
+  <object id="1008" x="128" y="32" width="32" height="32"/>
+  <object id="1009" x="160" y="32" width="32" height="32"/>
+  <object id="1010" x="192" y="32" width="32" height="32"/>
+  <object id="1011" x="288" y="96" width="32" height="32"/>
+  <object id="1013" x="64" y="128" width="32" height="32"/>
+  <object id="1014" x="64" y="192" width="32" height="32"/>
+  <object id="1015" x="96" y="192" width="32" height="32"/>
+  <object id="1016" x="128" y="192" width="32" height="32"/>
+  <object id="1017" x="128" y="256" width="32" height="32"/>
+  <object id="1018" x="96" y="256" width="32" height="32"/>
+  <object id="1019" x="32" y="320" width="32" height="32"/>
+  <object id="1020" x="96" y="384" width="32" height="32"/>
+  <object id="1021" x="96" y="416" width="32" height="32"/>
+  <object id="1022" x="128" y="448" width="32" height="32"/>
+  <object id="1023" x="160" y="448" width="32" height="32"/>
+  <object id="1024" x="192" y="448" width="32" height="32"/>
+  <object id="1025" x="224" y="448" width="32" height="32"/>
+  <object id="1026" x="224" y="416" width="32" height="32"/>
+  <object id="1027" x="192" y="320" width="32" height="32"/>
+  <object id="1028" x="160" y="288" width="32" height="32"/>
+  <object id="1029" x="224" y="320" width="32" height="32"/>
+  <object id="1030" x="256" y="320" width="32" height="32"/>
+  <object id="1031" x="288" y="224" width="32" height="32"/>
+  <object id="1032" x="288" y="160" width="32" height="32"/>
+  <object id="1033" x="320" y="128" width="32" height="32"/>
+  <object id="1034" x="384" y="128" width="32" height="32"/>
+  <object id="1035" x="448" y="128" width="32" height="32"/>
+  <object id="1036" x="352" y="192" width="32" height="32"/>
+  <object id="1037" x="416" y="192" width="32" height="32"/>
+  <object id="1038" x="320" y="256" width="32" height="32"/>
+  <object id="1039" x="352" y="288" width="32" height="32"/>
+  <object id="1040" x="384" y="256" width="32" height="32"/>
+  <object id="1041" x="416" y="288" width="32" height="32"/>
+  <object id="1042" x="448" y="256" width="32" height="32"/>
+  <object id="1043" x="480" y="224" width="32" height="32"/>
+  <object id="1044" x="480" y="160" width="32" height="32"/>
+  <object id="1045" x="480" y="96" width="32" height="32"/>
+  <object id="1046" x="576" y="32" width="32" height="32"/>
+  <object id="1047" x="608" y="32" width="32" height="32"/>
+  <object id="1048" x="640" y="32" width="32" height="32"/>
+  <object id="1049" x="704" y="128" width="32" height="32"/>
+  <object id="1050" x="704" y="192" width="32" height="32"/>
+  <object id="1051" x="672" y="192" width="32" height="32"/>
+  <object id="1052" x="640" y="192" width="32" height="32"/>
+  <object id="1053" x="640" y="224" width="32" height="32"/>
+  <object id="1054" x="672" y="256" width="32" height="32"/>
+  <object id="1055" x="736" y="320" width="32" height="32"/>
+  <object id="1056" x="672" y="384" width="32" height="32"/>
+  <object id="1057" x="672" y="416" width="32" height="32"/>
+  <object id="1058" x="640" y="448" width="32" height="32"/>
+  <object id="1059" x="608" y="448" width="32" height="32"/>
+  <object id="1060" x="576" y="448" width="32" height="32"/>
+  <object id="1061" x="544" y="448" width="32" height="32"/>
+  <object id="1062" x="544" y="416" width="32" height="32"/>
+  <object id="1063" x="512" y="320" width="32" height="32"/>
+  <object id="1064" x="544" y="320" width="32" height="32"/>
+  <object id="1065" x="576" y="320" width="32" height="32"/>
+  <object id="1066" x="608" y="288" width="32" height="32"/>
+  <object id="1067" x="480" y="448" width="32" height="32"/>
+  <object id="1068" x="480" y="480" width="32" height="32"/>
+  <object id="1069" x="448" y="512" width="32" height="32"/>
+  <object id="1070" x="512" y="512" width="32" height="32"/>
+  <object id="1071" x="416" y="480" width="32" height="32"/>
+  <object id="1072" x="384" y="512" width="32" height="32"/>
+  <object id="1073" x="352" y="480" width="32" height="32"/>
+  <object id="1074" x="352" y="416" width="32" height="32"/>
+  <object id="1075" x="352" y="352" width="32" height="32"/>
+  <object id="1076" x="416" y="352" width="32" height="32"/>
+  <object id="1077" x="416" y="416" width="32" height="32"/>
+  <object id="1078" x="288" y="448" width="32" height="32"/>
+  <object id="1079" x="288" y="480" width="32" height="32"/>
+  <object id="1080" x="256" y="512" width="32" height="32"/>
+  <object id="1081" x="320" y="512" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="health">
+  <object id="979" x="160" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="980" x="192" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="981" x="224" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="detection_points">
+  <object id="637" x="318" y="629" width="1"/>
+  <object id="860" x="32" y="128" width="32" height="32"/>
+  <object id="861" x="128" y="224" width="32" height="32"/>
+  <object id="862" x="160" y="256" width="32" height="32"/>
+  <object id="863" x="288" y="512" width="32" height="32"/>
+  <object id="864" x="352" y="512" width="32" height="32"/>
+  <object id="865" x="416" y="512" width="32" height="32"/>
+  <object id="866" x="480" y="512" width="32" height="32"/>
+  <object id="867" x="640" y="256" width="32" height="32"/>
+  <object id="868" x="608" y="256" width="32" height="32"/>
+  <object id="869" x="480" y="128" width="32" height="32"/>
+  <object id="870" x="416" y="128" width="32" height="32"/>
+  <object id="871" x="352" y="128" width="32" height="32"/>
+  <object id="872" x="288" y="128" width="32" height="32"/>
+  <object id="873" x="224" y="224" width="32" height="32"/>
+  <object id="874" x="544" y="224" width="32" height="32"/>
+  <object id="875" x="256" y="224" width="32" height="32"/>
+  <object id="876" x="512" y="224" width="32" height="32"/>
+  <object id="877" x="320" y="192" width="32" height="32"/>
+  <object id="878" x="448" y="192" width="32" height="32"/>
+  <object id="879" x="480" y="192" width="32" height="32"/>
+  <object id="880" x="288" y="192" width="32" height="32"/>
+  <object id="881" x="320" y="224" width="32" height="32"/>
+  <object id="882" x="448" y="224" width="32" height="32"/>
+  <object id="883" x="352" y="320" width="32" height="32"/>
+  <object id="884" x="352" y="384" width="32" height="32"/>
+  <object id="885" x="352" y="448" width="32" height="32"/>
+  <object id="886" x="416" y="448" width="32" height="32"/>
+  <object id="887" x="416" y="384" width="32" height="32"/>
+  <object id="888" x="416" y="320" width="32" height="32"/>
+  <object id="889" x="416" y="256" width="32" height="32"/>
+  <object id="890" x="352" y="256" width="32" height="32"/>
+  <object id="891" x="384" y="320" width="32" height="32"/>
+  <object id="892" x="384" y="384" width="32" height="32"/>
+  <object id="893" x="384" y="448" width="32" height="32"/>
+  <object id="894" x="736" y="128" width="32" height="32"/>
+  <object id="944" x="160" y="320" width="32" height="32"/>
+  <object id="945" x="608" y="320" width="32" height="32"/>
+  <object id="952" x="96" y="32" width="32" height="32"/>
+  <object id="953" x="672" y="32" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="start_position">
+  <object id="948" x="384" y="192" width="32" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

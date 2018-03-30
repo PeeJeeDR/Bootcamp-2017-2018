@@ -6,6 +6,7 @@ var Player  = function (x, y)
     _player.anchor.setTo(0.5);
     _player.scale.setTo(0.80);
     _player.frame   = 4;
+    _player.body.collideWorldBounds   = true;
 
     _player.animations.add('immortal-up-fast', [1, 7], 10, true);
     _player.animations.add('immortal-down-fast', [4, 10], 10, true);

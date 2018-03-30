@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="582">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="25" height="18" tilewidth="32" tileheight="32" infinite="0" nextobjectid="713">
  <tileset firstgid="1" name="pacman_tileset" tilewidth="32" tileheight="32" tilecount="30" columns="10">
   <image source="../assets/sprites/pacman_tileset.png" width="320" height="96"/>
  </tileset>
@@ -63,10 +63,10 @@
 17,0,8,9,9,9,6,0,7,0,0,0,0,0,0,0,7,0,4,9,9,9,10,0,17,
 17,0,0,0,0,0,17,0,27,0,18,0,18,0,18,0,27,0,17,0,0,0,0,0,17,
 17,0,4,9,6,0,17,0,0,0,0,0,0,0,0,0,0,0,17,0,4,9,6,0,17,
-17,0,17,0,17,0,2147483664,2147483656,0,18,0,18,0,18,0,18,0,8,16,0,17,0,17,0,17,
-17,0,24,9,26,0,27,0,0,0,0,0,0,0,0,0,0,0,27,0,24,9,26,0,17,
-17,0,0,0,0,0,0,0,18,0,18,0,18,0,18,0,18,0,0,0,0,0,0,0,17,
-24,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,26
+2147483664,9,25,6,17,0,2147483664,2147483656,0,18,0,18,0,18,0,18,0,8,16,0,17,2147483654,25,9,16,
+17,0,0,2147483664,26,0,27,0,0,0,0,0,0,0,0,0,0,0,27,0,24,16,0,0,17,
+17,0,0,17,0,0,0,0,18,0,18,0,18,0,18,0,18,0,0,0,0,17,0,0,17,
+24,9,9,25,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,25,9,9,26
 </data>
  </layer>
  <objectgroup name="coins">
@@ -229,14 +229,151 @@
   <object id="578" x="96" y="64" width="32" height="32">
    <ellipse/>
   </object>
-  <object id="579" x="736" y="512" width="32" height="32">
+  <object id="706" x="288" y="288" width="32" height="32">
    <ellipse/>
   </object>
-  <object id="580" x="32" y="512" width="32" height="32">
+  <object id="707" x="320" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="708" x="352" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="709" x="384" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="710" x="416" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="711" x="448" y="288" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="712" x="480" y="288" width="32" height="32">
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="detection_points" visible="0">
+ <objectgroup name="health">
+  <object id="582" x="160" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="583" x="192" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+  <object id="584" x="224" y="96" width="32" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mystery_boxes">
+  <object id="585" x="384" y="32" width="32" height="32"/>
+  <object id="586" x="448" y="32" width="32" height="32"/>
+  <object id="587" x="512" y="32" width="32" height="32"/>
+  <object id="588" x="544" y="32" width="32" height="32"/>
+  <object id="589" x="576" y="32" width="32" height="32"/>
+  <object id="590" x="640" y="32" width="32" height="32"/>
+  <object id="591" x="608" y="32" width="32" height="32"/>
+  <object id="592" x="672" y="96" width="32" height="32"/>
+  <object id="593" x="736" y="64" width="32" height="32"/>
+  <object id="594" x="736" y="96" width="32" height="32"/>
+  <object id="595" x="736" y="128" width="32" height="32"/>
+  <object id="596" x="704" y="128" width="32" height="32"/>
+  <object id="597" x="672" y="160" width="32" height="32"/>
+  <object id="598" x="640" y="160" width="32" height="32"/>
+  <object id="599" x="608" y="160" width="32" height="32"/>
+  <object id="600" x="544" y="160" width="32" height="32"/>
+  <object id="601" x="608" y="192" width="32" height="32"/>
+  <object id="602" x="576" y="224" width="32" height="32"/>
+  <object id="603" x="576" y="256" width="32" height="32"/>
+  <object id="604" x="544" y="256" width="32" height="32"/>
+  <object id="605" x="512" y="192" width="32" height="32"/>
+  <object id="606" x="480" y="192" width="32" height="32"/>
+  <object id="607" x="448" y="128" width="32" height="32"/>
+  <object id="608" x="448" y="160" width="32" height="32"/>
+  <object id="609" x="480" y="64" width="32" height="32"/>
+  <object id="610" x="416" y="64" width="32" height="32"/>
+  <object id="611" x="352" y="64" width="32" height="32"/>
+  <object id="612" x="320" y="32" width="32" height="32"/>
+  <object id="613" x="288" y="64" width="32" height="32"/>
+  <object id="614" x="256" y="32" width="32" height="32"/>
+  <object id="615" x="224" y="32" width="32" height="32"/>
+  <object id="616" x="192" y="32" width="32" height="32"/>
+  <object id="617" x="128" y="32" width="32" height="32"/>
+  <object id="618" x="160" y="32" width="32" height="32"/>
+  <object id="619" x="96" y="96" width="32" height="32"/>
+  <object id="620" x="32" y="64" width="32" height="32"/>
+  <object id="621" x="32" y="96" width="32" height="32"/>
+  <object id="622" x="32" y="128" width="32" height="32"/>
+  <object id="623" x="64" y="128" width="32" height="32"/>
+  <object id="624" x="96" y="160" width="32" height="32"/>
+  <object id="625" x="128" y="160" width="32" height="32"/>
+  <object id="626" x="160" y="160" width="32" height="32"/>
+  <object id="627" x="160" y="192" width="32" height="32"/>
+  <object id="628" x="224" y="160" width="32" height="32"/>
+  <object id="629" x="288" y="192" width="32" height="32"/>
+  <object id="630" x="256" y="192" width="32" height="32"/>
+  <object id="631" x="192" y="224" width="32" height="32"/>
+  <object id="632" x="192" y="256" width="32" height="32"/>
+  <object id="633" x="224" y="256" width="32" height="32"/>
+  <object id="634" x="32" y="288" width="32" height="32"/>
+  <object id="635" x="32" y="352" width="32" height="32"/>
+  <object id="636" x="32" y="416" width="32" height="32"/>
+  <object id="641" x="128" y="512" width="32" height="32"/>
+  <object id="642" x="160" y="480" width="32" height="32"/>
+  <object id="643" x="160" y="448" width="32" height="32"/>
+  <object id="644" x="160" y="416" width="32" height="32"/>
+  <object id="645" x="64" y="320" width="32" height="32"/>
+  <object id="646" x="96" y="288" width="32" height="32"/>
+  <object id="647" x="128" y="320" width="32" height="32"/>
+  <object id="648" x="160" y="320" width="32" height="32"/>
+  <object id="649" x="192" y="320" width="32" height="32"/>
+  <object id="650" x="224" y="352" width="32" height="32"/>
+  <object id="651" x="224" y="384" width="32" height="32"/>
+  <object id="652" x="224" y="416" width="32" height="32"/>
+  <object id="653" x="256" y="448" width="32" height="32"/>
+  <object id="654" x="224" y="480" width="32" height="32"/>
+  <object id="655" x="192" y="512" width="32" height="32"/>
+  <object id="656" x="320" y="448" width="32" height="32"/>
+  <object id="657" x="384" y="448" width="32" height="32"/>
+  <object id="658" x="448" y="448" width="32" height="32"/>
+  <object id="659" x="512" y="448" width="32" height="32"/>
+  <object id="660" x="544" y="480" width="32" height="32"/>
+  <object id="661" x="576" y="512" width="32" height="32"/>
+  <object id="662" x="640" y="512" width="32" height="32"/>
+  <object id="667" x="736" y="416" width="32" height="32"/>
+  <object id="668" x="736" y="352" width="32" height="32"/>
+  <object id="669" x="736" y="288" width="32" height="32"/>
+  <object id="670" x="704" y="320" width="32" height="32"/>
+  <object id="671" x="672" y="288" width="32" height="32"/>
+  <object id="672" x="640" y="320" width="32" height="32"/>
+  <object id="673" x="608" y="320" width="32" height="32"/>
+  <object id="674" x="576" y="320" width="32" height="32"/>
+  <object id="675" x="480" y="288" width="32" height="32"/>
+  <object id="676" x="448" y="288" width="32" height="32"/>
+  <object id="677" x="288" y="288" width="32" height="32"/>
+  <object id="678" x="320" y="288" width="32" height="32"/>
+  <object id="679" x="320" y="352" width="32" height="32"/>
+  <object id="680" x="256" y="320" width="32" height="32"/>
+  <object id="681" x="384" y="320" width="32" height="32"/>
+  <object id="682" x="448" y="352" width="32" height="32"/>
+  <object id="683" x="416" y="384" width="32" height="32"/>
+  <object id="684" x="352" y="384" width="32" height="32"/>
+  <object id="685" x="288" y="384" width="32" height="32"/>
+  <object id="686" x="480" y="384" width="32" height="32"/>
+  <object id="687" x="512" y="320" width="32" height="32"/>
+  <object id="688" x="544" y="384" width="32" height="32"/>
+  <object id="689" x="544" y="416" width="32" height="32"/>
+  <object id="690" x="544" y="352" width="32" height="32"/>
+  <object id="691" x="416" y="256" width="32" height="32"/>
+  <object id="692" x="416" y="224" width="32" height="32"/>
+  <object id="693" x="416" y="192" width="32" height="32"/>
+  <object id="694" x="352" y="192" width="32" height="32"/>
+  <object id="695" x="352" y="224" width="32" height="32"/>
+  <object id="699" x="320" y="128" width="32" height="32"/>
+  <object id="700" x="320" y="160" width="32" height="32"/>
+  <object id="701" x="352" y="256" width="32" height="32"/>
+  <object id="702" x="608" y="416" width="32" height="32"/>
+  <object id="703" x="608" y="448" width="32" height="32"/>
+  <object id="704" x="608" y="480" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="detection_points">
   <object id="453" x="320" y="416" width="32" height="32"/>
   <object id="454" x="320" y="480" width="32" height="32"/>
   <object id="455" x="384" y="480" width="32" height="32"/>

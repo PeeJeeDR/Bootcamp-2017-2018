@@ -25,7 +25,9 @@ var enemy;
 var enemies         = [];
 var nbrOfEnemies    = 2;
 var enemyHitCounter = 0;
-var enableToHit = false;
+var enableToHit     = false;
+var startEnemiesSpawned     = false;
+var enemyCounter     = 0;
 
 // COINS
 var coin;
@@ -46,6 +48,9 @@ var playerFaceDirection;
 // STARS
 var stars;
 
+// CLOUDS 
+var clouds;
+
 // HEARTS
 var heart;
 var heartArray  = [];
@@ -57,12 +62,13 @@ var mariokart;
 var menuBackground;
 var soundBtn;
 
-
+// AUDIO
 var coinHit;
 var enemyHit;
 var pressStart;
 var theme;
 var gameMusicOver;
+var powerUpSound;
 var playMusic = true;
 
 // MYSTERY BOXES
@@ -76,14 +82,17 @@ var timeFirstBox        = 7;
 var timeForNextBox      = 7;
 var timeBoxRemoved      = 0;
 var boxTotal   = 0;
-
+var randomX;
+var randomY;
+   
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    // "immortal",
-    "banana"
+    "rocket",
+    "immortal",
+    //"banana"
 ]
 var powerUp;
+var powerUpRoller;
 
 // IMMORTAL
 var immortalState   = false;
@@ -106,6 +115,7 @@ var graphics;
 
 // LEVEL
 var levelNumber;
+var newLevelNumber  = 1;
 
 /* ===== SETTINGS ===== */
 var playerSettings = {
@@ -121,6 +131,7 @@ var enemySettings = {
 var scoreString = "0";
 var firstScoreNbr = "0";
 var secondScoreNbr = "0";
+var puActivated;
 
 /* ===== FUNCTIONS ===== */
 function enemyOnPoint (enemy, point)
@@ -378,20 +389,40 @@ function fixFallthrough()
 function checkCoins ()
 {
     // coinsArray.length
-    if (coinsCollected === 10)
+    if (coinsCollected === coinsArray.length)
     {
-        // Wat doen als alle levels gecleared zijn?
+        onWin();
     }
 }
 
 function addMysteryBox ()
 {
     firstBoxSpawned     = true;
+
     var maxNbr          = boxXPositions.length;
     var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
-    var randomX         = boxXPositions[randomNbr];
-    var randomY         = boxYPositions[randomNbr];
+    randomX         = boxXPositions[randomNbr];
+    randomY         = boxYPositions[randomNbr];
+    
+    clouds = game.add.sprite(randomX, randomY, 'clouds');
+    
+    clouds.frame = 0;
+    clouds.anchor.setTo(0,0);
+    clouds.animations.add('boxAppear', [0, 1, 2, 3], 1, false);
+    clouds.animations.play('boxAppear');
+    
+    game.time.events.add(Phaser.Timer.SECOND * 0.9,AppearMysteryBox,this);
+    
+}
+
+function AppearMysteryBox(){
+
+    game.camera.flash(0xFFD700, 300);
+    clouds.destroy();
+
+    var maxNbr          = boxXPositions.length;
+    var randomNbr       = Math.floor(Math.random() * (maxNbr - 0) + 0);
 
     mysteryBox  = mysteryBoxes.create(randomX, randomY, 'mysterybox');
 }
@@ -412,14 +443,28 @@ function generateBoxes ()
 
 function collectMysteryBox ()
 {
+    
+    
     boxTotal   = 0;
 
+    rolPowerUp();
+    
     var randomNbr   = Math.floor(Math.random() * (powerUps.length - 0) + 0);
     powerUp         = powerUps[randomNbr];
 
-    activatePowerUp();
-
     mysteryBox.destroy();
+}
+
+function rolPowerUp()
+{
+    powerUpRoller.animations.play('power');
+    game.time.events.add(Phaser.Timer.SECOND * 4, activatePowerUp, this);
+}
+
+function activatePU ()
+{
+    puActivated     = true;
+    activatePowerUp();
 }
 
 function removeMysteryBox ()
@@ -440,18 +485,27 @@ function updateRocketCounter ()
 
 function activatePowerUp ()
 {
+    powerUpRoller.animations.stop('power');
     switch (powerUp)
     {
         case 'immortal':
+        if(playMusic){
+            powerUpSound = game.add.audio('powerUpSound');
+            powerUpSound.volume = 0.4;
+            powerUpSound.play();
+          } 
             immortalPowerUp();
+            powerUpRoller.frame = 2;
         break;
 
         case 'rocket':
             rocketPowerUp();
+            powerUpRoller.frame = 1;
         break;
 
         case 'banana':
             bananaPowerUp();
+            powerUpRoller.frame = 0;
         break;
     }
 }
@@ -543,8 +597,6 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-    console.log(graphicsGroup);
-
 }
 
 function onTap(pointer, graphics)
@@ -589,13 +641,10 @@ function HandleOrientation (e)
     }
 }
 
-function onWin (currentLevel)
+function onWin ()
 {
-	if(coinsCollected == coinsArrayLength)
-    {	
-    	levelNumber = currentLevel;
-        game.state.start('win');
-    }
+    levelNumber = currentLevel;
+    game.state.start('win');
 }
 
 /* ===== STATES ===== */
@@ -616,6 +665,11 @@ game.state.add('level_2', Level_2);
 game.state.add('level_3', Level_3);
 game.state.add('level_4', Level_4);
 game.state.add('level_5', Level_5);
+game.state.add('level_6', Level_6);
+game.state.add('level_7', Level_7);
+game.state.add('level_8', Level_8);
+game.state.add('level_9', Level_9);
+game.state.add('level_10', Level_10);
 
 // INTROS
 

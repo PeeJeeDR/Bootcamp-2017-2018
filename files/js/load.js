@@ -42,12 +42,16 @@ var LoadState   = {
         game.load.audio('pressStart','assets/sounds/pressStart.mp3');
         game.load.audio('gameOver','assets/sounds/gameOver.mp3')
         game.load.audio('theme','assets/sounds/mariotheme.mp3');
+        game.load.audio('theme2','assets/sounds/stuff-voor-mario.mp3')
         game.load.spritesheet('rocket', 'assets/sprites/projectile.png', 32, 32);
         game.load.spritesheet('explosion', 'assets/sprites/explosion.png', 32, 32);
         game.load.spritesheet('names','assets/sprites/names.png',600,200);
         game.load.spritesheet('made_by','assets/sprites/made_by.png',300,75);
         game.load.spritesheet('pacman_dead','assets/sprites/pacman_dead.png',32,32);
         game.load.spritesheet('pauseAndPlay', 'assets/sprites/pause_play.png', 48, 48);
+        game.load.spritesheet('powerUpRoller','assets/sprites/powerup_roller.png',32,32);
+        game.load.spritesheet('clouds', 'assets/sprites/clouds.png', 32, 32);
+        game.load.audio('powerUpSound','assets/sounds/powerup.mp3');
     },
 
     create: function ()
@@ -62,6 +66,11 @@ var LoadState   = {
         game.load.tilemap('level_3', 'assets/maps/level_3.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_4', 'assets/maps/level_4.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.tilemap('level_5', 'assets/maps/level_5.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_6', 'assets/maps/level_6.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_7', 'assets/maps/level_7.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_8', 'assets/maps/level_8.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_9', 'assets/maps/level_9.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level_10', 'assets/maps/level_10.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/sprites/pacman_tileset.png', 0, 0);
        
     }
