@@ -17,12 +17,9 @@ var Banana  = function (x,y)
             }
         }
         
-        if(bananaCnt === 1)
-        {
-            graphicsGroup.kill();
-           bananaCnt=0;
-
-        }
+   
+        
+        
     }
 
     

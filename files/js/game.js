@@ -503,11 +503,11 @@ function destroyRocket ()
 /* === BANANA === */
 function bananaPowerUp ()
 {
-    
-    for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
+    bananaOnScreen = false;
+    /*for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
     {
         square(bananaXPos[i], bananaYPos[i]);
-    }
+    }*/
 
     game.input.onTap.add(onTap, this);
 }
@@ -532,7 +532,7 @@ function onTap(pointer , graphics)
 {
     
 
-    if(bananaCnt === 0)
+    if(!bananaOnScreen)
     {
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
@@ -540,7 +540,7 @@ function onTap(pointer , graphics)
              if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
             {
                      banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                     bananaCnt++;
+                     bananaOnScreen= true;
              }
          }
          //graphicsGroup.lineStyle(1, 0xffffff, 1);
@@ -551,6 +551,7 @@ function enemyOnBanana (enemie, banana)
 {
     enemie.destroy();
     banana.destroy();
+   
 }
 
 function HandleOrientation (e) 
