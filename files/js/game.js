@@ -86,8 +86,8 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    //"rocket",
-   // "immortal",
+    "rocket",
+    "immortal",
     "banana"
 ]
 var powerUp;
