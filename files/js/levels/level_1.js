@@ -39,8 +39,6 @@ var Level_1   = {
 
         fixFallthrough();
 
-        coinsArrayLength = coinsArray.length;
-
         scoreImage1 = game.add.sprite(576, 110, 'number0');
         scoreImage2 = game.add.sprite(608, 110, 'number0');
         scoreImage1.anchor.setTo(0.5);
@@ -63,7 +61,6 @@ var Level_1   = {
 
         if (firstBoxSpawned)    {generateBoxes();}
         if (rocketEnableToFLy)  {calculateAirTime();}
-        onWin(currentLevel); 
         displayScore();
     },
 

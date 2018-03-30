@@ -388,9 +388,9 @@ function fixFallthrough()
 function checkCoins ()
 {
     // coinsArray.length
-    if (coinsCollected === 10)
+    if (coinsCollected === 50/* coinsArray.length */)
     {
-        // Wat doen als alle levels gecleared zijn?
+        onWin();
     }
 }
 
@@ -586,11 +586,6 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-
-  /*  if(!bananaOnScreen){
-        graphicsGroup.destroy();
-
-    }*/
 }
 
 function onTap(pointer, graphics)
@@ -640,13 +635,10 @@ function HandleOrientation (e)
     }
 }
 
-function onWin (currentLevel)
+function onWin ()
 {
-	if(coinsCollected == coinsArrayLength)
-    {	
-    	levelNumber = currentLevel;
-        game.state.start('win');
-    }
+    levelNumber = currentLevel;
+    game.state.start('win');
 }
 
 /* ===== STATES ===== */
