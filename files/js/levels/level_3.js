@@ -50,8 +50,6 @@ var Level_3   = {
         this.immortalState();
         rocketCollision();
 
-        console.log(enemyCounter);
-
         if (enemyCounter > (10 + Math.floor(Math.random() * (5 - 0) + 0)))
         {
             enemyCounter    = 0;

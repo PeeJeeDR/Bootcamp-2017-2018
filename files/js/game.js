@@ -87,9 +87,9 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    // "rocket",
-    // "immortal",
-    "banana"
+    "rocket",
+    "immortal",
+    // "banana"
 ]
 var powerUp;
 var powerUpRoller;
@@ -579,11 +579,6 @@ function bananaPowerUp ()
     bananaOnScreen = false;
     game.input.onTap.add(onTap, this);
 
-    for (var i = 0, ilen = boxXPositions.length; i < ilen; i++)
-    {
-        square(bananaXPos[i], bananaYPos[i]);
-    }
-
     if (!bananaPlaced)
     {
         bananaPlaced    = true;
@@ -591,7 +586,8 @@ function bananaPowerUp ()
     }
 }
 
-/*function square(x, y)
+/*
+function square(x, y)
 {
     console.log('test');
     graphics = game.make.graphics(x, y);
@@ -603,7 +599,8 @@ function bananaPowerUp ()
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-}*/
+}
+*/
 
 function onTap(pointer, graphics)
 {

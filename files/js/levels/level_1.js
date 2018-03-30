@@ -60,8 +60,6 @@ var Level_1   = {
         if (rocketEnableToFLy)  {calculateAirTime();}
         displayScore();
 
-        console.log(bananaPlaced);
-
         if (bananaPlaced)
         {
             graphicsGroup.kill();
