@@ -102,6 +102,7 @@ var bananaOnScreen  = false;
 var bananaXPos  = [];
 var bananaYPos  = [];
 var graphics;
+var bananaCnt = 0;
 
 // LEVEL
 var levelNumber;
@@ -525,16 +526,13 @@ function square(x, y)
     graphicsGroup.add(graphics);
     console.log(graphicsGroup);
 
-  /*  if(!bananaOnScreen){
-        graphicsGroup.destroy();
-
-    }*/
 }
 
 function onTap(pointer , graphics)
 {
+    
 
-    if(!bananaOnScreen)
+    if(bananaCnt === 0)
     {
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
@@ -542,7 +540,7 @@ function onTap(pointer , graphics)
              if (((pointer.x >= (bananaXPos[i]) && pointer.x <= (bananaXPos[i] + 32))) &&  (pointer.y >= (bananaYPos[i]) && pointer.y <= (bananaYPos[i] + 32)))
             {
                      banana         = new Banana((bananaXPos[i] + 32 / 2), (bananaYPos[i] + 32 / 2));
-                     bananaOnScreen = true;
+                     bananaCnt++;
              }
          }
          //graphicsGroup.lineStyle(1, 0xffffff, 1);
