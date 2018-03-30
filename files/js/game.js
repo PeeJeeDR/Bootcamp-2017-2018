@@ -86,9 +86,9 @@ var randomY;
    
 // POWERUPS
 var powerUps    = [
-    "rocket",
-    "immortal",
-    //"banana"
+    //"rocket",
+   // "immortal",
+    "banana"
 ]
 var powerUp;
 var powerUpRoller;
@@ -567,15 +567,10 @@ function destroyRocket ()
 function bananaPowerUp ()
 {
     bananaOnScreen = false;
-    /*for(var i=0, ilen = boxXPositions.length; i<ilen; i++)
-    {
-        square(bananaXPos[i], bananaYPos[i]);
-    }*/
-
     game.input.onTap.add(onTap, this);
 }
 
-function square(x, y)
+/*function square(x, y)
 {
     graphics = game.make.graphics(x, y);
     graphics.lineStyle(1, 0x408046, 1);
@@ -587,7 +582,7 @@ function square(x, y)
     graphics.lineTo(0, 0)
     
     graphicsGroup.add(graphics);
-}
+}*/
 
 function onTap(pointer, graphics)
 {
@@ -595,6 +590,12 @@ function onTap(pointer, graphics)
 
     if(!bananaOnScreen)
     {
+       // banana.destroy();
+        console.log(bananas.length);
+        if(bananas.length> 0){
+
+            banana.destroy();
+        }
 
         for (var i = 0, ilen = bananaXPos.length; i < ilen; i++)
         {
@@ -604,11 +605,17 @@ function onTap(pointer, graphics)
                      bananaOnScreen= true;
              }
          }
+        
     }
 }
 
 function enemyOnBanana (enemie, banana)
 {
+    pacman_dead = game.add.sprite(enemie.x, enemie.y, 'pacman_dead');
+    pacman_dead.frame = 0;
+    pacman_dead.anchor.setTo(0.5);
+    pacman_dead.animations.add('onDead', [0, 1, 2, 3, 0], 12, false);
+    pacman_dead.animations.play('onDead');
     enemie.destroy();
     banana.destroy();
    
