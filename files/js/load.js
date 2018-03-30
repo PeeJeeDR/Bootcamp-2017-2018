@@ -52,6 +52,8 @@ var LoadState   = {
         game.load.spritesheet('powerUpRoller','assets/sprites/powerup_roller.png',32,32);
         game.load.spritesheet('clouds', 'assets/sprites/clouds.png', 32, 32);
         game.load.audio('powerUpSound','assets/sounds/powerup.mp3');
+        game.load.audio('missile','assets/sounds/missile.mp3');
+        game.load.audio('explosionSound','assets/sounds/explosion.mp3');
     },
 
     create: function ()
