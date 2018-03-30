@@ -69,7 +69,10 @@ var pressStart;
 var theme;
 var gameMusicOver;
 var powerUpSound;
+var missileSound;
+var explosionSound;
 var playMusic = true;
+
 
 // MYSTERY BOXES
 var boxXPositions   = [];
@@ -502,6 +505,11 @@ function activatePowerUp ()
         case 'rocket':
             rocketPowerUp();
             powerUpRoller.frame = 1;
+            if(playMusic){
+                missileSound = game.add.audio('missile');
+                missileSound.volume = 0.08;
+                missileSound.play();
+              } 
         break;
 
         case 'banana':
@@ -559,6 +567,11 @@ function rocketKill (rocket, enemy)
 {
     rocket.body.velocity.x  = 0;
     rocket.body.velocity.y  = 0;
+    if(playMusic){
+        explosionSound = game.add.audio('explosionSound');
+        explosionSound.volume = 0.09;
+        explosionSound.play();
+      } 
     explosion.animations.play('explode');
     game.camera.shake(0.025, 600);
     rocketEnableToFLy   = false;
