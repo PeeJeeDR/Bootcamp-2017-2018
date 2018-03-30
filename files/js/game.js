@@ -510,6 +510,7 @@ function immortalPowerUp ()
 function resetImmortalPowerUp ()
 {
     immortalState   = false;
+    powerUpRoller.frame = 3;
 }
 /* ===== */
 
@@ -553,6 +554,7 @@ function rocketKill (rocket, enemy)
     rocketEnableToFLy   = false;
     game.time.events.add(Phaser.Timer.SECOND * 0.5, destroyRocket, this);
     enemy.destroy();
+    powerUpRoller.frame = 3;
 }
 
 function destroyRocket ()
