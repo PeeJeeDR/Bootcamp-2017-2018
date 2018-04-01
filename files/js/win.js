@@ -9,10 +9,13 @@ var WinState   = {
     	number.anchor.setTo(0.5);
 
     	nextlvlBtn   = game.add.button(game.world.centerX, game.world.centerY + 100, 'nextlvl', this.nextLevel, this);
-        nextlvlBtn.anchor.setTo(0.5);
+		nextlvlBtn.anchor.setTo(0.5);
+		
+		nextlvlBtn.inputEnabled = true;
+		nextlvlBtn.events.onInputDown.add(this.goToNextLevel, this);
     },
 
-    nextLevel: function ()
+    goToNextLevel: function ()
     {
     	newLevelNumber 	= currentLevel + 1;
     	// nextLevelName 	= "level_" + newLevelNumber;

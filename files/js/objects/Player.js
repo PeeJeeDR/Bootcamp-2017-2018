@@ -51,7 +51,6 @@ var Player  = function (x, y)
             if (playerFaceDirection === "DOWN")     {_player.animations.play('immortal-down-fast');}            
         }
         
-        checkCoins();
         game.physics.arcade.collide(_player, borderLayer);
         game.physics.arcade.overlap(_player, coins, collectCoin, null, this);
         game.physics.arcade.overlap(_player, mysteryBoxes, collectMysteryBox, null, this);

@@ -18,6 +18,7 @@ var Level_1   = {
         
         this.addPauseBtn();
         displayHearts();
+        checkCoins();
 
         coins.forEachAlive(function (sc) {
             sc.animations.play('spin');
@@ -65,6 +66,8 @@ var Level_1   = {
             graphicsGroup.kill();
             bananaPlaced    = false;
         }
+
+        console.log(coinsArray);
     },
 
     updateEnemyCounter: function ()

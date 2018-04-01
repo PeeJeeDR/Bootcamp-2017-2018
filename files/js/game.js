@@ -220,6 +220,7 @@ function collectCoin (enemy, coin)
     coin.animations.play('collected');
     // game.time.events.add(Phaser.Timer.SECOND * 0.3, killCoin, this);
     killCoin();
+    coinsCollected += 1;
 
     if(playMusic)
     {
@@ -231,7 +232,6 @@ function collectCoin (enemy, coin)
     function killCoin () 
     {
         coin.kill();
-        coinsCollected += 1;
         //scoreText.text  = coinsCollected
         scoreString = coinsCollected.toString();
     }
