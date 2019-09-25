@@ -1,18 +1,18 @@
 # Bootcamp 2017 - 2018
 
 ## Ideas
-- Packman / mario combineren
-- Blades of Steel ijshokey
-- Super metroid
-- Bellen blazen door middel van blazen in de microfoon
-- Plant vs Zombies
+- Combining of Packman and Mario.
+- Blades of Steel ice hockey.
+- Super metroid.
+- Blow bubbles by using the mic on your phone.
+- Plant vs Zombies.
 
-## Packman variatie
-- als speler is het de bedoeling dat je packman gaat ontwijken.
-- accelerometer? Projectiel spawnen die de pacman kan raken.
+## Packman variation
+- Avoid packman.
+- Control player by the accelerometer in your phone.
 
 ## To Do 
-- Tileset maken
+- Making Tilesets
 - Graphics
 - Player movement
 - Enemy movement
